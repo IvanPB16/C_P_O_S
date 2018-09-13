@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+ <div class="content-wrapper">
  
   <section class="content-header">
     
@@ -27,46 +27,38 @@
         <button class="btn btn-primary" data-toggle="modal" data-target="#modalAddSubCategorias">
           Agregar subcategorias
         </button>
-
-  
       </div>
-
-
       <div class="box-body">
-        <table class="table table-bordered table-striped dt-responsive tablas" width="100%">
-          
-          <thead>
-            <th style="width: 10px">#</th>
-             <th>Subcategoria</th>
-            <th>Categoria</th>
-            <th>Acciones</th>  
-          </thead>
-          <tbody>
-            <?php  
-              $item = null;
-              $valor = null;
-               $categorias = ControladorCategorias::ctrMostrarCategorias($item,$valor);
-            foreach ($categorias as $key => $value) {
-              echo '<tr>
-                    <td>'.($key+1).'</td>
-                    <td>..</td>
-                    <td class="text-uppercase">'.$value["nombre"].'</td>
-                    <td>
-                      <div class="btn-goup">
+    
+        <?php 
+          $item = null;
+          $valor = null;
 
-                      <button class="btn btn-warning btnEditarCategoria" idCategoria="'.$value['id'].'" data-toggle="modal" data-target="#modalEditCategorias"><i class="fa fa-pencil"></i></button>
+          $categoria = ControladorCategorias::ctrMostrarCategorias($item,$valor);
 
-                      <button class="btn btn-danger btnBorrarCategoria" idCategoria="'.$value['id'].'"><i class="fa fa-times"></i></button>
-                      </div>
-                    </td>
+          foreach ($categoria as $key => $value) {
+             echo '<ul class="list-group list-group-flush">
+                   <li class="list-group-item">'.($key+1).".-".$value["nombre"].'</li>';
 
-                   </tr>';
-            }
-
-            ?>
-          </tbody>
-        </table>
-
+                $item = null;
+                $valor = $value["id"];
+                $sub = ControladorSubCategorias::ctrMostrarSubCategorias($item,$valor);
+                  foreach ($sub as $key => $out) {
+                    echo '<ul class="todo-list">
+                            <li><span class="handle">
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-ellipsis-v"></i>
+                              </span><span class="text">'.$out["nombre"].'</span>
+                              <div class="tools">
+                              <i class="fa fa-edit" data-toggle="modal" data-target="#modalEditSubCategorias"></i>
+                              <i class="fa fa-trash-o"></i>
+                              </div>
+                            </li>
+                          </ul>';
+                  }
+             echo '</ul>';
+           } 
+         ?>
       </div>
 
     </div>

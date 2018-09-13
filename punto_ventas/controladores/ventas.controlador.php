@@ -1,2 +1,1 @@
 <?php 
-public class ventas{}

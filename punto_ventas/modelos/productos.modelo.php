@@ -1,7 +1,7 @@
 <?php 
  
 require_once "conexion.php";
-
+ 
 class ModeloProducto{
 
 	static public function mdlMostrarProducto($tabla,$item,$valor){
