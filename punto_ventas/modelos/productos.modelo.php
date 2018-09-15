@@ -65,7 +65,8 @@ class ModeloProducto{
  
 	static public function mdlEliminarProducto($tabla,$data){
 
-		$statement = Conexion::Conectar()->prepare("DELETE * FROM $tabla WHERE id = :id");
+		$statement = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
+
 		$statement -> bindParam(":id",$data,PDO::PARAM_INT);
 
 		if($statement -> execute()){
@@ -74,6 +75,7 @@ class ModeloProducto{
 			return "error";
 		}
 
-		 
+		$statement -> close();
+		$statement=null;
 	}
 } 

@@ -220,39 +220,36 @@
 	
  	}
 
- 	static public ctrEliminarProducto(){
+ 	static public function ctrEliminarProducto(){
  		
  		if (isset($_GET["idProducto"])) {
- 			$tabla = "productos";
+ 			$tabla = "producto";
  			$data = $_GET["idProducto"];
 
- 			if ($_GET["imagen"] != "" && "vistas/img/productos/default/anonymous.png") {
+ 			if ($_GET["imagen"] != "" && $_GET["imagen"] != "vistas/img/productos/default/anonymous.png") {
  				unlink($_GET["imagen"]);
  				rmdir('vistas/img/productos/'.$_GET["codigo"]);
  			}
 
  			$enviar = ModeloProducto::mdlEliminarProducto($tabla,$data);
 
- 			if ($respuesta == "ok") {
-					echo '<script>
-							swal({
-							type: "success",
-							title: "¡El producto se elimino correctamente!",
-							showConfirmButton: true,
-							confirmButtonText: "Cerrar",
-							closeOnConfirm: false
-							}).then((result)=>{
-								if(result.value){
-								window.location = "productos";
-									}
-								})
-							</script>';	
-						}
-
-
+ 			if ($enviar == "ok") {
+				echo '<script>
+					swal({
+					type: "success",
+					title: "¡El producto se elimino correctamente!",
+					showConfirmButton: true,
+					confirmButtonText: "Cerrar",
+					closeOnConfirm: false
+					}).then((result)=>{
+						if(result.value){
+							window.location = "productos";
+							}
+					})
+					</script>';	
+						
+ 			}
 
  		}
-
- 	}
-
- }  
+	}
+}

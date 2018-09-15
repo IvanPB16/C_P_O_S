@@ -300,5 +300,4 @@
 <?php 
   $eliminarProducto = new ControladorProducto();
   $eliminarProducto -> ctrEliminarProducto();
-
  ?>

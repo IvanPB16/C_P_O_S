@@ -280,8 +280,8 @@ $(".tablaProductos tbody").on("click","button.btnEditarProducto",function(){
 $(".tablaProductos tbody").on("click","button.btnEliminarProducto",function(){
 
 	var idProducto = $(this).attr("idProducto");
-	var codigo = $(this).attr("idProducto");
-	var imagen = $(this).attr("idProducto");
+	var codigo = $(this).attr("codigo");
+	var imagen = $(this).attr("imagen");
 
 		swal({
 			title: '¿Seguro de que desea borrar el producto?',
