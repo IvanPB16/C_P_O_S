@@ -1,5 +1,5 @@
 <div class="content-wrapper">
-  
+   
   <section class="content-header">
      
     <h1>
@@ -28,7 +28,7 @@
         </button>
       </div>
       <div class="box-body">
-        <table class="table table-bordered table-striped dt-responsive tablaProductos">
+        <table class="table table-bordered table-striped dt-responsive tablaProductos" width="100%">
           
          <thead>
             <th style="width: 10px">#</th>
@@ -117,7 +117,6 @@
               </div>
 
               <div class="form-group row">
-
                 <div class="col-xs-6">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-arrow-up"></i></span>
@@ -143,7 +142,7 @@
 
                   <div class="col-xs-6" style="padding: 0">
                     <div class="input-group">
-                      <input type="number" class="form-control input-lg nuevoPorcentaje" min="0"value="10" required>
+                      <input type="number" class="form-control input-lg nuevoPorcentaje" min="0" value="10" required>
                       <span class="input-group-addon"><i class="fa fa-percent"></i></span>
                     </div>
                   </div>
@@ -184,7 +183,7 @@
 
  <!--=====================================
 =            Modal edit product            =
-======================================
+====================================== -->
 <div id="modalEditProducto" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -202,9 +201,8 @@
 
               <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-th"></i></span>
-
-                  <select class="form-control input-lg" name="editarCategoria"  readonly>
+                  <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+                  <select class="form-control input-lg" name="editarCategoria"  readonly  required>
                     <option id="editarCategoria"></option>
                   </select>
                 </div>
@@ -271,6 +269,7 @@
                 <div class="panel">Subir imagen</div>
 
                 <input type="file" class="nuevaImagen" name="editarImagen">
+
                 <p class="help-block">Peso máximo de la imagen 2MB</p>
                 
                 <img src="vistas/img/productos/default/anonymous.png" alt="" class="img-thumbnail previsualizar" width="100px">
@@ -290,11 +289,16 @@
           </div>
         </form>
         <?php 
-         # $editarProducto = new ControladorProducto();
-         #$editarProducto -> ctrEditarProducto();
+          $editarProducto = new ControladorProducto();
+          $editarProducto -> ctrEditarProducto();
          ?>
 
     </div>
       
   </div>
-</div>-->
+</div>
+<?php 
+  $eliminarProducto = new ControladorProducto();
+  $eliminarProducto -> ctrEliminarProducto();
+
+ ?>

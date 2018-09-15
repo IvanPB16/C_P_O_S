@@ -3,14 +3,14 @@
     
     <h1>
       
-     Administrar usuarios
+     Administrar empleados
     </h1>
   
     <ol class="breadcrumb">
       
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
       
-      <li class="active">Administrar usuarios</li>
+      <li class="active">Administrar empleados</li>
     
     </ol>
 
@@ -24,7 +24,7 @@
 
       <div class="box-header with-border">
         <button class="btn btn-primary" data-toggle="modal" data-target="#modalAddUser">
-          Agregar usuario
+          Agregar empleado
         </button>
       </div>
 
@@ -106,7 +106,7 @@
         <form role="form" method="post" enctype="multipart/form-data">
           <div class="modal-header" style="background: #3c8bdc; color:white;">
             <button type="button" class="close" data-dismiss="modal" >&times;</button>
-            <h4 class="modal-title">Agregar usuario</h4>
+            <h4 class="modal-title">Agregar empleados</h4>
           </div>
 
           <div class="modal-body">
@@ -139,13 +139,12 @@
                   <input type="password" class="form-control input-lg" id="validarNuevoPassword"  name="validarPassword" placeholder="Repite la contraseña" required>
                 </div>
                 <span id="error" class="alert"></span>
-
               </div>
 
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                  <select class="form-control input-lg" name="nuevoPerfil" id="">
+                  <select class="form-control input-lg" name="nuevoPerfil">
                     <option value="">Seleccionar perfil</option>
                     <option value="Administrador">Adminstrador</option>
                     <option value="Agente">Agente de ventas</option>
@@ -179,12 +178,11 @@
           </div>
 
           <?php 
-
           $crearUsuario = new ControladorUsuarios();
           $crearUsuario -> ctrCrearUsuario(); 
-
-           ?>
+          ?>
         </form>
+        
 
     </div>
   </div>
@@ -200,11 +198,12 @@
     <div class="modal-content">
 
         <form role="form" method="post" enctype="multipart/form-data">
+
           <div class="modal-header" style="background: #3c8bdc; color:white;">
 
             <button type="button" class="close" data-dismiss="modal" >&times;</button>
 
-            <h4 class="modal-title">Editar usuario</h4>
+            <h4 class="modal-title">Editar empleado</h4>
           </div>
 
           <div class="modal-body">
@@ -213,14 +212,14 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                  <input type="text" class="form-control input-lg" id="editarNombre" name="editarNombre" value="" required>
+                  <input type="text" class="form-control input-lg" id="editarNombre" name="editarNombre" required>
                 </div>
               </div>
 
                <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                  <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" value="" readonly>
+                  <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" readonly>
                 </div>
               </div>
 
@@ -231,27 +230,27 @@
                   <input type="hidden" id="passwordActual" name="passwordActual" >
                 </div>
               </div>
+
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                  <input type="password" class="form-control input-lg" id="validarNuevoPassword2" name="validarPassword2" placeholder="Repite la contraseña">
-
+                  <input type="password" class="form-control input-lg" id="validarNuevoPassworddos" name="validarPassworddos" placeholder="Repite la contraseña">
                 </div>
-                  <span id="error2"></span>
+                <span id="error" class="alert"></span>
               </div>
 
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-users"></i></span>
                   <select class="form-control input-lg" name="editarPerfil">
-                    <option value="" id="editarPerfil">Seleccionar perfil</option>
+                    <option value="" id="editarPerfil"></option>
 
                     <option value="Administrador">Adminstrador</option>
                     <option value="Agente">Agente de ventas</option>
                     <option value="Contador">Contador</option>
                     <option value="Inventario">Inventario</option>
                     <option value="Vendedor">Vendedor</option>
-                    
+              
                   </select>
                 </div>
               </div>
@@ -274,25 +273,26 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-            <button type="submit" class="btn btn-primary btn-val">Guardar cambios</button>
-          </div>
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <?php 
+          <button type="submit" class="btn btn-primary">Modificar empleado</button>
 
-          $crearUsuario = new ControladorUsuarios();
-          $crearUsuario -> ctrEditarUsuario();
+        </div>
+         <?php 
+
+          $crearEmpleado = new ControladorUsuarios();
+          $crearEmpleado -> ctrEditarUsuario();
 
            ?>
         </form>
-
     </div>
   </div>
 </div>
 
 
  <?php 
- $borrarUsuario = new ControladorUsuarios();
- $borrarUsuario -> ctrBorrarUsuario();
-  ?>
+ $borrarEmpleado = new ControladorUsuarios();
+ $borrarEmpleado -> ctrBorrarUsuario();
+
+ ?>

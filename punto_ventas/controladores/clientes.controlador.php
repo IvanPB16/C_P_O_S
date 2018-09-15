@@ -130,7 +130,7 @@ class ControladorCliente{
 				echo '<script>
 						swal({
 							type:"success",
-							title:"¡Cliente agregado correctamente!",
+							title:"¡Cliente eliminado correctamente!",
 							showConfirmButton: true,
 							confirmButtonText:"Cerrar",
 							closeOnConfirm: false

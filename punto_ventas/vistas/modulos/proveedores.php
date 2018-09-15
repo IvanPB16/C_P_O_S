@@ -38,19 +38,32 @@
             <th>Acciones</th>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Empresay</td>
-              <td>044 233 123 14 15</td>
-              <td>correo@correo.com</td>
-              <td>Computadoras</td>
-              <td>
-                <div class="btn-goup">
-                 <button class="btn btn-warning btnEditarProveedor" data-toggle="modal" data-target="#modalEditProveedor"><i class="fa fa-pencil"></i></button>
-                 <button class="btn btn-danger btnEliminarProveedor"><i class="fa fa-times"></i></button>
-               </div>
-              </td>
-            </tr>
+            <?php 
+
+            $item = null;
+            $valor = null;
+
+            $verProveedor = ControladorProveedor::ctrMostrarProveedor($item,$valor);
+
+            foreach ($verProveedor as $key => $out) {
+
+              echo '<tr>
+                <td>'.($key+1).'</td>
+                <td>'.$out["nombre_proveedor"].'</td>
+                <td>'.$out["producto"].'</td>
+                <td>'.$out["telefono"].'</td>
+                <td>'.$out["correo"].'</td>
+                <td>
+                  <div class="btn-goup">
+                   <button class="btn btn-warning btnEditarProveedor" data-toggle="modal" data-target="#modalEditProveedor" idProveedor="'.$out["id"].'"><i class="fa fa-pencil"></i></button>
+                   <button class="btn btn-danger btnEliminarProveedor" idProveedor="'.$out["id"].'"><i class="fa fa-times"></i></button>
+                 </div>
+                </td>
+              </tr>';
+               
+             } 
+              
+            ?>
           </tbody>
 
 
@@ -58,6 +71,7 @@
       </div>
 
     </div>
+
 
   </section>
 
@@ -90,15 +104,15 @@
 
               <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-number"></i></span>
-                  <input type="number" min="0" class="form-control input-lg" name="nuevoArticulos" placeholder="Ingresa el nombre de articulos" required>
+                  <span class="input-group-addon"><i class="fa  fa-tag"></i></span>
+                  <input type="text" class="form-control input-lg" name="nuevoArticulo" placeholder="Ingresa el nombre de articulos" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                  <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar teléfono"  data-inputmask="'mask':'(999) 999-999-9999'" data-mask required>
+                  <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar teléfono"  data-inputmask="'mask':'(999) 999-9999'" data-mask required>
                 </div>
               </div>
 
@@ -118,6 +132,11 @@
             <button type="submit" class="btn btn-primary">Guardar proveedor</button>
           </div>
         </form>
+
+        <?php 
+          $agregarProveedor = new ControladorProveedor();
+          $agregarProveedor -> ctrAgregarProveedor();
+         ?>
 
     </div>
       
@@ -137,7 +156,7 @@
 
           <div class="modal-header" style="background: #3c8bdc; color:white;">
             <button type="button" class="close" data-dismiss="modal" >&times;</button>
-            <h4 class="modal-title">Agregar Proveedor</h4>
+            <h4 class="modal-title">Editar Proveedor</h4>
           </div>
 
           <div class="modal-body">
@@ -147,27 +166,28 @@
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
                   <input type="text" class="form-control input-lg" id="editarProveedor" name="editarProveedor"  required>
+                  <input type="hidden" id="IdProv" name="IdProv">
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-number"></i></span>
-                  <input type="number" min="0" class="form-control input-lg" id="editarArticulos" name="editarArticulos" required>
+                  <span class="input-group-addon"><i class="fa  fa-tag"></i></span>
+                  <input type="text"class="form-control input-lg" id="editarArticulo" name="editarArticulo" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                  <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar teléfono"  data-inputmask="'mask':'(999) 999-999-9999'" data-mask required>
+                  <input type="text" class="form-control input-lg" id="editarTelefono" name="editarTelefono"  data-inputmask="'mask':'(999) 999-9999'" data-mask required>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                  <input type="email" class="form-control input-lg" name="nuevoEmail" placeholder="Ingresa el Correo electrónico" required>
+                  <input type="email" class="form-control input-lg" id="editarEmail" name="editarEmail" required>
                 </div>
               </div>
 
@@ -181,8 +201,17 @@
           </div>
         </form>
 
+        <?php 
+        $editarProv = new ControladorProveedor();
+        $editarProv -> ctrEditarProveedor();
+         ?>
+
     </div>
       
   </div>
 </div>
- 
+ <?php 
+  $eliminarProveedor = new ControladorProveedor();
+  $eliminarProveedor -> ctrEliminarProveedor();
+
+  ?>

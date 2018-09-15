@@ -1,5 +1,5 @@
   /* tabla dinamica */
- 
+  
 var tabla = $(".tablaProductos").DataTable({
 	"ajax":"ajax/dtproductos.ajax.php",
 	"columnDefs":[{
@@ -10,7 +10,7 @@ var tabla = $(".tablaProductos").DataTable({
 			{
 				"targets":-1,
 				"data":null,
-				"defaultContent":'<div class="btn-goup"><button class="btn btn-warning btnEditarProducto" data-toggle="modal" data-target="#modalEditProducto" idProducto><i class="fa fa-pencil"></i></button><button class="btn btn-danger btnEliminarProducto" idProducto><i class="fa fa-times"></i></button></div>'
+				"defaultContent":'<div class="btn-goup"><button class="btn btn-warning btnEditarProducto" data-toggle="modal" data-target="#modalEditProducto" idProducto><i class="fa fa-pencil"></i></button><button class="btn btn-danger btnEliminarProducto" idProducto codigo imagen><i class="fa fa-times"></i></button></div>'
 			} 
 	],
 	"language":{
@@ -44,9 +44,17 @@ var tabla = $(".tablaProductos").DataTable({
 
 /* activar botones botones */
 
-$('.tablaProductos tbody').on('click','button',function(){ 
-	var data = tabla.row($(this).parents('tr')).data(); 
+$('.tablaProductos tbody').on('click','button',function(){
+
+	 if (window.matchMedia("(min-width:992px)").matches) {
+	 	var data = tabla.row($(this).parents('tr')).data();
+	 }else{
+		var data = tabla.row($(this).parents('tbody tr ul li')).data();
+	 }
+
 	$(this).attr("idProducto",data[9])
+	$(this).attr("codigo",data[2])
+	$(this).attr("imagen",data[1])
 });
 
 /* cargar  imagenes */
@@ -133,25 +141,25 @@ $("#nuevaCategoria").change(function(){
 })
 
 /*agregar precio de venta*/
-$("#nuevoPrecioCompra","#editarPrecioCompra").change(function(){
+$("#nuevoPrecioCompra,#editarPrecioCompra").change(function(){
 
 	if ($(".porcentaje").prop("checked")) {
 		var valorPorcentaje = $(".nuevoPorcentaje").val();
 	
 		var porcentaje = Number((($("#nuevoPrecioCompra").val()*valorPorcentaje)/100))+Number($("#nuevoPrecioCompra").val());
 
-		//var editarporcentaje = Number((($("#editarPrecioCompra").val()*valorPorcentaje)/100))+Number($("#editarPrecioCompra").val());
+		var editarporcentaje = Number((($("#editarPrecioCompra").val()*valorPorcentaje)/100))+Number($("#editarPrecioCompra").val());
 
 		$("#nuevoPrecioVenta").val(porcentaje);
 		$("#nuevoPrecioVenta").prop("readonly",true);
 
-	//	$("#editarPrecioVenta").val(editarporcentaje);
-	//	$("#editarPrecioVenta").prop("readonly",true);
+		$("#editarPrecioVenta").val(editarporcentaje );
+		$("#editarPrecioVenta").prop("readonly",true);
 	}
 })
 
 /*Cambio de porcentaje*/
-$(".nuevoPorcentaje","#editarPrecioCompra").change(function(){
+$(".nuevoPorcentaje").change(function(){
 
 	if ($(".porcentaje").prop("checked")) {
 			var valorPorcentaje = $(this).val();
@@ -160,22 +168,26 @@ $(".nuevoPorcentaje","#editarPrecioCompra").change(function(){
 
 			var editarporcentaje = Number((($("#editarPrecioCompra").val()*valorPorcentaje)/100))+Number($("#editarPrecioCompra").val());
 
+			
+
 			$("#nuevoPrecioVenta").val(porcentaje);
 			$("#nuevoPrecioVenta").prop("readonly",true);
 
-		/*	$("#editarPrecioVenta").val(editarporcentaje);
-			$("#editarPrecioVenta").prop("readonly",true);*/
-		}
+			$("#editarPrecioVenta").val(editarporcentaje );
+			$("#editarPrecioVenta").prop("readonly",true);
+
+		
+		} 
 })
 
 $(".porcentaje").on("ifUnchecked",function(){
 	$("#nuevoPrecioVenta").prop("readonly",false);	
-	//$("#editarPrecioVenta").prop("readonly",false);
+	$("#editarPrecioVenta").prop("readonly",false);
 })
 
 $(".porcentaje").on("ifChecked",function(){
 	$("#nuevoPrecioVenta").prop("readonly",true);
-	//$("#editarPrecioVenta").prop("readonly",true);		
+	$("#editarPrecioVenta").prop("readonly",true);		
 })
 
 
@@ -215,8 +227,9 @@ $(".nuevaImagen").change(function() {
 	}
 })
 
-/*editar producto
+/*Editar producto*/
 $(".tablaProductos tbody").on("click","button.btnEditarProducto",function(){
+
 	var idProducto = $(this).attr("idProducto");
 
 	var datos = new FormData();
@@ -232,28 +245,24 @@ $(".tablaProductos tbody").on("click","button.btnEditarProducto",function(){
 		processData:false,
 		dataType:"json",
 		 success:function(respuesta){
-          
-          var datosCategoria = new FormData();
-          datosCategoria.append("idCategoria",respuesta["id_categoria"]);
+		 	var datosCategoria = new FormData();
+		 	datosCategoria.append("idCategoria",respuesta["id_categoria"]);
 
-           $.ajax({
-
-				url:"ajax/categorias.ajax.php",
+		 	$.ajax({
+				url: "ajax/categorias.ajax.php",
 				method: "POST",
 				data: datosCategoria,
 				cache: false,
 				contentType: false,
 				processData:false,
 				dataType:"json",
-				success:function(respuesta){
-					console.log("res",respuesta);
-					$("#editarCategoria").val(respuesta["id"]);
-					$("#editarCategoria").html(respuesta["nombre"]);
-				}
+				 success:function(respuesta){
+				 	$("#editarCategoria").val(respuesta["id"]);
+				 	$("#editarCategoria").html(respuesta["nombre"]);
+				 }
 			})
 
-
-           $("#editarCodigo").val(respuesta["codigo"]);
+		   $("#editarCodigo").val(respuesta["codigo"]);
            $("#editarDescripcion").val(respuesta["descripcion"]);
            $("#editarStock").val(respuesta["stock"]);
            $("#editarPrecioCompra").val(respuesta["precio_compra"]);
@@ -262,10 +271,33 @@ $(".tablaProductos tbody").on("click","button.btnEditarProducto",function(){
            $("#imagenActual").val(respuesta["imagen"]);
            $(".previsualizar").attr("src",respuesta["imagen"]);
            }
-           
-		}
+
+		 }
+	})
+})
+
+/*Eliminar producto*/
+$(".tablaProductos tbody").on("click","button.btnEliminarProducto",function(){
+
+	var idProducto = $(this).attr("idProducto");
+	var codigo = $(this).attr("idProducto");
+	var imagen = $(this).attr("idProducto");
+
+		swal({
+			title: '¿Seguro de que desea borrar el producto?',
+			text: "Si no lo está puede cancelar la acción",
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3885d6',
+			cancelButtonColor: '#d33',
+			cancelButtonText: 'Cancelar',
+			confirmButtonText: 'Borrar producto'
+		}).then((result)=>{
+			if (result.value) {
+				window.location = "index.php?ruta=productos&idProducto="+idProducto+"&codigo="+codigo+"&imagen="+imagen;
+			}
+		})
 
 	})
 
-
-})*/
+	

@@ -16,8 +16,7 @@ $(".btnEditarCategoria").click(function(){
 		processData:false,
 		dataType:"json",
 		success:function(respuesta){
-			
-			console.log(respuesta["id"]);
+	
 			$("#editarCategoria").val(respuesta["nombre"]);
 			$("#idCategoria").val(respuesta["id"]);
 			

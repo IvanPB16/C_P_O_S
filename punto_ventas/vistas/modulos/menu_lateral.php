@@ -12,7 +12,7 @@
 		 	<li>
 		 		<a href="usuarios">
 		 			<i class="fa fa-user"></i>
-		 			<span>Usuarios</span>
+		 			<span>Empleados</span>
 		 		</a>
 		 	</li>
 

@@ -1,4 +1,4 @@
-<?php 
+<?php  
    
 require_once "../controladores/productos.controlador.php";
 require_once "../modelos/productos.modelo.php";
@@ -43,6 +43,7 @@ if (isset($_POST["idCategoria"])) {
 	$generar ->ajaxGenerarCodigo();
 }
 
+/*editar producto*/
 if (isset($_POST["idProducto"])) {
 	$editarProducto = new AjaxProductos();
 	$editarProducto -> idProducto = $_POST["idProducto"];

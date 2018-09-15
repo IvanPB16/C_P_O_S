@@ -50,8 +50,9 @@
                                 <i class="fa fa-ellipsis-v"></i>
                               </span><span class="text">'.$out["nombre"].'</span>
                               <div class="tools">
-                              <i class="fa fa-edit" data-toggle="modal" data-target="#modalEditSubCategorias"></i>
-                              <i class="fa fa-trash-o"></i>
+                              <button class="btn btn-warning btnEditarSub" idSub="'.$out["id"].'" data-toggle="modal" data-target="#modalEditSubCategorias" ><i class="fa fa-edit"></i></button>
+
+                              <button class="btn btn-warning btnEditarSub" idSub="'.$out["id"].'"><i class="fa fa-trash-o"></i></button>
                               </div>
                             </li>
                           </ul>';
@@ -68,7 +69,7 @@
 </div>
 
 <!--=====================================
-=            Modal add categorias           =
+=            Modal add subcategorias           =
 ======================================-->
 
 <div id="modalAddSubCategorias" class="modal fade" role="dialog">
@@ -88,7 +89,7 @@
               <div class="form-group">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-th"></i></span>
-                    <select class="form-control input-lg" name="nuevoSubCategoria" id="">
+                    <select class="form-control input-lg"  name="nuevoAgregarCategoria" id="nuevoAgregarCategoria">
                     <option value="">Seleccione una categoría</option>
 
                       <?php 
@@ -99,7 +100,7 @@
                       $mostrarCategorias = ControladorCategorias::ctrMostrarCategorias($item,$valor);
 
                       foreach ($mostrarCategorias as $key => $value) {
-                        echo '<option value="">'.$value["nombre"].'</option>';
+                        echo '<option value="'.$value["id"].'" >'.$value["nombre"].'</option>';
                       }
 
                       ?>
@@ -116,7 +117,6 @@
                 </div>
               </div>
 
-
             </div>
           </div>
 
@@ -127,10 +127,9 @@
           </div>
 
           <?php 
-         // $agregarsubcategoria = new ControladorSubCategorias();
-         // $agregarsubcategoria -> ctrSubAgregarCategoria();
-
-           ?>
+            $agregarsubcategoria = new ControladorSubCategorias();
+            $agregarsubcategoria -> ctrSubAgregarCategoria();
+          ?>
         </form>
 
     </div>
@@ -139,7 +138,7 @@
 </div>
 
 <!--=====================================
-=            Modal edit categorias       =
+=            Modal edit subcategorias       =
 ======================================-->
 
 <div id="modalEditSubCategorias" class="modal fade" role="dialog">
@@ -156,13 +155,23 @@
           <div class="modal-body">
             <div class="box-body">
 
+               <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                    <select class="form-control input-lg" name="editarAgregarCategoria" >
+                    <option value="" id="editarAgregarCategoria"></option>
+
+                      <?php 
+                      ?>
+                    </select>
+                  </div>
+              </div>
+
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                  <input type="text" class="form-control input-lg" name="editarCategoria" id="editarCategoria" placeholder="Ingresa la Categoria" required>
-
-                  <input type="hidden" name="idCategoria" id="idCategoria" required>
+                  <input type="text" class="form-control input-lg" id="editarSubCategoria" name="editarSubCategoria"  required>
 
                 </div>
               </div>

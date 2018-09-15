@@ -5,7 +5,7 @@ require_once "../modelos/clientes.modelo.php";
 
 class AjaxCliente{
 	public $idCliente;
-	public function ajaxEditarCategoria(){
+	public function ajaxEditarCliente(){
 
 		$item = "id";
 		$valor = $this->idCliente;
@@ -15,10 +15,10 @@ class AjaxCliente{
 	}
 
 }
-
+ 
 /*editar cliente*/
 if (isset($_POST["idCliente"])) {
 	$editarCliente = new AjaxCliente();
 	$editarCliente -> idCliente = $_POST["idCliente"];
-	$editarCliente -> ajaxEditarCategoria();
+	$editarCliente -> ajaxEditarCliente();
 }

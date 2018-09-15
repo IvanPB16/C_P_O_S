@@ -1,5 +1,5 @@
 <?php
- 
+  
 class ControladorUsuarios{
 
 	/*=============================================
@@ -23,6 +23,7 @@ class ControladorUsuarios{
 					if ($respuesta["estado"] == 1) {
 
 						$_SESSION["iniciarSesion"] = "ok";
+
 						$_SESSION["id"] = $respuesta["id"];
 						$_SESSION["nombre"] = $respuesta["nombre"];
 						$_SESSION["usuario"] = $respuesta["usuario"];
@@ -71,11 +72,13 @@ class ControladorUsuarios{
 
 		if(isset($_POST["nuevoUsuario"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) &&
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/',$_POST["nuevoNombre"]) &&
 			   preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoUsuario"]) &&
 			   preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoPassword"])){
 
-			   	$ruta = "";
+			   	/*validar foto*/
+
+			   $ruta = "";
 
 			   	if (isset($_FILES["nuevaFoto"]["tmp_name"])) {
 
@@ -84,76 +87,58 @@ class ControladorUsuarios{
 			   		$nuevoAncho = 500;
 			   		$nuevoAlto = 500;
 
-			   		#directorio
 			   		$directorio = "vistas/img/usuarios/".$_POST["nuevoUsuario"];
-			   		#asignanlos permisos 
-			   		mkdir($directorio,0755);
 
-			   		#configuracion para imagen jpg
-			   		if($_FILES["nuevaFoto"]["type"] == "image/jpeg"){
+			   		mkdir($directorio, 0755);
 
-			   			#para obtener un número aleaotorio
+			   		/*tipo imagen jpg*/
+
+			   		if ($_FILES["nuevaFoto"]["type"] == "image/jpeg"){
+			   			
 			   			$aleatorio = mt_rand(100,999);
-			   			#ruta en donde se genera la imagen
+
 			   			$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".jpg";
-			   			
-			   			#crea la imagen jpg
+
 			   			$origen = imagecreatefromjpeg($_FILES["nuevaFoto"]["tmp_name"]);
-			   			#cuando se corte la imagen mantenga las propiedades
-			   			$destino = imagecreatetruecolor($nuevoAncho,$nuevoAlto);
+
+			   			$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
 
 			   			imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
 			   			imagejpeg($destino,$ruta);
-			   			
+
 			   		}
-			   		
-			   	}
-			   	if (isset($_FILES["nuevaFoto"]["tmp_name"])) {
 
-			   		list($ancho,$alto) = getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
-
-			   		$nuevoAncho = 500;
-			   		$nuevoAlto = 500;
-
-			   		#directorio
-			   		$directorio = "vistas/img/usuarios/".$_POST["nuevoUsuario"];
-			   		#asignanlos permisos 
-			   		mkdir($directorio,0755);
-
-			   		#configuracion para imagen png
-			   		if($_FILES["nuevaFoto"]["type"] == "image/png"){
-
-			   			#para obtener un número aleaotorio
-			   			$aleatorio = mt_rand(100,999);
-			   			#ruta en donde se genera la imagen
-			   			$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".png";
+			   		if ($_FILES["nuevaFoto"]["type"] == "image/png"){
 			   			
-			   			#crea la imagen png
+			   			$aleatorio = mt_rand(100,999);
+
+			   			$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".png";
+
 			   			$origen = imagecreatefrompng($_FILES["nuevaFoto"]["tmp_name"]);
-			   			#cuando se corte la imagen mantenga las propiedades
-			   			$destino = imagecreatetruecolor($nuevoAncho,$nuevoAlto);
+
+			   			$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
 
 			   			imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
 			   			imagepng($destino,$ruta);
-			   			
+
 			   		}
-			   		
+
 			   	}
 
-			 	$tabla = "usuarios";
-			 	
-			 	$encriptar = crypt($_POST["nuevoPassword"],'$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+			   
 
-			   $dato = array("nombre" => $_POST["nuevoNombre"],
+			  $tabla = "usuarios";
+			 	
+			  $encriptar = crypt($_POST["nuevoPassword"],'$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+			   $datos = array("nombre" => $_POST["nuevoNombre"],
 			   				"usuario" => $_POST["nuevoUsuario"],
 			   				"password" =>$encriptar,
 			   				"perfil" =>  $_POST["nuevoPerfil"],
-			   				"ruta" =>  $ruta
+			   				"foto" => $ruta
 			   				);
 
-			   $respuesta =  ModeloUsuarios::MdlIngresarUsuario($tabla,$dato);
+			   $respuesta =  ModeloUsuarios::MdlCrearUsuario($tabla,$datos);
 
 			   if ($respuesta == "ok") {
 			   	echo 	'<script>
@@ -216,64 +201,53 @@ class ControladorUsuarios{
 
 				$ruta = $_POST["fotoActual"];
 
-				if(isset($_FILES["editarFoto"]["tmp_name"]) && !empty($_FILES["editarFoto"]["tmp_name"])){
+				if (isset($_FILES["editarFoto"]["tmp_name"]) && !empty($_FILES["editarFoto"]["tmp_name"])) {
 
 			   		list($ancho,$alto) = getimagesize($_FILES["editarFoto"]["tmp_name"]);
 
 			   		$nuevoAncho = 500;
 			   		$nuevoAlto = 500;
 
-			   		#directorio
 			   		$directorio = "vistas/img/usuarios/".$_POST["editarUsuario"];
 
-			   		//si el usuario tiene una foto solo remplaza, si no crea el directorio
-			   		if(!empty($_POST["fotoActual"])){
+			   		if (!empty($_POST["fotoActual"])) {
+			   			unlink($_POST["fotoActual"]);
+			   		}else{
+			   			mkdir($directorio, 0755);
+			   		}
 
-						unlink($_POST["fotoActual"]);
+			   		/*tipo imagen jpg*/
 
-					}else{
-
-						mkdir($directorio, 0755);
-
-					}	
-			   		
-
-			   		#configuracion para imagen jpg
-			   		if($_FILES["editarFoto"]["type"] == "image/jpeg"){
-
-			   			#para obtener un número aleaotorio
+			   		if ($_FILES["editarFoto"]["type"] == "image/jpeg"){
+			   			
 			   			$aleatorio = mt_rand(100,999);
-			   			#ruta en donde se genera la imagen
+
 			   			$ruta = "vistas/img/usuarios/".$_POST["editarUsuario"]."/".$aleatorio.".jpg";
-			   			
-			   			#crea la imagen jpg
+
 			   			$origen = imagecreatefromjpeg($_FILES["editarFoto"]["tmp_name"]);
-			   			#cuando se corte la imagen mantenga las propiedades
-			   			$destino = imagecreatetruecolor($nuevoAncho,$nuevoAlto);
+
+			   			$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
 
 			   			imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
 			   			imagejpeg($destino,$ruta);
-			   			
-			   		}
-			   		if($_FILES["editarFoto"]["type"] == "image/png"){
 
-			   			#para obtener un número aleaotorio
-			   			$aleatorio = mt_rand(100,999);
-			   			#ruta en donde se genera la imagen
-			   			$ruta = "vistas/img/usuarios/".$_POST["editarUsuario"]."/".$aleatorio.".png";
+			   		}
+
+			   		if ($_FILES["editarFoto"]["type"] == "image/png"){
 			   			
-			   			#crea la imagen png
+			   			$aleatorio = mt_rand(100,999);
+
+			   			$ruta = "vistas/img/usuarios/".$_POST["editarUsuario"]."/".$aleatorio.".png";
+
 			   			$origen = imagecreatefrompng($_FILES["editarFoto"]["tmp_name"]);
-			   			#cuando se corte la imagen mantenga las propiedades
-			   			$destino = imagecreatetruecolor($nuevoAncho,$nuevoAlto);
+
+			   			$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
 
 			   			imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
 			   			imagepng($destino,$ruta);
-			   			
+
 			   		}
-			   		
+
 			   	}
 
 			   	$tabla = "usuarios";

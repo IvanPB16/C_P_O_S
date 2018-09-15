@@ -1,5 +1,5 @@
 <?php
- 
+  
 require_once "conexion.php";
  
 class ModeloUsuarios{
@@ -27,15 +27,15 @@ class ModeloUsuarios{
 
 	}
 
-	static public function MdlIngresarUsuario($tabla,$dato){
+	static public function MdlCrearUsuario($tabla,$datos){
 
-		$statement = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, usuario, password, perfil,foto) VALUES (:nombre, :usuario, :password, :perfil,:foto)");
+		$statement = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre,usuario,password,perfil,foto) VALUES (:nombre,:usuario, :password,:perfil,:foto)");
 
-		$statement->bindParam(":nombre", $dato["nombre"], PDO::PARAM_STR);
-		$statement->bindParam(":usuario", $dato["usuario"], PDO::PARAM_STR);
-		$statement->bindParam(":password", $dato["password"], PDO::PARAM_STR);
-		$statement->bindParam(":perfil", $dato["perfil"], PDO::PARAM_STR);
-		$statement->bindParam(":foto", $dato["ruta"], PDO::PARAM_STR);
+		$statement->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+		$statement->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
+		$statement->bindParam(":password", $datos["password"], PDO::PARAM_STR);
+		$statement->bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
+		$statement->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
 
 		if ($statement->execute()) {
 			return "ok";
@@ -70,7 +70,7 @@ class ModeloUsuarios{
 	}
 
 
-	#actualizar usuario
+	#actualizar  usuario
 
 	static public function MdlActualizarUsuario($tabla,$item1,$valor1,$item2,$valor2){
 

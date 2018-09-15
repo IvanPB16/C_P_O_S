@@ -1,15 +1,16 @@
-$(".nuevaFoto").change(function() {
+/*subir foto*/
+$(".nuevaFoto").change(function(){
 
 	var imagen = this.files[0];
 	
-	if (imagen["type"]  != "image/jpeg"  && imagen["type"]  != "image/png" ) {
+	if (imagen["type"]  != "image/jpeg" && imagen["type"] != "image/png" ) {
 		
 		//limpiamos
 		$(".nuevaFoto").val(""); 
 		swal({
 			  	type: "error",
 				title: "Error al subir la imagen",
-				text: "La imagen debe estar en formato jpeg o png",
+				text: "La imagen debe estar en formato jpg o png",
 				confirmButtonText: "Cerrar"
 			});
 
@@ -26,7 +27,8 @@ $(".nuevaFoto").change(function() {
 	}else{
 		var datosImagen = new FileReader;
 		datosImagen.readAsDataURL(imagen);
-		$(datosImagen).on("load",function(event){
+
+		$(datosImagen).on("load", function(event){
 			var rutaImagen = event.target.result;
 			$(".previsualizar").attr("src",rutaImagen);
 		})
@@ -57,6 +59,7 @@ $(".btnEditarUsuario").click(function(){
 			$("#editarNombre").val(respuesta["nombre"]);
 			$("#editarUsuario").val(respuesta["usuario"]);
 			$("#editarPerfil").html(respuesta["perfil"]);
+			
 			$("#editarPerfil").val(respuesta["perfil"]);
 			$("#fotoActual").val(respuesta["foto"]);
 
@@ -181,21 +184,5 @@ $(document).ready(function () {
 	 });
 });
 
-//validar contraseña editar usuario
 
-/*$(document).ready(function () {
-	$('.btn-val').hide(); 
-	 $('#validarNuevoPassword2').keyup(function(){
-	 	var paseditar =  $('#editarPassword').val();
-	 	var pasval = $('#validarNuevoPassword2').val();
-
-	 	if (paseditar == pasval) {
-	 		$("#error2").text("Coinciden").css("color","green");
-	 		$('.btn-val').show(); 
-	 	}else{
-	 		$("#error").text("No coinciden").css("color","red");
-	 		$('.btn-val').hide(); 
-	 	}
-	 });
-});*/
 
