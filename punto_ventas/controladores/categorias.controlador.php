@@ -12,20 +12,23 @@ class ControladorCategorias{
 				$dato = $_POST["nuevaCategoria"];
 
 				$respuesta = ModeloCategorias::MdlAgregarCategoria($tabla,$dato);
-
 					if ($respuesta == "ok") {
 						echo 	'<script>
-									swal({
-									type: "success",
-									title: "¡La categoría se agrego correctamente!",
-									showConfirmButton: true,
-									confirmButtonText: "Cerrar",
-									closeOnConfirm: false
-									}).then((result)=>{
-										if(result.value){
-										window.location = "categorias";
-										}
-									});
+									$.when(swal({
+				                        type: "success",
+				                        title: "¡Categoría agregada!",
+				                        showConfirmButton: true,
+				                        confirmButtonText: "Cerrar",
+				                        closeOnConfirm: true
+				                        }).then((result)=>{
+				                            if(result.value){
+				                                window.location = location.origin+"/categorias";
+				                            }
+				                       })).done(function(){
+				                           $(".swal2-container").on("click",function () {
+				                            window.location = location.origin+"/categorias";
+				                           });
+				                       }); 
 								</script>';
 						}
 			}else{

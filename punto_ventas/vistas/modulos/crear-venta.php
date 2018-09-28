@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+ <div class="content-wrapper">
 
   <section class="content-header">
     
@@ -24,7 +24,7 @@
         <div class="col-lg-5 col-xs-12">
           <div class="box box-success">
             <div class="box header with-border"></div>
-              <form role="form" method="post">
+              <form role="form" method="post" class="formularioVenta">
 
                 <div class="box-body">
 
@@ -34,20 +34,35 @@
                     <div class="form-group">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input type="text" class="form-control" id="nuevoVendedor" value="admin" readonly>
+                        <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $_SESSION["nombre"]; ?>" readonly>
                      </div>  
                     </div>
 
                     <div class="form-group">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                        <input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="10" readonly>
+                        <?php   
+                          $item = null;
+                          $valor = null;
+
+                          $num_ventas = ControladorVentas::ctrMostrarVentas($item,$valor);
+
+                          if (!$num_ventas) {
+                            echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="1" readonly>';
+                          }else{
+
+                          foreach ($num_ventas as $key => $value) {
+                          }
+                          $codigo = $value["codigo"] + 1;
+                          echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="'.$codigo.'" readonly>';
+                          }
+                         ?>
                       </div>
                     </div>
 
                     <div class="form-group row nuevoProducto">
 
-                      <div class="col-xs-6" style="padding-right:0px">
+                     <!--  <div class="col-xs-6" style="padding-right:0px">
                         <div class="input-group">
 
                          <span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></span>
@@ -73,11 +88,11 @@
 
                         </div>
 
-                      </div>
+                      </div> -->
 
                     </div>
 
-                    <button type="button" class="btn btn-default hidden-lg">Agregar producto</button>
+                    <button type="button" class="btn btn-default hidden-lg btnAgregarProducto">Agregar producto</button>
 
                     <hr>
 
@@ -167,33 +182,16 @@
             <div class="box-header">
               
               <div class="box-body">
-                <table class="table table-bordered table-striped dt-responsive tablas ">
+                <table class="table table-bordered table-striped dt-responsive tablaVentas">
                     <thead>
                       <tr>
                         <th style="width: 10px">#</th>
-                        <th>Imagen</th>
                         <th>Código</th>
                         <th>Descripción</th>
-                        <th>Categorias</th>
                         <th>Stock</th>
                         <th>Acciones</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td style="width: 10px">#</td>
-                        <td>Imagen</td>
-                        <td>Código</td>
-                        <td>Descripción</td>
-                        <td>Categorias</td>
-                        <td>Stock</td>
-                        <td><div class="btn-group">
-                              <button type="button" class="btn btn-primary">Agregar</button> 
-                            </div>
-                          </td>
-                      </tr>
-                      
-                    </tbody>
                 </table>
               </div>
             </div>
