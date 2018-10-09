@@ -2,7 +2,7 @@
 session_start();
  ?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -120,6 +120,7 @@ session_start();
           $_GET["ruta"] == "productos" ||
           $_GET["ruta"] == "ventas" ||
           $_GET["ruta"] == "crear-venta" ||
+          $_GET["ruta"] == "editar-venta" ||
           $_GET["ruta"] == "clientes" ||
           $_GET["ruta"] == "proveedores" ||
           $_GET["ruta"] == "promociones" ||

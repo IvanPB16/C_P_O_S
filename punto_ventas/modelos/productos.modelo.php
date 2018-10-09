@@ -1,5 +1,5 @@
 <?php 
-  
+   
 require_once "conexion.php";
  
 class ModeloProducto{
@@ -78,4 +78,22 @@ class ModeloProducto{
 		$statement -> close();
 		$statement=null;
 	}
+
+	static public function MdlActualizarProducto($tabla,$item1,$valor1,$valor){
+
+		$statement = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE id = :id");
+
+		$statement -> bindParam(":".$item1,$valor1, PDO::PARAM_STR);
+		$statement -> bindParam(":id",$valor, PDO::PARAM_STR);
+
+		if ($statement->execute()) {
+			return "ok";
+		}else{
+			return "error";
+		}
+
+		$statement->close();
+		$statement = null; 
+	}
+
 } 
