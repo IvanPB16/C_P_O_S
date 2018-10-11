@@ -417,20 +417,24 @@ $("#nuevoMetodoPago").change(function(){
 $(".formularioVenta").on('change','input.nuevoValorEfectivo',function(){
 
 	var efectivo = $(this).val();
-	if (efectivo > $("#nuevoTotalVenta").val() ) {
-		var cambio = Number(efectivo) - Number($("#nuevoTotalVenta").val());
+	var totalpagar = $("#nuevoTotalVenta").val();
+	
+	//if (efectivo > totalpagar) {
+		
+		var cambio = Number(efectivo) - Number(totalpagar);
 		var NcambioEfectivo = $(this).parent().parent().parent().children(".capturaCambioEfectivo").children().children(".CambioEfectivo");
 		
 		NcambioEfectivo.val(cambio);
-		}else{
-		$(this).val(0); 
-		swal({
-			title:"La cantidad que ingreso es inferior a ",
-			text: "pulse para continuar",
-			type:"warning",
-			confirmButtonText:"!Cerrar¡"
-		});
-		}
+		
+		//}else{
+		// $(this).val(0); 
+		// swal({
+		// 	title:"La cantidad que ingreso es inferior a ",
+		// 	text: "pulse para continuar",
+		// 	type:"warning",
+		// 	confirmButtonText:"!Cerrar¡"
+		// })
+		//}
 })
 /*cambio transacion*/
 $(".formularioVenta").on('change','input#codigoTransicion',function(){
@@ -490,4 +494,11 @@ $(".btnEliminarVenta").click(function(){
         }
 
   })
+})
+
+// Imprimir Factura
+$(".tablas").on("click",".btnImprimirFactura",function(){
+	var codigoVenta = $(this).attr("codigoVenta");
+	var idCliente = $("#mcliente").val();
+	window.open("extensiones/tcpdf/pdf/factura.php?codigo="+codigoVenta+"&cliente="+idCliente, "_blank");
 })

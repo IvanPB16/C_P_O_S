@@ -137,6 +137,11 @@ class ControladorVentas{
 	if (isset($_GET["idVenta"])) {
 			$tabla = "venta";
 
+			$item ="id";
+			$valor = $_GET["idVenta"];
+
+			$traerVenta = ModeloVentas::mdlMostrarVentas($tabla,$item,$valor);
+
 			$productos = json_decode($traerVenta["producto"],true);
 
 			foreach ($productos as $key => $value) {

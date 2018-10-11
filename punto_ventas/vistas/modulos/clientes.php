@@ -54,7 +54,7 @@
                       <td>'.$out["email"].'</td>
                       <td>'.$out["telefono"].'</td>
                       <td>
-                        <div class="btn-goup">
+                        <div class="btn-group">
                          <button class="btn btn-warning btnEditarCliente" data-toggle="modal" data-target="#modaleditCliente" idCliente="'.$out['id'].'"><i class="fa fa-pencil"></i></button>
                          <button class="btn btn-danger btnEliminarCliente" idCliente="'.$out['id'].'"><i class="fa fa-times"></i></button>
                        </div>

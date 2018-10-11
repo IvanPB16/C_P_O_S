@@ -73,7 +73,7 @@
 
                        echo  '<td>'.$value["ultimo_login"].'</td>
                         <td>
-                          <div class="btn-goup">
+                         <div class="btn-group">
                            <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id"].'" data-toggle="modal" data-target="#modalEditUser"><i class="fa fa-pencil"></i></button>
                            <button class="btn btn-danger btnEliminarUsuario" idUsuario="'.$value["id"].'" fotoUsuario="'.$value["foto"].'" Usuario="'.$value["usuario"].'" ><i class="fa fa-times"></i></button>
                          </div>

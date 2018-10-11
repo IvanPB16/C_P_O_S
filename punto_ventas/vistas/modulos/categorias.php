@@ -52,8 +52,7 @@
                     <td>'.($key+1).'</td>
                     <td class="text-uppercase">'.$value["nombre"].'</td>
                     <td>
-                      <div class="btn-goup">
-
+                      <div class="btn-group">
                       <button class="btn btn-warning btnEditarCategoria" idCategoria="'.$value['id'].'" data-toggle="modal" data-target="#modalEditCategorias"><i class="fa fa-pencil"></i></button>
 
                       <button class="btn btn-danger btnBorrarCategoria" idCategoria="'.$value['id'].'"><i class="fa fa-times"></i></button>
