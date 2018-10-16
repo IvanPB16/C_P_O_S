@@ -1,5 +1,5 @@
 <div class="content-wrapper">
-
+ 
   <section class="content-header">
     
     <h1>
@@ -24,17 +24,29 @@
 
     <div class="row">
       <?php 
-      include "inicio/cajas_superiores.php" ?>
+      if ($_SESSION["perfil"] == "Administrador") {
+        include "inicio/cajas_superiores.php";
+      }
+      ?>
     </div>
 
     <div class="row">
       <div class="col-lg-12">
         <?php 
-          include "reportes/grafico-ventas.php"
+        if ($_SESSION["perfil"] == "Administrador") {
+          include "reportes/grafico-ventas.php";
+          }
+        ?>
+      </div>
+      <div class="col-lg-12">
+        <?php 
+        if ($_SESSION["perfil"] !== "Administrador") {
+          echo '<h1>Bienvenido al sistema de CompuActual '.$_SESSION["nombre"].'</h1>';
+        }
+
         ?>
       </div>
     </div>
 
-
   </section>
- </div>
+</div>

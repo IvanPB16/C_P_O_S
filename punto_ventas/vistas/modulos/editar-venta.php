@@ -1,4 +1,4 @@
- <div class="content-wrapper">
+<div class="content-wrapper">
  
   <section class="content-header">
     
@@ -63,7 +63,7 @@
                     <div class="form-group row nuevoProducto">
                         <?php 
                         $listaProducto = json_decode($venta["producto"],true);
-                                                
+                        
                         foreach ($listaProducto as $key => $value){
                           $item = "id";
                           $valor = $value["id"];
@@ -86,7 +86,7 @@
                                    <div class="col-xs-3 ingresoPrecio" style="padding-left: 0px">
                                       <div class="input-group">
                                             <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>              
-                                            <input type="text" class="form-control nuevoPrecioProducto" name="nuevoPrecioProducto" value="'.$respuesta["precio_venta"].'" precioReal="'.$value["total"].'" required readonly>
+                                            <input type="text" class="form-control nuevoPrecioProducto" name="nuevoPrecioProducto" value="'.$respuesta["precio_venta"].'" precioReal="'.$value["precio"].'" required readonly>
                                       </div>
                                    </div>
                                 </div>';
@@ -131,7 +131,7 @@
 
                                   <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
 
-                                  <input type="text" class="form-control input-lg" id="nuevoTotalVenta" name="nuevoTotalVenta" total="" value="<?php echo $venta["total"]; ?>" readonly required>
+                                  <input type="text" class="form-control input-lg" id="nuevoTotalVenta" name="nuevoTotalVenta" total="<?php echo $venta["subtotal"]; ?>" value="<?php echo $venta["total"]; ?>" readonly required>
 
                                   <input type="hidden" name="totalVenta" value="<?php echo $venta["total"]; ?>" id="totalVenta">
 

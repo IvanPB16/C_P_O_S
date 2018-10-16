@@ -20,16 +20,27 @@
 
   <section class="content">
 
-    
     <div class="box">
       <div class="box-header with-border">
+        <div class="input-group">
+          <button type="button" class="btn btn-default" id="daterange-btn2">
+              <span><i class="fa fa-calendar"></i>Rango de fecha</span>
 
-        <button type="button" class="btn btn-default" id="daterange-bnt2">
-          <span><i class="fa fa-calendar"></i>Rango de fecha</span>
-        </button>
-       
+              <i class="fa fa-caret-down"></i>
+            </button>
+          </div>
         <div class="box-tools pull-right">
+          <?php 
+          if (isset($_GET["fechaInicial"])) {
+            echo '<a href="vistas/modulos/descargar-reporte.php?reporte=reporte&fechaInicial='.$_GET["fechaInicial"].'&fechaFinal='.$_GET["fechaFinal"].'">';
+          }else{
+            echo '<a href="vistas/modulos/descargar-reporte.php?reporte=reporte">';
+          }
+
+          ?>
          
+            <button class="btn btn-success" style="margin-top:5px">Descargar reporte en Excel</button>
+
         </div>
       </div>
       <div class="box-body">
@@ -39,12 +50,16 @@
               include "reportes/grafico-ventas.php";
              ?>
           </div>
+          <div class="col-xs-12">
+            <?php 
+              include "reportes/vendedores.php";
+             ?>
+          </div>
+
         </div>
       </div>
      
     </div>
-    
-
   </section>
 
 </div>

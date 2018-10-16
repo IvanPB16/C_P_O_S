@@ -1,95 +1,68 @@
-<?php
+<?php 
+ 
+	$item = null;
+	$valor = null;
 
-$item = null;
-$valoe = null;
+	$ventas = ControladorVentas::ctrMostrarVentas($item,$valor);
+	$empleados = ControladorUsuarios::ctrMostrarUsuario($item,$valor);
 
-$ventas = ControladorVentas::ctrMostrarVentas($item, $valor);
-$usuarios = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
+	$arrayVendedores = array();
+	$arrayListaVendedores = array();
 
-$arrayVendedores = array();
-$arraylistaVendedores = array();
+	foreach ($ventas as $key => $valueVentas) {
 
-foreach ($ventas as $key => $valueVentas) {
+		foreach ($empleados as $key => $valueEmpleados) {
 
-  foreach ($usuarios as $key => $valueUsuarios) {
+			if ($valueEmpleados["id"] == $valueVentas["id_vendedor"]) {
+				/*se capturan los nombre de los empleados vendedores*/
+				array_push($arrayVendedores, $valueEmpleados["nombre"]);
+				/*Capturamos los nombres y valores*/
+				$arrayListaVendedores = array($valueEmpleados["nombre"] => $valueVentas["subtotal"]);
 
-    if($valueUsuarios["id"] == $valueVentas["id_vendedor"]){
+				foreach ($arrayListaVendedores as $key => $value) {
+					$sumaTotalxVendedor[$key] += $value;
+				}	
 
-        #Capturamos los vendedores en un array
-        array_push($arrayVendedores, $valueUsuarios["nombre"]);
-
-        #Capturamos las nombres y los valores netos en un mismo array
-        $arraylistaVendedores = array($valueUsuarios["nombre"] => $valueVentas["neto"]);
-
-    }
-
-    #Sumamos los netos de cada vendedor
-
-    foreach ($arraylistaVendedores as $key => $value) {
-
-        $sumaTotalVendedores[$key] += $value;
-
-     }
-  
-  }
-
-}
-
-#Evitamos repetir nombre
-$noRepetirNombres = array_unique($arrayVendedores);
+			}
+			/*ciclo para obtener el neto de cada vendedor*/
+		
+		}
+	}
+/*Evitamos repetir nombres*/
+$noRepetirNombre = array_unique($arrayVendedores);
 
 ?>
+<div< class="box box-success">
 
-
-<!--=====================================
-VENDEDORES
-======================================-->
-
-<div class="box box-success">
-	
 	<div class="box-header with-border">
-    
-    	<h3 class="box-title">Vendedores</h3>
-  
-  	</div>
-
-  	<div class="box-body">
-  		
+		<h3 class="box-title">Vendedores</h3>
+	</div>
+	<div class="box-body">
 		<div class="chart-responsive">
-			
-			<div class="chart" id="bar-chart1" style="height: 300px;"></div>
-
+			<div class="chart" id="bar-chart1" style=""></div>
 		</div>
-
-  	</div>
-
+	</div>
 </div>
 
+<!--char -->
+
 <script>
-	
-//BAR CHART
-var bar = new Morris.Bar({
-  element: 'bar-chart1',
-  resize: true,
-  data: [
+	var bar = new Morris.Bar({
+      element: 'bar-chart1',
+      resize: true,
+      data: [
+      <?php 
 
-  <?php
-    
-    foreach($noRepetirNombres as $value){
-
-      echo "{y: '".$value."', a: '".$sumaTotalVendedores[$value]."'},";
-
-    }
-
-  ?>
-  ],
-  barColors: ['#0af'],
-  xkey: 'y',
-  ykeys: ['a'],
-  labels: ['ventas'],
-  preUnits: '$',
-  hideHover: 'auto'
-});
-
-
+      	foreach ($noRepetirNombre as $value) {
+       		echo "{y: '".$value."', a: '".$sumaTotalxVendedor[$value]."'},";
+       }	 
+       ?>    
+      ],
+      barColors: ['#00a65a'],
+      xkey: 'y',
+      ykeys: ['a'],
+      labels: ['Ventas'],
+      preUnits:'$',
+      hideHover: 'auto'
+    });
 </script>

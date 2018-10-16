@@ -1,7 +1,43 @@
-<!--=====================================
-GRÁFICO DE VENTAS
-======================================-->
+<?php 
+  error_reporting(0);
 
+  if (isset($_GET["fechaInicial"])) {
+
+    $fechaInicial = $_GET["fechaInicial"];
+    $fechaFinal = $_GET["fechaFinal"];
+  }else{
+    $fechaInicial = null;
+    $fechaFinal = null;
+  }
+
+  $obtener = ControladorVentas::ctrRangoFechaVentas($fechaInicial,$fechaFinal);
+
+  $arrayFechas = array();
+  $arrayVentas = array();
+
+  foreach ($obtener as $key => $value) {
+    //capturamos el mes y año
+    $fecha = substr($value["fecha"],0,7);
+
+    //Se llena el array con las fechas
+    array_push($arrayFechas,$fecha);
+
+    //capturamos ventas
+
+    $arrayVentas = array($fecha => $value["total"]);
+
+    //sumar pagos del mismo mes
+    foreach ($arrayVentas as $key => $value) {
+      $sumaPagoMes[$key] += $value; 
+    }
+  }
+
+  $noRepetirFechas = array_unique($arrayFechas);
+
+
+?>
+
+<!-- Grafico ventas -->
 
 <div class="box box-solid bg-teal-gradient">
 	
@@ -27,20 +63,21 @@ GRÁFICO DE VENTAS
     element          : 'line-chart-ventas',
     resize           : true,
     data             : [
-      { y: '2011 Q1', item1: 2666 },
-      { y: '2011 Q2', item1: 2778 },
-      { y: '2011 Q3', item1: 4912 },
-      { y: '2011 Q4', item1: 3767 },
-      { y: '2012 Q1', item1: 6810 },
-      { y: '2012 Q2', item1: 5670 },
-      { y: '2012 Q3', item1: 4820 },
-      { y: '2012 Q4', item1: 15073 },
-      { y: '2013 Q1', item1: 10687 },
-      { y: '2013 Q2', item1: 8432 }
+
+    <?php
+    if ($noRepetirFechas != null) {
+      foreach ($noRepetirFechas as $key) {
+        echo "{y: '".$key."', ventas: ".$sumaPagoMes[$key]."},";
+        }
+        echo "{y: '".$key."', ventas: ".$sumaPagoMes[$key]."}";  
+    }else{
+      echo "{y: '0', ventas: '0'}";  
+    }
+    ?>
     ],
     xkey             : 'y',
-    ykeys            : ['item1'],
-    labels           : ['Item 1'],
+    ykeys            : ['ventas'],
+    labels           : ['ventas'],
     lineColors       : ['#efefef'],
     lineWidth        : 2,
     hideHover        : 'auto',
@@ -50,6 +87,7 @@ GRÁFICO DE VENTAS
     pointStrokeColors: ['#efefef'],
     gridLineColor    : '#efefef',
     gridTextFamily   : 'Open Sans',
+    preUnits         : '$',
     gridTextSize     : 10
   });
 </script>

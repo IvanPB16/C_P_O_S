@@ -1,6 +1,6 @@
 <?php 
 require_once "conexion.php";
-   
+    
 Class ModeloVentas{
 
 	static public function mdlMostrarVentas($tabla,$item,$valor){
@@ -69,6 +69,53 @@ Class ModeloVentas{
 		$statement ->close();
 		$statement = null;
 	}
+
+	static public function mdlRangoFechaVenta($tabla,$fechaInicial,$fechaFinal){
+		if ($fechaInicial == null) {
+		$statement = Conexion::Conectar()->prepare("SELECT * FROM $tabla  ORDER BY id ASC");
+			$statement -> execute();
+			return $statement ->fetchAll();
+		}else if ($fechaInicial == $fechaFinal) {
+			$statement = Conexion::Conectar()->prepare("SELECT * FROM $tabla  WHERE fecha like '%$fechaFinal%'");
+			$statement -> bindParam(":fecha",$fechaFinal,PDO::PARAM_STR);
+			$statement -> execute();
+			return $statement ->fetchAll();
+		}else{
+
+			$fechaActual = new DateTime();
+			$fechaActual ->add(new DateInterval("P1D"));
+			$fechaActualMasUno = $fechaActual->format("Y-m-d");
+
+			$fechaFinal2 = new DateTime($fechaFinal);
+			$fechaFinal2 ->add(new DateInterval("P1D"));
+			$fechaFinalMasUno = $fechaFinal2->format("Y-m-d");
+
+			if ($fechaFinalMasUno == $fechaActualMasUno) {
+				$statement = Conexion::Conectar()->prepare("SELECT * FROM $tabla  WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinalMasUno'");
+			}else{
+				$statement = Conexion::Conectar()->prepare("SELECT * FROM $tabla  WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinal'");
+			}
+
+			
+			$statement -> execute();
+			return $statement ->fetchAll();
+		}
+
+		$statement -> close();
+		$statement = null;
+	}
+
+	static public function mdlSumaTotalVentas($tabla){
+
+		$statement = Conexion::Conectar()->prepare("SELECT SUM(subtotal) as total FROM $tabla");
+		$statement -> execute();
+
+		return $statement -> fetch();
+
+		$statement -> close();
+		$statement = null;
+	}
+
 }
 
 

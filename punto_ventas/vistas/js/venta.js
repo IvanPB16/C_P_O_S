@@ -1,3 +1,10 @@
+/*local storage*/
+if (localStorage.getItem("capturarRango") != null) {
+	$('#daterange-btn span').html(localStorage.getItem("capturarRango"));
+}else{
+	$('#daterange-btn span').html('<i class="fa fa-calendar"></i>Rango de fecha');
+}
+
 /*tabla dinamamica*/ 
   
 var tabla_ventas = $(".tablaVentas").DataTable({
@@ -135,6 +142,18 @@ $(".tablaVentas").on('click','button.agregarProducto',function(){
 			var stock = respuesta["stock"];
 			var precio = respuesta["precio_venta"];
 
+			//evitar agregar producto cuando el stock está en cero
+
+			if (stock == 0) {
+				swal({
+					title:"No hay más productos",
+					type:"error",
+					confirmButtonText:"Cerrar"
+				});
+				$("button[idProducto='"+idProducto+"']").addClass("btn-primary agregarProducto");
+				return;
+			}
+
 			$(".nuevoProducto").append(
 				'<div class="row" style="padding:5px 15px">'+
 					'<div class="col-xs-6" style="padding-right:0px">'+
@@ -171,13 +190,37 @@ $(".tablaVentas").on('click','button.agregarProducto',function(){
 
 
 });
-/*quitar productos*/
+/*Cuando carge la tabla y navege en ella*/
 
+$(".tablaVentas").on("draw.dt",function(){
+	if (localStorage.getItem("quitarProducto") != null) {
+		var listarIdProducto = JSON.parse(localStorage.getItem("quitarProducto"));
+		for(var i=0;i<listarIdProducto.length;i++){
+			$("button.recuperar[idProducto = '"+listarIdProducto[i]["idProducto"]+"']").removeClass('btn-default');
+			$("button.recuperar[idProducto = '"+listarIdProducto[i]["idProducto"]+"']").addClass('btn-primary agregarProducto');
+		}
+	}
+})
+
+
+/*quitar productos*/
+var idQuitarProducto = [];
+localStorage.removeItem("quitarProducto");
 $(".formularioVenta").on('click','button.quitarProducto',function(){
 
 	$(this).parent().parent().parent().parent().remove();
 
 	var idProducto = $(this).attr("idProducto");
+
+	/*Almacenar el id de producto a quitar*/
+	if (localStorage.getItem("quitarProducto") == null) {
+		idQuitarProducto = [];
+	}else{
+		idQuitarProducto.concat(localStorage.getItem("quitarProducto"))
+	}
+
+	idQuitarProducto.push({"idProducto":idProducto});
+	localStorage.setItem("quitarProducto",JSON.stringify(idQuitarProducto));
 
 	$("button.recuperar[idProducto = '"+idProducto+"']").removeClass('btn-default');
 	$("button.recuperar[idProducto = '"+idProducto+"']").addClass('btn-primary agregarProducto');
@@ -197,9 +240,35 @@ $(".formularioVenta").on('click','button.quitarProducto',function(){
 	}
 })
 
-/*Agregado productos desde dispositios*/
+/*desactivar boton al agregar producto si ya habia sido seleccionado*/
 
+function quitarAgregarProducto(){
+	//captura el id de los productos elegidos
+	var idProducto = $(".quitarProducto");
+	//capturan botones de agregar de la tabla
+	var botonesTabla = $(".tablaVentas tbody button.agregarProducto");
+	//recorremos en un ciclo para obtener los diferentes id que fueron elegidos
+	for(var i = 0;i<idProducto.length;i++){
+		//se captura el id de los productos agregados
+		var boton = $(idProducto[i]).attr("idProducto");
+		//Se hace recorrido por la tabla q aparece para desactivar botones
+		for(var j=0;j<botonesTabla.length;j++){
+
+			if ((botonesTabla[j]).attr("idProducto") ==  boton) {
+				$(botonesTabla[j]),removeClass("btn-primary agregarProducto");
+				$(botonesTabla[j]),addClass("btn-default");
+			}
+		}
+	}
+
+}
+
+/*Agregado productos desde dispositios*/
+var numProducto = 0;
 $(".btnAgregarProducto").click(function(){
+
+	numProducto ++;
+
 	var dato = new FormData();
 
 	dato.append("traerProducto","ok");
@@ -218,7 +287,7 @@ $(".btnAgregarProducto").click(function(){
 					'<div class="col-xs-6" style="padding-right:0px">'+
 		             	'<div class="input-group">'+
 			                '<span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitarProducto" idProducto><i class="fa fa-times"></i></button></span>'+
-			               '<select class="form-control nuevaDescripcionProducto" idProducto name="nuevaDescripcionProducto" required>'+
+			               '<select class="form-control nuevaDescripcionProducto" id="producto'+numProducto+'" idProducto name="nuevaDescripcionProducto" required>'+
 
 			                '<option>Selecciona un producto</option>'+
 			                '</select>'+
@@ -241,9 +310,12 @@ $(".btnAgregarProducto").click(function(){
 			respuesta.forEach(funcionFor);
 
 			function funcionFor(item,index){
-				$(".nuevaDescripcionProducto").append(	
+
+				if (item.stock != 0) {
+				$("#producto"+numProducto).append(	
 					'<option idProducto="'+item.id+'" value="'+item.descripcion+'">'+item.descripcion+'</option>'
 					)
+				}
 			}
 		sumarPrecio()
 		agregarImpuesto()
@@ -419,22 +491,13 @@ $(".formularioVenta").on('change','input.nuevoValorEfectivo',function(){
 	var efectivo = $(this).val();
 	var totalpagar = $("#nuevoTotalVenta").val();
 	
-	//if (efectivo > totalpagar) {
 		
 		var cambio = Number(efectivo) - Number(totalpagar);
 		var NcambioEfectivo = $(this).parent().parent().parent().children(".capturaCambioEfectivo").children().children(".CambioEfectivo");
 		
 		NcambioEfectivo.val(cambio);
 		
-		//}else{
-		// $(this).val(0); 
-		// swal({
-		// 	title:"La cantidad que ingreso es inferior a ",
-		// 	text: "pulse para continuar",
-		// 	type:"warning",
-		// 	confirmButtonText:"!Cerrar¡"
-		// })
-		//}
+	
 })
 /*cambio transacion*/
 $(".formularioVenta").on('change','input#codigoTransicion',function(){
@@ -475,8 +538,15 @@ function listarMetodos(){
 	}
 
 }
+
+/*editar venta */
+$(".tablas").on("click",".btnEditarVenta",function(){
+	var idVenta = $(this).attr("idVenta");
+	window.location = "index.php?ruta=editar-venta&idVenta="+idVenta;
+})
+
 /*Borrar venta*/
-$(".btnEliminarVenta").click(function(){
+$(".tablas").on("click",".btnEliminarVenta",function(){
 	var idVenta = $(this).attr("idVenta");
 	swal({
         title: '¿Está seguro de borrar la venta?',
@@ -498,7 +568,82 @@ $(".btnEliminarVenta").click(function(){
 
 // Imprimir Factura
 $(".tablas").on("click",".btnImprimirFactura",function(){
+	if ($("#mcliente").val() !== "Seleccione" ) {
 	var codigoVenta = $(this).attr("codigoVenta");
 	var idCliente = $("#mcliente").val();
+	console.log(idCliente);
 	window.open("extensiones/tcpdf/pdf/factura.php?codigo="+codigoVenta+"&cliente="+idCliente, "_blank");
+	location.reload();
+	}else{
+		swal({
+			title:"Debe seleccionar a un cliente para imprimir una factura",
+			type:"warning",
+			confirmButtonText:"Continuar"
+		});
+	}
+})
+
+/*Rango de fechas*/
+$('#daterange-btn').daterangepicker(
+  {
+    ranges   : {
+      'Hoy'       : [moment(), moment()],
+      'Ayer'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+      'Últimos 7 días' : [moment().subtract(6, 'days'), moment()],
+      'Últimos 30 días': [moment().subtract(29, 'days'), moment()],
+      'Este mes'  : [moment().startOf('month'), moment().endOf('month')],
+      'Último mes'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+    },
+    startDate: moment(),
+    endDate  : moment()
+  },
+	function (start, end) {
+	  $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+
+	  var fechaInicial = start.format("YYYY-MM-DD");
+	  
+	  var fechaFinal = end.format("YYYY-MM-DD");
+	  
+	  var capturarRango = $('#daterange-btn span').html();
+	  localStorage.setItem("capturarRango",capturarRango);
+
+	  window.location = "index.php?ruta=ventas&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal;
+   	}
+)
+
+/*Cancelar rango de fechas*/
+$(".datarangepicker .opensleft .range_inputs .cancelBtn").on("click",function(){
+	localStorage.removeItem("capturarRango");
+	localStorage.clear();
+	window.location = "ventas";
+})
+/*capturar hoy*/
+$(".daterangepicker .opensleft .ranges li").on("click",function(){
+	var textoHoy = $(this).attr("data-range-key");
+	if (textoHoy == "Hoy") {
+		var d = new Date();
+
+		var dia = d.getDate();
+		var mes = d.getMonth()+1;
+		var anio = d.getFullYear();
+
+		if (mes < 10) {
+			var fechaInicial = anio+"-0"+mes+"-"+dia;
+			var fechaFinal = anio+"-0"+mes+"-"+dia;
+		}else if (dia < 10) {
+			var fechaInicial = anio+"-"+mes+"-0"+dia;
+			var fechaFinal = anio+"-"+mes+"-0"+dia;
+		}else if (mes < 10 && dia < 10) {
+			var fechaInicial = anio+"-0"+mes+"-0"+dia;
+			var fechaFinal = anio+"-0"+mes+"-0"+dia;
+		}else{
+			var fechaInicial = anio+"-"+mes+"-"+dia;
+			var fechaFinal = anio+"-"+mes+"-"+dia;
+		}
+
+		localStorage.setItem("capturarRango","Hoy");
+
+		window.location = "index.php?ruta=ventas&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal;
+
+	}
 })

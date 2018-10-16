@@ -152,5 +152,6 @@ session_start();
 <script src="vistas/js/proveedores.js"></script>
 <script src="vistas/js/subcategoria.js"></script>
 <script src="vistas/js/venta.js"></script>
+<script src="vistas/js/reportes.js"></script>
 </body>
 </html>
