@@ -29,7 +29,7 @@
       </div>
 
       <div class="box-body">
-        <table class="table table-bordered table-striped dt-responsive tablas">
+        <table class="table table-bordered table-striped dt-responsive tablas" width="100%">
           
           <thead>
             <th style="width: 10px">#</th>
@@ -172,7 +172,7 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+            <button type="button" class="btn btn-default pull-left btn-salir" data-dismiss="modal">Salir</button>
 
             <button type="submit" class="btn btn-primary btn-val">Guardar usuario</button>
           </div>
@@ -234,9 +234,9 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                  <input type="password" class="form-control input-lg" id="validarNuevoPassworddos" name="validarPassworddos" placeholder="Repite la contraseña">
+                  <input type="password" class="form-control input-lg" id="validarNuevoPassword2" name="validarPassworddos" placeholder="Repite la contraseña">
                 </div>
-                <span id="error" class="alert"></span>
+                <span id="error2" class="alert"></span>
               </div>
 
               <div class="form-group">
@@ -274,9 +274,9 @@
 
           <div class="modal-footer">
 
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-default pull-left btn-salir" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary">Modificar empleado</button>
+          <button type="submit" class="btn btn-primary btn-validar">Modificar empleado</button>
 
         </div>
          <?php 

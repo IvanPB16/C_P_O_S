@@ -49,10 +49,12 @@
                                 <i class="fa fa-ellipsis-v"></i>
                                 <i class="fa fa-ellipsis-v"></i>
                               </span><span class="text">'.$out["nombre"].'</span>
+                              <input id="ayuda" type="hidden" value="'.$out["nombre"].'">
                               <div class="tools">
-                              <button class="btn btn-warning btnEditarSub" idSub="'.$out["id"].'" data-toggle="modal" data-target="#modalEditSubCategorias" ><i class="fa fa-edit"></i></button>
-
-                              <button class="btn btn-warning btnEditarSub" idSub="'.$out["id"].'"><i class="fa fa-trash-o"></i></button>
+                                <div class="btn-group">
+                                  <button class="btn btn-warning btnEditarSubCategoria" idSub="'.$out["id"].'" data-toggle="modal" data-target="#modalEditSubCategorias"><i class="fa fa-edit"></i></button>
+                                  <button class="btn btn-warning btnEliminarSub" idSub="'.$out["id"].'"><i class="fa fa-trash-o"></i></button>
+                                </div>
                               </div>
                             </li>
                           </ul>';
@@ -89,7 +91,7 @@
               <div class="form-group">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-th"></i></span>
-                    <select class="form-control input-lg"  name="nuevoAgregarCategoria" id="nuevoAgregarCategoria">
+                    <select class="form-control input-lg"  name="nuevoAgregarSubCategoria" id="nuevoAgregarSubCategoria">
                     <option value="">Seleccione una categoría</option>
 
                       <?php 
@@ -98,7 +100,6 @@
                       $valor = null;
 
                       $mostrarCategorias = ControladorCategorias::ctrMostrarCategorias($item,$valor);
-
                       foreach ($mostrarCategorias as $key => $value) {
                         echo '<option value="'.$value["id"].'" >'.$value["nombre"].'</option>';
                       }
@@ -155,7 +156,7 @@
           <div class="modal-body">
             <div class="box-body">
 
-               <div class="form-group">
+               <!-- <div class="form-group">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-th"></i></span>
                     <select class="form-control input-lg" name="editarAgregarCategoria" >
@@ -165,14 +166,13 @@
                       ?>
                     </select>
                   </div>
-              </div>
+              </div> -->
 
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                  <input type="text" class="form-control input-lg" id="editarSubCategoria" name="editarSubCategoria"  required>
-
+                  <input type="text" class="form-control input-lg" id="editarSubCategoria" name="editarSubCategoria" required>
                 </div>
               </div>
 
@@ -198,7 +198,7 @@
 </div>
 
      <?php 
-         // $borrarsubCategoria = new ControladorSubCategorias();
-          //$borrarsubCategoria -> ctrBorrarSubCategoria();
+          $borrarsubCategoria = new ControladorSubCategorias();
+          $borrarsubCategoria -> ctrBorrarSub();
        ?>
  

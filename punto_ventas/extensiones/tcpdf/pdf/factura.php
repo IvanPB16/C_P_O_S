@@ -127,8 +127,8 @@ $bloque3 = <<<EOF
 
 	<table style="font-size:10px; padding:5px 10px;">
 		<tr>
-			<td style="border: 1px solid:#666; background-color:white; width: 260px text-aling:center">Producto</td>
 			<td style="border: 1px solid:#666; background-color:white; width: 80px text-aling:center">Cantidad</td>
+			<td style="border: 1px solid:#666; background-color:white; width: 260px text-aling:center">Producto</td>
 			<td style="border: 1px solid:#666; background-color:white; width: 100px text-aling:center">Valor Unitario</td>
 			<td style="border: 1px solid:#666; background-color:white; width: 100px text-aling:center">Total</td>
 
@@ -154,14 +154,14 @@ $bloque4 = <<<EOF
 
 	<table style="font-size:10px; padding:5px 10px;">
 		<tr>
-			<td style="border: 1px solid:#666; color: #333; background-color:white; width: 260px; text-align:center">
-				$item[descripcion]
-			</td>
-		
 			<td style="border: 1px solid:#666; color: #333; background-color:white; width: 80px; text-align:center">
 				$item[cantidad]
 			</td>
-
+			
+			<td style="border: 1px solid:#666; color: #333; background-color:white; width: 260px; text-align:center">
+				$item[descripcion]
+			</td>
+	
 			<td style="border: 1px solid:#666; color: #333; background-color:white; width: 100px; text-align:center">
 				$ $valorUnitario
 			</td>

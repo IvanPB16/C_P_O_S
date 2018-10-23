@@ -1,4 +1,4 @@
-<?php 
+<?php  
 require_once "conexion.php";
     
 Class ModeloVentas{
@@ -6,7 +6,7 @@ Class ModeloVentas{
 	static public function mdlMostrarVentas($tabla,$item,$valor){
 
 		if($item != null){
-			$statement = Conexion::Conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id ASC");
+			$statement = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ORDER BY id ASC");
 			$statement -> bindParam(":".$item,$valor,PDO::PARAM_STR);
 			$statement -> execute();
 			return $statement ->fetch();
@@ -72,7 +72,7 @@ Class ModeloVentas{
 
 	static public function mdlRangoFechaVenta($tabla,$fechaInicial,$fechaFinal){
 		if ($fechaInicial == null) {
-		$statement = Conexion::Conectar()->prepare("SELECT * FROM $tabla  ORDER BY id ASC");
+		$statement = Conexion::conectar()->prepare("SELECT * FROM $tabla  ORDER BY id ASC");
 			$statement -> execute();
 			return $statement ->fetchAll();
 		}else if ($fechaInicial == $fechaFinal) {

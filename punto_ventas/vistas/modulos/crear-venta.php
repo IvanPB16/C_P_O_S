@@ -83,7 +83,7 @@
 
                           <thead>
                             <tr>
-                              <th>Impuesto</th>
+                              <th></th>
                               <th>Total</th>
                             </tr>
                           </thead>
@@ -93,11 +93,11 @@
                               <td style="width: 50%">
                                 <div class="input-group">
 
-                                  <input type="number" class="form-control  input-lg" min="0" id="nuevoImpuestoVenta" name="nuevoImpuestoVenta"  placeholder="0" >
+                                  <input type="hidden" class="form-control  input-lg" min="0" id="nuevoImpuestoVenta" name="nuevoImpuestoVenta"  placeholder="0" readonly >
 
                                   <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" required>
                                   <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" required>
-                                  <span class="input-group-addon"><i class="fa fa-percent"></i></span>
+                                  <!-- <span class="input-group-addon"><i class="fa fa-percent"></i></span> -->
 
                                 </div>
                               </td>

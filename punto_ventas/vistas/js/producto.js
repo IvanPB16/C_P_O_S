@@ -132,7 +132,6 @@ $("#nuevaCategoria").change(function(){
 			
 			var nuevoCodigo = Number(respuesta["codigo"]) + 1;
 			$("#nuevoCodigo").val(nuevoCodigo); 
-			console.log(nuevoCodigo);
 		}
 			
 		}

@@ -1,5 +1,5 @@
 <?php
-  
+   
 class ControladorUsuarios{
 
 	/*=============================================
@@ -72,7 +72,7 @@ class ControladorUsuarios{
 
 		if(isset($_POST["nuevoUsuario"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/',$_POST["nuevoNombre"]) &&
+			if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/',$_POST["nuevoNombre"]) &&
 			   preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoUsuario"]) &&
 			   preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoPassword"])){
 

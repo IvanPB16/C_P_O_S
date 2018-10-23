@@ -91,6 +91,8 @@ session_start();
   <!-- ChartJS http://www.chartjs.org/-->
   <script src="vistas/bower_components/Chart.js/Chart.js"></script>
 
+ 
+
 </head>
 
 <!--=====================================

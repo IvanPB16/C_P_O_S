@@ -146,7 +146,7 @@
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                  <input type="text" class="form-control input-lg" name="editarCategoria" id="editarCategoria" placeholder="Ingresa la Categoria" required>
+                  <input type="text" class="form-control input-lg" name="editarCategoria" id="editarCategoria" required>
 
                   <input type="hidden" name="idCategoria" id="idCategoria" required>
 

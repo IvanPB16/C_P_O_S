@@ -2,26 +2,21 @@
 require_once "../controladores/subcategorias.controlador.php";
 require_once "../modelos/subcategorias.modelo.php";
 
-class AjaxSubcategoria{
-
-	public $idSub;
+Class AjaxSubCategoria(){
+	public $nombre;
 
 	public function ajaxEditarSubCategoria(){
+		$item = null;
+		$valor = null;
 
-		$item = "id";
-		$valor = $this->idSub;
-
-		$regresa = ControladorSubCategorias::ctrMostrarSubCategorias($item,$valor);
-
-		echo json_encode($regresa);
-
+		$respuesta = ControladorSubCategorias::ctrEditarMostrar($item,$valor);
+		echo json_encode($respuesta);
 	}
 }
 
-/*editar */
-if (isset($_POST["idSub"])){
-	$editarSub = new AjaxSubcategoria();
-	$editarSub -> idSub = $_POST["idSub"];
-	$editarSub -> ajaxEditarSubCategoria();
-}
+// if (isset($_POST["nombre"])) {
 
+	$editar = new AjaxSubCategoria();
+	$editar -> nombre = $_POST["nombre"];
+	$editar -> ajaxEditarSubCategoria();
+// }

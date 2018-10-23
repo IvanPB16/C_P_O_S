@@ -1,5 +1,5 @@
 <?php 
-  
+   
 class ControladorVentas{ 
 	static public function ctrMostrarVentas($item,$valor){
 		$tabla = "venta";

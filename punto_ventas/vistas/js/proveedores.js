@@ -1,5 +1,5 @@
 /*editar*/
-$(".btnEditarProveedor").click(function(){
+$(document).on("click",".btnEditarProveedor",function(){
 
   	var idProveedor = $(this).attr("idProveedor");
 
@@ -16,7 +16,6 @@ $(".btnEditarProveedor").click(function(){
 		processData:false,
 		dataType:"json",
 		success:function(res){
-			console.log(res)
 			$("#IdProv").val(res["id"]);
   			$("#editarProveedor").val(res["nombre_proveedor"]);
   			$("#editarArticulo").val(res["producto"]);
@@ -28,7 +27,7 @@ $(".btnEditarProveedor").click(function(){
 
 
 /*eliminar*/
-$(".btnEliminarProveedor").click(function(){
+$(document).on("click",".btnEliminarProveedor",function(){
 	var idProveedor = $(this).attr("idProveedor");
 
 		swal({

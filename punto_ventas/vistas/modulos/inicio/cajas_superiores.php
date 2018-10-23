@@ -56,7 +56,7 @@
 <div class="col-lg-3 col-xs-6">       
   <div class="small-box bg-red">
       <div class="inner">
-        <h3>Mostrar Reportes</h3>
+        <h3><br></h3>
 
         <p>Reportes</p>
       </div>

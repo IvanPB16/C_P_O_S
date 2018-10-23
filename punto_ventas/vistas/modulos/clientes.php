@@ -33,7 +33,7 @@
           <thead>
             <th style="width: 10px">#</th>
             <th>Nombre</th>
-            <th>Documento ID</th> 
+            <th>ID Cleinte</th> 
             <th>RFC</th> 
             <th>Email</th>
             <th>Teléfono</th>
@@ -100,7 +100,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                  <input type="number" min="0" class="form-control input-lg" name="nuevoNumeroCliente" placeholder="Ingresa el número de cliente" required>
+                  <input type="number" min="0" class="form-control input-lg" id="nuevoNumeroCliente" name="nuevoNumeroCliente" required readonly>
                 </div>
               </div>
 

@@ -1,6 +1,6 @@
 /* Editar categorias */
  
-$(".btnEditarCategoria").click(function(){
+$(document).on("click",".btnEditarCategoria",function(){
 	var idCategoria = $(this).attr("idCategoria");
 
 	var datos = new FormData();
@@ -27,7 +27,7 @@ $(".btnEditarCategoria").click(function(){
 
 /* Borrar categoría */
 
-$(".btnBorrarCategoria").click(function(){
+$(document).on("click",".btnBorrarCategoria",function(){
 	var idCategoria = $(this).attr("idCategoria");
 
 	swal({

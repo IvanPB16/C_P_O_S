@@ -1,4 +1,4 @@
-/*subir foto*/
+/*subir foto*/ 
 $(".nuevaFoto").change(function(){
 
 	var imagen = this.files[0];
@@ -40,7 +40,7 @@ $(".nuevaFoto").change(function(){
  Editar usuario
   */
 
-$(".btnEditarUsuario").click(function(){
+$(document).on("click",".btnEditarUsuario",function(){
 	
 	var idUsuario = $(this).attr("idUsuario");
 	var datos = new FormData() ;
@@ -75,7 +75,7 @@ $(".btnEditarUsuario").click(function(){
 
 /*Activar usuario*/
 
-$(".btnActivar").click(function(){
+$(document).on("click",".btnActivar",function(){
 
 	var idUsuario = $(this).attr("idUsuario");
 	var estadoUsuario = $(this).attr("estadoUsuario");
@@ -93,7 +93,17 @@ $(".btnActivar").click(function(){
 		contentType: false,
 		processData: false,
 		success:function(respuesta){
-
+			if (window.matchMedia("(max-width:767px)").matches) {
+				swal({
+					title:"El usuario ha cambiado de estado",
+					type: "info",
+					confirmButtonText:"Continuar"
+				}).then(function(result){
+					if (result.value) {
+						window.location = "usuarios";
+						}
+					});
+			}
 		}
 
 	})
@@ -144,7 +154,7 @@ $("#nuevoUsuario").change(function(){
 
 //borrar usuario
 
-$(".btnEliminarUsuario").click(function(){
+$(document).on("click",".btnEliminarUsuario",function(){
 
 	var idUsuario = $(this).attr("idUsuario");
 	var fotoUsuario = $(this).attr("fotoUsuario");
@@ -168,12 +178,11 @@ $(".btnEliminarUsuario").click(function(){
 })
 
 //validar contraseña agregar usuario
-$(document).ready(function () {
+$(document).ready(function() {
 	$('.btn-val').hide(); 
 	 $('#validarNuevoPassword').keyup(function(){
 	 	var pass =  $('#nuevoPassword').val();
 	 	var pass2 = $('#validarNuevoPassword').val();
-
 	 	if (pass == pass2) {
 	 		$("#error").text("Coinciden").css("color","green");
 	 		$('.btn-val').show(); 
@@ -184,5 +193,21 @@ $(document).ready(function () {
 	 });
 });
 
+/*Validar contraseña editar usuario*/
+$(document).ready(function(){
+	$("#validarNuevoPassword2").keyup(function(){
+		var cont = $("#editarPassword").val();
+		var cont2 = $("#validarNuevoPassword2").val();
 
+		$("#editarPassword").prop("required",true);
+		$("#validarNuevoPassword2").prop("required",true);
+		if (cont === cont2) {
+			$("#error2").text("Coinciden").css("color","green");
+			$('.btn-validar').show();
+		}else{
+			$("#error2").text("No coinciden").css("color","red");
+			$('.btn-validar').hide(); 	
+		}
+	});
+});
 

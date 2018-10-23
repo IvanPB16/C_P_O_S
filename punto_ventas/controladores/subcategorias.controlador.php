@@ -8,7 +8,7 @@ class ControladorSubCategorias{
 				
 				$table = "subcategoria";
 
-				$data = array("cat"=>$_POST["nuevoAgregarCategoria"],
+				$data = array("cat"=>$_POST["nuevoAgregarSubCategoria"],
 					"subCat" => $_POST["nuevaSubCategoria"]
 							);
 
@@ -52,12 +52,43 @@ class ControladorSubCategorias{
 	}
 
 	static public function ctrMostrarSubCategorias($item,$valor){
-		$table = "subcategoria";
+		$tabla = "subcategoria";
 
-		$res = ModeloSubCategorias::mdlMostrarSubCategoria($table,$item,$valor);
+		$respuesta = ModeloSubCategorias::mdlMostrarSubCategoria($tabla,$item,$valor);
 
-		return $res;
+		return $respuesta;
 	}
+	static public function ctrEditarMostrar($item,$valor){
+	$tabla = "subcategoria";
+	$respuesta = ModeloSubCategorias::mdlEditarMostrar($tabla,$item,$valor);
 
+	return $respuesta;
+	}
+	
+	static public function ctrBorrarSub(){
+		if (isset($_GET["idSub"])) {
+			$tabla = "subcategoria";
+			$dato = $_GET["idSub"];
+
+
+			$respuesta = ModeloSubCategorias::mdlBorrarSub($tabla,$dato);
+			if ($respuesta == "ok") {
+				echo 	'<script>
+								swal({
+								type: "success",
+								title: "¡La subcategoria ha sido borrado correctamente!",
+								showConfirmButton: true,
+								confirmButtonText: "Cerrar",
+								closeOnConfirm: false
+								}).then((result)=>{
+									if(result.value){
+									window.location = "subcategorias";
+									}
+								});
+							</script>';
+			}
+			
+		}
+	}
 
 } 

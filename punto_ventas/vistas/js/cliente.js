@@ -1,4 +1,4 @@
-$(".btnEditarCliente").click(function(){
+$(document).on("click",".btnEditarCliente",function(){
 
 	var idCliente = $(this).attr("idCliente");
 
@@ -26,7 +26,7 @@ $(".btnEditarCliente").click(function(){
 
 })
  /*Eliminar cliente*/
-$(".btnEliminarCliente").click(function(){
+$(document).on("click",".btnEliminarCliente",function(){
 
 	var idCliente = $(this).attr("idCliente");
 
@@ -46,4 +46,3 @@ $(".btnEliminarCliente").click(function(){
 	})
 })
 
-		
