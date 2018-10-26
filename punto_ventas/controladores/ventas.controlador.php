@@ -11,7 +11,7 @@ class ControladorVentas{
 
 	static public function ctrCrearVenta(){
 		if (isset($_POST["nuevaVenta"])) {
-			/*Actualizar las compras del cliente y reducir el stock y alimentar las ventas de los productos*/
+			/*Actualizar las compras del cliente y reducir el stock */
 			$listarProductos = json_decode($_POST["listaProductos"],true);
 
 			foreach ($listarProductos as $key => $value) {
@@ -34,7 +34,7 @@ class ControladorVentas{
 						    "impuesto" => $_POST["nuevoPrecioImpuesto"],
 	 					    "neto" => $_POST["nuevoPrecioNeto"],
 						    "total" => $_POST["totalVenta"],
-						    "metodo_pago" => $_POST["nuevoMetodoPago"],
+						    "metodo_pago" => $_POST["listaMetodoPago"],
 						    "idVendedor" => $_POST["idVendedor"]
 							);
 
@@ -67,9 +67,8 @@ class ControladorVentas{
 			$valor = $_POST["editarVenta"];
 
 			$traerVenta = ModeloVentas::mdlMostrarVentas($tabla,$item,$valor);
-			/*verificr productos editados*/
-			
 
+			/*verificar productos editados*/
 			if ($_POST["listaProductos"] == "") {
 
 				$listaProductos = $traerVenta["producto"];
@@ -94,7 +93,7 @@ class ControladorVentas{
 					$item1a = "stock";
 					$valor1a = $value["cantidad"] + $traerProducto["stock"];
 
-					$modificarStock = ModeloProducto::MdlActualizarProducto($tablaProductos,$item1a,$valor1a,$valor);
+					$nuevoStock = ModeloProducto::MdlActualizarProducto($tablaProductos,$item1a,$valor1a,$valor);
 				}
 
 
@@ -103,16 +102,15 @@ class ControladorVentas{
 				$listarProductos2 = json_decode($listaProductos,true);
 
 				foreach ($listarProductos2 as $key => $value) {
-					
-					
+					$tablaProductos2 = "producto";
 					$item2 = "id";
 					$valor2 = $value["id"];
 
-					$traerProducto2 = ModeloProducto::mdlMostrarProducto($tablaProductos,$item,$valor);
+					$traerProducto2 = ModeloProducto::mdlMostrarProducto($tablaProductos2,$item2,$valor2);
 
 					$item1a2 = "stock";
 					$valor1a2 = $value["stock"];
-					$modificarStock = ModeloProducto::MdlActualizarProducto($tablaProductos,$item1a,$valor1a,$valor);
+					$modificarStock2 = ModeloProducto::MdlActualizarProducto($tablaProductos2,$item1a2,$valor1a2,$valor2);
 				}
 			}
 			/*guardar cambios de la compra*/
@@ -122,7 +120,7 @@ class ControladorVentas{
 						    "impuesto" => $_POST["nuevoPrecioImpuesto"],
 	 					    "neto" => $_POST["nuevoPrecioNeto"],
 						    "total" => $_POST["totalVenta"],
-						    "metodo_pago" => $_POST["nuevoMetodoPago"],
+						    "metodo_pago" => $_POST["listaMetodoPago"],
 						    "idVendedor" => $_POST["idVendedor"]
 							);
 

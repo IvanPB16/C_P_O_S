@@ -2,7 +2,7 @@
  
 $(document).on("click",".btnEditarCategoria",function(){
 	var idCategoria = $(this).attr("idCategoria");
-
+	console.log(idCategoria);
 	var datos = new FormData();
 
 	datos.append("idCategoria",idCategoria);

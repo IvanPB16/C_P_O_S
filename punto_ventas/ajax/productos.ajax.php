@@ -1,5 +1,5 @@
 <?php  
-   
+    
 require_once "../controladores/productos.controlador.php";
 require_once "../modelos/productos.modelo.php";
 
@@ -16,11 +16,11 @@ class AjaxProductos{
 	
 	/* generar codigo */
 	 public function ajaxGenerarCodigo(){
-	 	$item = "id_categoria";
-	 	$valor = $this->idCategoria;
+	 		$item = "id_categoria";
+	 		$valor = $this->idCategoria;
 	 	
-	$respuesta = ControladorProducto::ctrMostrarProducto($item,$valor);
-	 	echo json_encode($respuesta);
+			$respuesta = ControladorProducto::ctrMostrarProducto($item,$valor);
+	 		echo json_encode($respuesta);
 	 } 
 
 	 public function ajaxEditarProducto(){
@@ -78,7 +78,7 @@ if (isset($_POST["traerProducto"])) {
 /*selecinar producto*/
 
 if (isset($_POST["nombreProducto"])) {
-	$editarProducto = new AjaxProductos();
-	$editarProducto -> nombreProducto = $_POST["nombreProducto"];
-	$editarProducto -> ajaxEditarProducto();
+	$nombreProducto = new AjaxProductos();
+	$nombreProducto -> nombreProducto = $_POST["nombreProducto"];
+	$nombreProducto -> ajaxEditarProducto();
 }

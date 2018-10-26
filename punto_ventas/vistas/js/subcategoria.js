@@ -1,29 +1,21 @@
 /* Editar subcategorias */
 
-$(".btnEditarSubCategoria").click(function(){
-
-	var idSub = $(this).attr("idSub");
-	var nombre = $("#ayuda").val();
-	console.log(idSub);
-	console.log(nombre);
-
-	var datos = new FormData();
-
-	datos.append("idSub",idSub);
-
-	$.ajax({
-		url: "ajax/subcategoria.ajax.php",
-		method: "POST",
-		data: datos,
-		cache: false,
-		contentType: false,
-		processData:false,
-		dataType:"json",
-		success:function(respuesta){
-			console.log("res",respuesta);
-		}
-	})
+$(document).on("click",".btnEditarSub",function(){
+	 var idsc = $(this).attr("idsc");
+	 var nom = $(this).attr("nombre");
+	$("#editarSubCategoria").val(nom);
+	$("#idsc").val(idsc);
+	$("#modalEditSubCategorias").modal("toggle");
+	$("#modalEditSubCategorias").modal("show");
 })
+
+$("#editarSubCategoria").change(function(){
+	var sc =$("#editarSubCategoria").val();
+	var sn = $("#idsc").val();
+	
+	$("#nuevoValor").val(sc);	
+})
+
 
 /*Borrar subcategoria*/
 $(document).on("click",".btnEliminarSub",function(){

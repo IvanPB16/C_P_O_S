@@ -50,9 +50,11 @@
                                 <i class="fa fa-ellipsis-v"></i>
                               </span><span class="text">'.$out["nombre"].'</span>
                               <input id="ayuda" type="hidden" value="'.$out["nombre"].'">
-                              <div class="tools">
+                             <div class="tools">
+
                                 <div class="btn-group">
-                                  <button class="btn btn-warning btnEditarSubCategoria" idSub="'.$out["id"].'" data-toggle="modal" data-target="#modalEditSubCategorias"><i class="fa fa-edit"></i></button>
+                                  <button class="btn btn-warning btnEditarSub" idsc="'.$out["id"].'" nombre="'.$out["nombre"].'"><i class="fa fa-edit"></i></button>
+                                
                                   <button class="btn btn-warning btnEliminarSub" idSub="'.$out["id"].'"><i class="fa fa-trash-o"></i></button>
                                 </div>
                               </div>
@@ -155,24 +157,13 @@
 
           <div class="modal-body">
             <div class="box-body">
-
-               <!-- <div class="form-group">
-                  <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-th"></i></span>
-                    <select class="form-control input-lg" name="editarAgregarCategoria" >
-                    <option value="" id="editarAgregarCategoria"></option>
-
-                      <?php 
-                      ?>
-                    </select>
-                  </div>
-              </div> -->
-
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
                   <input type="text" class="form-control input-lg" id="editarSubCategoria" name="editarSubCategoria" required>
+                  <input type="hidden" class="form-control input-lg" id="nuevoValor" name="nuevoValor" value="" required>
+                  <input type="hidden" class="form-control input-lg" id="idsc" name="editarids" required>
                 </div>
               </div>
 
@@ -183,12 +174,12 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            <button type="submit" class="btn btn-primary" id="enviar">Guardar cambios</button>
           </div>
 
-          <?php 
-       //   $editarCategoria = new ControladorSubCategorias();
-         // $editarCategoria -> ctrEditarSubCategoria();
+           <?php 
+          $editarCategoria = new ControladorSubCategorias();
+          $editarCategoria -> ctrEditarSub();
            ?>
         </form>
 
@@ -197,8 +188,8 @@
   </div>
 </div>
 
-     <?php 
-          $borrarsubCategoria = new ControladorSubCategorias();
-          $borrarsubCategoria -> ctrBorrarSub();
-       ?>
+<?php 
+  $borrarsubCategoria = new ControladorSubCategorias();
+  $borrarsubCategoria -> ctrBorrarSub();
+?>
  

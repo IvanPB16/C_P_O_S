@@ -19,8 +19,10 @@ $(document).on("click",".btnEditarProveedor",function(){
 			$("#IdProv").val(res["id"]);
   			$("#editarProveedor").val(res["nombre_proveedor"]);
   			$("#editarArticulo").val(res["producto"]);
+  			$("#editarDescripcion").val(res["descripcion"]);
   			$("#editarTelefono").val(res["telefono"]);
   			$("#editarEmail").val(res["correo"]);
+
   		}
   	})
   })

@@ -48,7 +48,7 @@
     <div class="icon">
       <i class="ion ion-person-add"></i>
     </div>
-      <a href="usuarios" class="small-box-footer">Más información<i class="fa fa-arrow-circle-right"></i>
+      <a href="clientes" class="small-box-footer">Más información<i class="fa fa-arrow-circle-right"></i>
       </a>
  </div>
 </div>

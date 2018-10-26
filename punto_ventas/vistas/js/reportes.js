@@ -34,13 +34,14 @@ $('#daterange-btn2').daterangepicker(
 )
 
 /*Cancelar rango de fechas*/
-$(".datarangepicker .opensright .range_inputs, .cancelBtn").on("click",function(){
+$(".daterangepicker.opensright .range_inputs .cancelBtn").on("click", function(){
 	localStorage.removeItem("capturarRango2");
 	localStorage.clear();
 	window.location = "reporte";
 })
+
 /*capturar hoy*/
-$(".daterangepicker .opensright .ranges li").on("click",function(){
+$(".daterangepicker.opensright .ranges li").on("click",function(){
 	var textoHoy = $(this).attr("data-range-key");
 	if (textoHoy == "Hoy") {
 		var d = new Date();

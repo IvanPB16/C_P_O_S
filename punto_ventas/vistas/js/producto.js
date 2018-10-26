@@ -10,7 +10,7 @@ var tabla = $(".tablaProductos").DataTable({
 			{
 				"targets":-1,
 				"data":null,
-				"defaultContent":'<div class="btn-goup"><button class="btn btn-warning btnEditarProducto" data-toggle="modal" data-target="#modalEditProducto" idProducto><i class="fa fa-pencil"></i></button><button class="btn btn-danger btnEliminarProducto" idProducto codigo imagen><i class="fa fa-times"></i></button></div>'
+				"defaultContent":'<div class="btn-goup"><button class="btn btn-success btnCantidadProducto" data-toggle="modal" data-target="#modalCantidadProducto" idProducto><i class="fa fa-plus"></i></button><button class="btn btn-warning btnEditarProducto" data-toggle="modal" data-target="#modalEditProducto" idProducto><i class="fa fa-pencil"></i></button><button class="btn btn-danger btnEliminarProducto" idProducto codigo imagen><i class="fa fa-times"></i></button></div>'
 			} 
 	],
 	"language":{
@@ -109,6 +109,7 @@ $(".sorting").click(function(){
 /* capturar categoria para asiganr codigo */
 $("#nuevaCategoria").change(function(){
 
+	//se va a enviar a la tabla de productos para buscarlo en id_categoria
 	var idCategoria = $(this).val();
 
 	var datos = new FormData();
@@ -299,4 +300,50 @@ $(".tablaProductos tbody").on("click","button.btnEliminarProducto",function(){
 
 	})
 
-	
+
+
+/*AgregarCantidad producto*/
+$(".tablaProductos tbody").on("click","button.btnCantidadProducto",function(){
+
+	var idProducto = $(this).attr("idProducto");
+
+	var datos = new FormData();
+
+	datos.append("idProducto",idProducto);
+
+	$.ajax({
+		url: "ajax/productos.ajax.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData:false,
+		dataType:"json",
+		 success:function(respuesta){
+		 	$("#numeroAyuda").val(respuesta["codigo"]);
+           	$("#stockActual").val(respuesta["stock"]);
+		 }
+	})
+
+})
+
+function agregarCantidad(){
+
+	var stockActual = $("#stockActual").val();
+	console.log(stockActual);
+	var stockAgregar = $("#agregarCantidadStock").val();
+	console.log(stockAgregar);
+	var stockFinal = Number(stockActual) + Number(stockAgregar);
+	console.log(stockFinal);
+
+	$("#stockFn").val(stockFinal);
+
+}
+
+$("#agregarCantidadStock").change(function(){
+	agregarCantidad();
+})
+
+// $("#nuevaCategoria").on("change",function(){
+// 	$("#sub").html('<select class="sub"><option value="">Seleccionar</option></select>');
+// })

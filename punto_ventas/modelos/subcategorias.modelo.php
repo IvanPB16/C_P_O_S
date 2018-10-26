@@ -16,6 +16,9 @@ class ModeloSubCategorias{
 		}else{
 			return "error";
 		}
+
+		$statement -> close();
+		$statement = null;
 	}
 
 	static public function mdlMostrarSubCategoria($tabla,$item,$valor){
@@ -30,20 +33,41 @@ class ModeloSubCategorias{
 			$statement ->bindParam(":id",$valor,PDO::PARAM_INT);
 			$statement->execute();
 			return $statement -> fetchAll();
+		 }
+
+		$statement -> close();
+		$statement = null;
+	}
+
+	static public function mdlEditarSub($tabla,$dato){
+		$statement = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre  WHERE id = :id");
+		$statement -> bindParam(":id",$dato["id"],PDO::PARAM_INT);
+		$statement -> bindParam(":nombre",$dato["nombre"],PDO::PARAM_STR);
+		if($statement->execute()){
+			return "ok";
+		}else{
+			return "error";
 		}
-
 		$statement -> close();
 		$statement = null;
 	}
-	static public function mdlEditarMostrar($tabla,$item,$valor){
-			$statement = Conexion::conectar()->prepare("SELECT * FROM $tabla");
-			$statement -> bindParam(":".$item,$valor,PDO::PARAM_STR);
-			$statement -> execute();
-			return $statement -> fetch();
 
-		$statement -> close();
-		$statement = null;
-	}
+
+
+	// $statement = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre where id = :id");
+
+	// 	$statement -> bindParam(":nombre",$dato["nombre"],PDO::PARAM_STR);
+	// 	$statement -> bindParam(":id",$dato["id"],PDO::PARAM_INT);
+
+	// 	if($statement->execute()){
+	// 		return "ok";
+	// 	}else{
+	// 		return "error";
+	// 	}
+	// 	$statement -> close();
+	// 	$statement = null;
+
+
 
 	static public function mdlBorrarSub($tabla,$dato){
 		$statement = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
@@ -58,5 +82,6 @@ class ModeloSubCategorias{
 		$statement->close();
 		$statement=null;
 	}
+
 }
  

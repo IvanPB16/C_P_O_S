@@ -96,4 +96,20 @@ class ModeloProducto{
 		$statement = null; 
 	}
 
+	static public function mdlAddCantidadProducto($tabla,$dato){
+
+		$statement = Conexion::conectar()->prepare("UPDATE $tabla SET stock = :stock WHERE codigo = :codigo");
+		
+		$statement->bindParam(":codigo",$dato["codigo"],PDO::PARAM_STR);
+		$statement->bindParam(":stock",$dato["stockFinal"],PDO::PARAM_STR);
+
+		if ($statement->execute()) {
+			return "ok";
+		}else{
+			return "error";
+		}
+		$statement->close();
+		$statement=null;
+	}
+
 } 

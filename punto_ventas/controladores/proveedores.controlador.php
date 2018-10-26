@@ -6,7 +6,8 @@ class ControladorProveedor{
 		if (isset($_POST["nuevoProveedor"])) {
 
 			if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/',$_POST["nuevoProveedor"]) &&
-				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/',$_POST["nuevoArticulo"]) &&
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ, ]+$/',$_POST["nuevoArticulo"]) &&
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ, ]+$/', $_POST["nuevaDescripcion"]) &&
 				preg_match('/^[()\-0-9 ]+$/', $_POST["nuevoTelefono"]) &&
 				preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["nuevoEmail"])) {
 
@@ -14,6 +15,7 @@ class ControladorProveedor{
 
 				$data = array("nombre"=>$_POST["nuevoProveedor"],
 							  "producto"=>$_POST["nuevoArticulo"],
+							  "descripcion"=>$_POST["nuevaDescripcion"],
 							  "telefono"=>$_POST["nuevoTelefono"],
 							  "correo"=>$_POST["nuevoEmail"]
 							   );
@@ -66,7 +68,8 @@ class ControladorProveedor{
 		if (isset($_POST["editarProveedor"])) {
 
 			if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/',$_POST["editarProveedor"]) &&
-				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/',$_POST["editarArticulo"]) &&
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ, ]+$/',$_POST["editarArticulo"]) &&
+				preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ, ]+$/', $_POST["editarDescripcion"]) &&
 				preg_match('/^[()\-0-9 ]+$/', $_POST["editarTelefono"]) &&
 				preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["editarEmail"])) {
 
@@ -75,6 +78,7 @@ class ControladorProveedor{
 				$data = array("id"=>$_POST["IdProv"],
 							  "nombre"=>$_POST["editarProveedor"],
 							  "producto"=>$_POST["editarArticulo"],
+							  "descripcion"=>$_POST["editarDescripcion"],
 							  "telefono"=>$_POST["editarTelefono"],
 							  "correo"=>$_POST["editarEmail"]
 							   );

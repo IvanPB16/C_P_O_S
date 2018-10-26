@@ -24,13 +24,20 @@ class TablaProductos{
 	 				$valor = $productos[$i]["id_categoria"];
 
 	 				$categorias = ControladorCategorias::ctrMostrarCategorias($item,$valor);
+	 				if ($productos[$i]["stock"] <= 10) {
+	 					$stock = "<button class='btn btn-danger'>".$productos[$i]["stock"]."</button>";
+	 				}else if ($productos[$i]["stock"] > 10 && $productos[$i]["stock"] <= 15) {
+	 					$stock = "<button class='btn btn-warning'>".$productos[$i]["stock"]."</button>";
+	 				}else{
+	 					$stock = "<button class='btn btn-success'>".$productos[$i]["stock"]."</button>";
+	 				}
 	 				echo '[
 	 					"'.($i+1).'",
 	 					"'.$productos[$i]["imagen"].'",
 	 					"'.$productos[$i]["codigo"].'",
 	 					"'.$productos[$i]["descripcion"].'",
 	 					"'.$categorias["nombre"].'",
-	 					"'.$productos[$i]["stock"].'",
+	 					"'.$stock.'",
 	 					"$'.number_format($productos[$i]["precio_compra"],2).'",
 	 					"$'.number_format($productos[$i]["precio_venta"],2).'",
 	 					"'.$productos[$i]["fecha"].'",
@@ -43,13 +50,22 @@ class TablaProductos{
 	 			$valor = $productos[count($productos)-1]["id_categoria"];
 
 	 				$categorias = ControladorCategorias::ctrMostrarCategorias($item,$valor);
+
+	 				if ($productos[count($productos)-1]["stock"] <= 10) {
+	 					$stock = "<button class='btn btn-danger'>".$productos[count($productos)-1]["stock"]."</button>";
+	 				}else if ($productos[count($productos)-1]["stock"] > 10 && $productos[$i]["stock"] <= 15) {
+	 					$stock = "<button class='btn btn-warning'>".$productos[count($productos)-1]["stock"]."</button>";
+	 				}else{
+	 					$stock = "<button class='btn btn-success'>".$productos[count($productos)-1]["stock"]."</button>";
+	 				}
+
 	 			echo'	[
 	 					"'.count($productos).'",
 	 					"'.$productos[count($productos)-1]["imagen"].'",
 	 					"'.$productos[count($productos)-1]["codigo"].'",
 	 					"'.$productos[count($productos)-1]["descripcion"].'",
 	 					"'.$categorias["nombre"].'",
-	 					"'.$productos[count($productos)-1]["stock"].'",
+	 					"'.$stock.'",
 	 					"$'.number_format($productos[count($productos)-1]["precio_compra"],2).'",
 	 					"$'.number_format($productos[count($productos)-1]["precio_venta"],2).'",
 	 					"'.$productos[count($productos)-1]["fecha"].'",

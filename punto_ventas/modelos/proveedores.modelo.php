@@ -5,9 +5,11 @@ class ModeloProveedor{
 
 	static public function mdlAgregarProveedor($tabla,$data){
 
-		$statement = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre_proveedor,producto,telefono,correo)VALUES(:nombre,:producto,:telefono,:correo)");
+		$statement = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre_proveedor,producto,descripcion,telefono,correo)VALUES(:nombre,:producto,:descripcion,:telefono,:correo)");
 
 		$statement -> bindParam(":nombre",$data["nombre"],PDO::PARAM_STR);
+		$statement -> bindParam(":producto",$data["producto"],PDO::PARAM_STR);
+		$statement -> bindParam(":descripcion",$data["descripcion"],PDO::PARAM_STR);
 		$statement -> bindParam(":producto",$data["producto"],PDO::PARAM_STR);
 		$statement -> bindParam(":telefono",$data["telefono"],PDO::PARAM_STR);
 		$statement -> bindParam(":correo",$data["correo"],PDO::PARAM_STR);
@@ -42,11 +44,12 @@ class ModeloProveedor{
 
 	static public function mdlEditarProveedor($tabla,$data){
 
-		$statement = Conexion::conectar()->prepare("UPDATE  $tabla SET nombre_proveedor = :nombre, producto = :producto ,telefono = :telefono, correo = :correo WHERE id = :id");
+		$statement = Conexion::conectar()->prepare("UPDATE  $tabla SET nombre_proveedor = :nombre, producto = :producto, descripcion = :descripcion ,telefono = :telefono, correo = :correo WHERE id = :id");
 
 		$statement -> bindParam(":id",$data["id"],PDO::PARAM_STR);
 		$statement -> bindParam(":nombre",$data["nombre"],PDO::PARAM_STR);
 		$statement -> bindParam(":producto",$data["producto"],PDO::PARAM_STR);
+		$statement -> bindParam(":descripcion",$data["descripcion"],PDO::PARAM_STR);
 		$statement -> bindParam(":telefono",$data["telefono"],PDO::PARAM_STR);
 		$statement -> bindParam(":correo",$data["correo"],PDO::PARAM_STR);
 

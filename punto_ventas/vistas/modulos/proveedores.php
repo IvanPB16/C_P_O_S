@@ -33,6 +33,7 @@
             <th style="width: 10px">#</th>
             <th>Nombre de la empresa o proveedor</th>
             <th>Artículos que maneja</th> 
+            <th>Descripción</th>
             <th>teléfono fijo/móvil</th>
             <th>Email</th>
             <th>Acciones</th>
@@ -51,6 +52,7 @@
                 <td>'.($key+1).'</td>
                 <td>'.$out["nombre_proveedor"].'</td>
                 <td>'.$out["producto"].'</td>
+                <td>'.$out["descripcion"].'</td>
                 <td>'.$out["telefono"].'</td>
                 <td>'.$out["correo"].'</td>
                 <td>
@@ -78,7 +80,7 @@
 </div>
 
 <!--=====================================
-=            Modal add user            =
+=            Modal add proveedor           =
 ======================================-->
 
 <div id="modalAddProveedor" class="modal fade" role="dialog">
@@ -108,6 +110,14 @@
                   <input type="text" class="form-control input-lg" name="nuevoArticulo" placeholder="Ingresa el nombre de articulos" required>
                 </div>
               </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa  fa-comment"></i></span>
+                   <textarea class="textarea form-control input-lg" name="nuevaDescripcion" placeholder="Descripción del proveedor" style="width: 100%; height: 80px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                </div>
+              </div>
+
 
               <div class="form-group">
                 <div class="input-group">
@@ -174,6 +184,13 @@
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa  fa-tag"></i></span>
                   <input type="text"class="form-control input-lg" id="editarArticulo" name="editarArticulo" required>
+                </div>
+              </div>
+
+               <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa  fa-comment"></i></span>
+                   <textarea class="textarea form-control input-lg" id="editarDescripcion" name="editarDescripcion" style="width: 100%; height: 80px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                 </div>
               </div>
 

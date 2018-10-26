@@ -93,11 +93,10 @@
                               <td style="width: 50%">
                                 <div class="input-group">
 
-                                  <input type="hidden" class="form-control  input-lg" min="0" id="nuevoImpuestoVenta" name="nuevoImpuestoVenta"  placeholder="0" readonly >
+                                  <input type="hidden" class="form-control  input-lg"readonly >
 
                                   <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" required>
                                   <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" required>
-                                  <!-- <span class="input-group-addon"><i class="fa fa-percent"></i></span> -->
 
                                 </div>
                               </td>

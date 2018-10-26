@@ -58,12 +58,37 @@ class ControladorSubCategorias{
 
 		return $respuesta;
 	}
-	static public function ctrEditarMostrar($item,$valor){
-	$tabla = "subcategoria";
-	$respuesta = ModeloSubCategorias::mdlEditarMostrar($tabla,$item,$valor);
 
-	return $respuesta;
+
+	static public function ctrEditarSub(){
+		if (isset($_POST["editarids"])) {
+			$tabla = "subcategoria";
+			$dato = array("id" => $_POST["editarids"],"nombre" => $_POST["nuevoValor"]);
+
+			$respuesta = ModeloSubCategorias::mdlEditarSub($tabla,$dato);
+			var_dump($respuesta);
+
+			if ($respuesta == "ok") {
+				echo 	'<script>
+								swal({
+								type: "success",
+								title: "¡La subcategoria ha sido actualizado correctamente!",
+								showConfirmButton: true,
+								confirmButtonText: "Cerrar",
+								closeOnConfirm: false
+								}).then((result)=>{
+									if(result.value){
+									window.location = "subcategorias";
+									}
+								});
+							</script>';
+			}
+
+		}
 	}
+			
+
+	
 	
 	static public function ctrBorrarSub(){
 		if (isset($_GET["idSub"])) {

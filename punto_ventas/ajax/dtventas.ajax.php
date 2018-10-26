@@ -1,9 +1,8 @@
 <?php 
- 
 require_once "../controladores/productos.controlador.php";
 require_once "../modelos/productos.modelo.php";
 
-class TablaProductos{
+class TablaMostraProductos{
 
 	public function mostrarTablaProducto(){
 
@@ -12,33 +11,42 @@ class TablaProductos{
 
 	 	$mostrar = ControladorProducto::ctrMostrarProducto($item,$valor);
 
-	 	echo '{
+	 		$datosJS='{
 	 			"data": [';
-	 			#i es igual a 0, i debe ser menor que el arreglo productos menos 1 e i se incrementa en 1
-	 			for($i = 0; $i<count($mostrar)-1;$i++){
+	 		for($i = 0;$i<count($mostrar);$i++){
 
-	 				echo '[
+	 			if ($mostrar[$i]["stock"] <= 10) {
+
+	 					$stock = "<button class='btn btn-danger'>".$mostrar[$i]["stock"]."</button>";
+
+	 				}else if ($mostrar[$i]["stock"] > 11 && $mostrar[$i]["stock"] <= 15) {
+
+	 					$stock = "<button class='btn btn-warning'>".$mostrar[$i]["stock"]."</button>";
+
+	 				}else{
+
+	 					$stock = "<button class='btn btn-success'>".$mostrar[$i]["stock"]."</button>";
+
+	 				}
+	 			$botonAdd = "<div class='btn-group'><button class='btn btn-primary agregarProducto recuperar' idProducto='".$mostrar[$i]["id"]."'>Agregar</button></div>";
+	 			/*concatena*/
+	 		$datosJS .='[
 	 					"'.($i+1).'",
 	 					"'.$mostrar[$i]["codigo"].'",
 	 					"'.$mostrar[$i]["descripcion"].'",
-	 					"'.$mostrar[$i]["stock"].'",
-	 					"'.$mostrar[$i]["id"].'" 
+	 					"'.$stock.'",
+	 					"'.$botonAdd.'" 
 	 					],';
+	 		}
 
-	 			}
+	 		/*devolvemos los datos sin el ultimo caracter que es la coma para el ultimo indece */
+	 		$datosJS = substr($datosJS,0,-1);
 
-	 			echo'	[
-	 					"'.count($mostrar).'",
-	 					"'.$mostrar[count($mostrar)-1]["codigo"].'",
-	 					"'.$mostrar[count($mostrar)-1]["descripcion"].'",
-	 					"'.$mostrar[count($mostrar)-1]["stock"].'",
-	 					"'.$mostrar[count($mostrar)-1]["id"].'" 
-	 					]
-	 				]
-
-	 		}';
+	 		$datosJS.= ']
+			}';
+			echo $datosJS;
 	}
 }
 
-$mostrarProducto = new TablaProductos();
+$mostrarProducto = new TablaMostraProductos();
 $mostrarProducto -> mostrarTablaProducto();

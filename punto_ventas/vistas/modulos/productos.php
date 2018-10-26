@@ -87,12 +87,15 @@
 
                     foreach ($mostrarCategorias as $key => $value) {
                       echo '<option value="'.$value["id"].'">'.$value["nombre"].'</option>';
-                    }
+                       
+                   }
 
                     ?>
                   </select>
+                  <p id="sub"></p>
                 </div>
               </div>
+
 
               <div class="form-group">
                 <div class="input-group">
@@ -117,17 +120,17 @@
               </div>
 
               <div class="form-group row">
-                <div class="col-xs-6">
+                <div class="col-xs-12 col-sm-6">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-arrow-up"></i></span>
-                    <input type="number" class="form-control input-lg" id="nuevoPrecioCompra" name="nuevoPrecioCompra" min="0" placeholder="Precio de compra" required>
+                    <input type="number" class="form-control input-lg" id="nuevoPrecioCompra" name="nuevoPrecioCompra" min="0" step="any" placeholder="Precio de compra" required>
                   </div>
                 </div>
 
-                <div class="col-xs-6">
+                <div class="col-xs-12 col-sm-6">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-arrow-down"></i></span>
-                    <input type="number" class="form-control input-lg" id="nuevoPrecioVenta" name="nuevoPrecioVenta" min="0" placeholder="Precio de venta" required>
+                    <input type="number" class="form-control input-lg" id="nuevoPrecioVenta" name="nuevoPrecioVenta" min="0" step="any" placeholder="Precio de venta" required>
                   </div>
 
                   <br>
@@ -235,14 +238,14 @@
                 <div class="col-xs-6">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-arrow-up"></i></span>
-                    <input type="number" class="form-control input-lg" id="editarPrecioCompra" name="editarPrecioCompra" min="0"  required>
+                    <input type="number" class="form-control input-lg" id="editarPrecioCompra" name="editarPrecioCompra" min="0" step="any"  required>
                   </div>
                 </div>
 
                 <div class="col-xs-6">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-arrow-down"></i></span>
-                    <input type="number" class="form-control input-lg" id="editarPrecioVenta" name="editarPrecioVenta" min="0"  required readonly>
+                    <input type="number" class="form-control input-lg" id="editarPrecioVenta" name="editarPrecioVenta" min="0" step="any"  required readonly>
                   </div>
 
                   <br>
@@ -297,6 +300,53 @@
       
   </div>
 </div>
+
+<!--=====================================
+=            Modal add cantidad product =
+====================================== -->
+<div id="modalCantidadProducto" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+        <form role="form" method="post">
+          <div class="modal-header" style="background: #3c8bdc; color:white;">
+            <button type="button" class="close" data-dismiss="modal" >&times;</button>
+            <h4 class="modal-title">Agregar más productos</h4>
+          </div>
+
+          <div class="modal-body">
+            <div class="box-body">
+
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-check"></i></span>
+                  <input type="hidden" id="numeroAyuda" name="numeroAyuda" readonly>
+                  <input type="number" class="form-control input-lg" id="agregarCantidadStock" min="0" value="0" required>
+                  <input type="hidden" id="stockActual"  readonly>
+                  <input type="hidden" id="stockFn" name="stockFN" readonly>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+        <?php 
+          $agregarCantidadProducto = new ControladorProducto();
+          $agregarCantidadProducto -> ctrAddCantidadProducto();
+         ?>
+
+    </div>
+      
+  </div>
+</div>
+
 <?php 
   $eliminarProducto = new ControladorProducto();
   $eliminarProducto -> ctrEliminarProducto();

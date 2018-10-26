@@ -33,7 +33,7 @@
           <thead>
             <th style="width: 10px">#</th>
             <th>Nombre</th>
-            <th>ID Cleinte</th> 
+            <th>ID Cliente</th> 
             <th>RFC</th> 
             <th>Email</th>
             <th>Teléfono</th>
@@ -49,7 +49,7 @@
               echo '<tr>
                       <td>'.($key+1).'</td>
                       <td>'.$out["nombre_cliente"].'</td>
-                      <td>'.$out["numero_cliente"].'</td>
+                      <td>CA-'.$out["numero_cliente"].'</td>
                       <td>'.$out["rfc"].'</td>
                       <td>'.$out["email"].'</td>
                       <td>'.$out["telefono"].'</td>
@@ -93,14 +93,14 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                  <input type="text" class="form-control input-lg" name="nuevoCliente" placeholder="Ingresa el nombre del cliente" required>
+                  <input type="text" class="form-control input-lg" id="nuevoCliente" name="nuevoCliente" placeholder="Ingresa el nombre del cliente" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                  <input type="number" min="0" class="form-control input-lg" id="nuevoNumeroCliente" name="nuevoNumeroCliente" required readonly>
+                  <input type="number" min="0" class="form-control input-lg" id="nuevoNumeroCliente" name="nuevoNumeroCliente" required >
                 </div>
               </div>
 

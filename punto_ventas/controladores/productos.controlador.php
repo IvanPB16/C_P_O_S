@@ -16,8 +16,8 @@
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaDescripcion"]) &&
 			   preg_match('/^[0-9]+$/', $_POST["nuevoStock"]) &&	
-			   preg_match('/^[0-9]+$/', $_POST["nuevoPrecioCompra"]) &&
-			   preg_match('/^[0-9]+$/', $_POST["nuevoPrecioVenta"])){
+			   preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioCompra"]) &&
+			   preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioVenta"])){
 
 				$ruta = "vistas/img/productos/default/anonymous.png";
 
@@ -115,8 +115,8 @@
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarDescripcion"]) &&
 			   preg_match('/^[0-9]+$/', $_POST["editarStock"]) &&	
-			   preg_match('/^[0-9]+$/', $_POST["editarPrecioCompra"]) &&
-			   preg_match('/^[0-9]+$/', $_POST["editarPrecioVenta"])){
+			   preg_match('/^[0-9.]+$/', $_POST["editarPrecioCompra"]) &&
+			   preg_match('/^[0-9.]+$/', $_POST["editarPrecioVenta"])){
 
 				$ruta = $_POST["imagenActual"];
 
@@ -200,21 +200,21 @@
 							</script>';	
 						}
 				}else{
-				echo '<script>
-					swal({
-						type: "error",
-						title: "¡La descripción no puede ir vacío o llevar caracteres especiales!",
-						showConfirmButton: true,
-						confirmButtonText: "Cerrar",
-						closeOnConfirm: false
-					}).then((result)=>{
-						if(result.value){
-							window.location = "productos";
-						}
-					})
-				</script>';
+					echo '<script>
+						swal({
+							type: "error",
+							title: "¡La descripción no puede ir vacío o llevar caracteres especiales!",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar",
+							closeOnConfirm: false
+						}).then((result)=>{
+							if(result.value){
+								window.location = "productos";
+							}
+						})
+					</script>';
 			
-			}	
+				}	
 			
  		}
 	
@@ -251,5 +251,48 @@
  			}
 
  		}
+	}
+
+	static public function ctrAddCantidadProducto(){
+		if (isset($_POST["stockFN"])) {
+			if (preg_match('/^[0-9]+$/', $_POST["stockFN"])){
+				$tabla = "producto";
+
+				$dato = array("codigo" => $_POST["numeroAyuda"],"stockFinal" => $_POST["stockFN"]);
+
+				$respuesta = ModeloProducto::mdlAddCantidadProducto($tabla,$dato);
+
+				if ($respuesta == "ok") {
+					echo '<script>
+								swal({
+								type: "success",
+								title: "¡El cantidad se agrego correctamente!",
+								showConfirmButton: true,
+								confirmButtonText: "Cerrar",
+								closeOnConfirm: false
+								}).then((result)=>{
+									if(result.value){
+									window.location = "productos";
+									}
+								})
+							</script>';	
+				}
+			}else{
+					echo '<script>
+								swal({
+								type: "success",
+								title: "¡Error al intentar agregar datos nuevos!",
+								showConfirmButton: true,
+								confirmButtonText: "Cerrar",
+								closeOnConfirm: false
+								}).then((result)=>{
+									if(result.value){
+									window.location = "productos";
+									}
+								})
+							</script>';	
+				}
+			
+		}
 	}
 }

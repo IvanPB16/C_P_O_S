@@ -46,3 +46,62 @@ $(document).on("click",".btnEliminarCliente",function(){
 	})
 })
 
+$("#nuevoCliente").change(function(){
+
+	var idCliente = $(this).attr("idCliente");
+	var dato =  new FormData();
+
+	dato.append("idCliente",idCliente);
+
+		$.ajax({
+		url: "ajax/cliente.ajax.php",
+		method: "POST",
+		data: dato,
+		cache: false,
+		contentType: false,
+		processData:false,
+		dataType:"json",
+		success:function(respuesta){
+			if (!respuesta) {
+				var codigoCliente = "CA " + 1;
+				$("#nuevoNumeroCliente").val(codigoCliente);
+			}else{
+				var nuevoCodigo = Number(respuesta["codigo"]) + 1;
+				$("#nuevoNumeroCliente").val(codigoCliente);
+			}
+		}
+	})
+})
+
+/* capturar categoria para asiganr codigo */
+// $("#nuevaCategoria").change(function(){
+
+// 	var idCategoria = $(this).val();
+
+// 	var datos = new FormData();
+
+// 	datos.append("idCategoria",idCategoria);
+
+// 	$.ajax({
+// 		url: "ajax/productos.ajax.php",
+// 		method: "POST",
+// 		data: datos,
+// 		cache: false,
+// 		contentType: false,
+// 		processData:false,
+// 		dataType:"json",
+// 		success:function(respuesta){
+
+// 			if (!respuesta) {
+// 				var nuevoCodigo = idCategoria +"01";
+// 				$("#nuevoCodigo").val(nuevoCodigo); 
+// 			}else{
+			
+// 			var nuevoCodigo = Number(respuesta["codigo"]) + 1;
+// 			$("#nuevoCodigo").val(nuevoCodigo); 
+// 		}
+			
+// 		}
+
+// 	})
+// })

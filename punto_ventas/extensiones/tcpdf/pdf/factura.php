@@ -142,8 +142,8 @@ foreach ($producto as $key => $item) {
 
 $itemProducto = "descripcion";
 $valorProducto = $item["descripcion"];
-$orden = null;
-$respuestaProducto = ControladorProducto::ctrMostrarProducto($itemProducto,$valorProducto,$orden);
+
+$respuestaProducto = ControladorProducto::ctrMostrarProducto($itemProducto,$valorProducto);
 
 
 $valorUnitario = number_format($respuestaProducto["precio_venta"],2);
@@ -162,12 +162,12 @@ $bloque4 = <<<EOF
 				$item[descripcion]
 			</td>
 	
-			<td style="border: 1px solid:#666; color: #333; background-color:white; width: 100px; text-align:center">
-				$ $valorUnitario
+			<td style="border: 1px solid:#666; color: #333; background-color:white; width: 100px; text-align:center">$
+				$valorUnitario
 			</td>
 
-			<td style="border: 1px solid:#666; color: #333; background-color:white; width: 100px; text-align:center">
-				$ $precioTotal
+			<td style="border: 1px solid:#666; color: #333; background-color:white; width: 100px; text-align:center">$
+				$precioTotal
 			</td>
 		</tr>
 

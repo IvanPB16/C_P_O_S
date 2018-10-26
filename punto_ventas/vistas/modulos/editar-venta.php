@@ -40,7 +40,6 @@
 
                        $vendedor = ControladorUsuarios::ctrMostrarUsuario($itemVendedor,$valorVendedor);
 
-                       $porcentajeImpuesto = ($venta["impuesto"] *  100) / $venta["subtotal"];
                     ?>
 
                     <div class="form-group">
@@ -75,6 +74,7 @@
                                      <div class="col-xs-6" style="padding-right:0px">
                                        <div class="input-group">
                                         <span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitarProducto" idProducto="'.$value["id"].'"><i class="fa fa-times"></i></button></span>
+
                                         <input type="text" class="form-control nuevaDescripcionProducto" idProducto="'.$value["id"].'" name="agregarProducto" value="'.$value["descripcion"].'"  readonly required>
                                         </div>
                                       </div>
@@ -86,7 +86,7 @@
                                    <div class="col-xs-3 ingresoPrecio" style="padding-left: 0px">
                                       <div class="input-group">
                                             <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>              
-                                            <input type="text" class="form-control nuevoPrecioProducto" name="nuevoPrecioProducto" value="'.$respuesta["precio_venta"].'" precioReal="'.$value["precio"].'" required readonly>
+                                            <input type="text" class="form-control nuevoPrecioProducto" precioReal="'.$respuesta["precio_venta"].'" name="nuevoPrecioProducto" value="'.$value["total"].'"  required readonly>
                                       </div>
                                    </div>
                                 </div>';
@@ -107,7 +107,7 @@
 
                           <thead>
                             <tr>
-                              <th>Impuesto</th>
+                              <th></th>
                               <th>Total</th>
                             </tr>
                           </thead>
@@ -117,12 +117,11 @@
                               <td style="width: 50%">
                                 <div class="input-group">
 
-                                  <input type="number" class="form-control  input-lg" min="0" id="nuevoImpuestoVenta" name="nuevoImpuestoVenta"  value="<?php echo $porcentajeImpuesto; ?>">
+                                  <input type="hidden" class="form-control  input-lg">
 
                                   <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" value="<?php echo $venta["impuesto"]; ?>"required>
+                                  
                                   <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" value="<?php echo $venta["subtotal"]; ?>" required>
-                                  <span class="input-group-addon"><i class="fa fa-percent"></i></span>
-
                                 </div>
                               </td>
 
