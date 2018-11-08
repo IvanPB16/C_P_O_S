@@ -143,5 +143,56 @@ class ControladorCliente{
 			}
 		}
 	}
+
+	static public function ctrAltaCliente(){
+		if (isset($_POST["nuevoCliente"])) {
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoCliente"]) &&
+			   preg_match('/^[0-9]+$/', $_POST["nuevoNumeroCliente"]) &&	
+			   preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoRFC"]) &&
+			   preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["nuevoEmail"]) && 
+			   preg_match('/^[()\-0-9 ]+$/', $_POST["nuevoTelefono"])){
+
+			   $tabla="cliente";
+			   
+			   $data = array("nombre"=> $_POST["nuevoCliente"],
+			   				 "numero"=> $_POST["nuevoNumeroCliente"],
+			   				 "rfc"=> $_POST["nuevoRFC"],
+			   				 "correo"=> $_POST["nuevoEmail"],
+			   				 "telefono"=> $_POST["nuevoTelefono"]);
+
+			   $res = ModeloCliente::mdlAgregarCliente($tabla,$data);
+
+			   if ($res == "ok") {
+			   		echo '<script>
+						swal({
+							type:"success",
+							title:"¡Cliente agregado correctamente!",
+							showConfirmButton: true,
+							confirmButtonText:"Cerrar",
+							closeOnConfirm: false
+							}).then((res)=>{
+								if(res.value){
+									window.location = "crear-venta";
+								}
+							});
+					 </script>';	
+			   }
+			}else{
+				echo '<script>
+						swal({
+							type:"error",
+							title:"¡La información de algún campo es incorrecta!",
+							showConfirmButton: true,
+							confirmButtonText:"Cerrar",
+							closeOnConfirm: false
+							}).then((res)=>{
+								if(res.value){
+									window.location = "crear-venta";
+								}
+							});
+					 </script>';
+			}
+		}
+	}
 }
 

@@ -21,20 +21,32 @@ class ModeloSubCategorias{
 		$statement = null;
 	}
 
-	static public function mdlMostrarSubCategoria($tabla,$item,$valor){
-
-		if ($item != null) {
-			$statement = Conexion::conectar()->prepare("SELECT nombre FROM $tabla WHERE $item = :$item");
-			$statement ->bindParam(":".$item,$valor,PDO::PARAM_STR);
-			$statement->execute();
-			return $statement->fecht();			
-		}else{
+	static public function mdlMostrarSubCategoria($tabla,$item,$valor){		
 			$statement = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE id_categoria = :id");
-			$statement ->bindParam(":id",$valor,PDO::PARAM_INT);
+			$statement -> bindParam(":id",$valor,PDO::PARAM_INT);
 			$statement->execute();
 			return $statement -> fetchAll();
-		 }
+		$statement -> close();
+		$statement = null;
+	}
 
+	static public function mdlMostrarSub($tabla,$item,$valor){
+			// SELECT * FROM `subcategoria` WHERE id_categoria = 3
+			$statement = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+			$statement ->bindParam(":".$item,$valor,PDO::PARAM_INT);
+			$statement->execute();
+			return $statement -> fetchAll();
+			$statement -> close();
+			$statement = null;
+	}
+
+	static public function mdlMostrarSubDos($tabla,$item,$valor){
+		// SELECT * FROM `subcategoria` WHERE id = 30
+		$statement = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+		$statement ->bindParam(":".$item,$valor,PDO::PARAM_INT);
+		$statement -> execute();
+		return $statement -> fetch();
+		
 		$statement -> close();
 		$statement = null;
 	}
@@ -51,22 +63,6 @@ class ModeloSubCategorias{
 		$statement -> close();
 		$statement = null;
 	}
-
-
-
-	// $statement = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre where id = :id");
-
-	// 	$statement -> bindParam(":nombre",$dato["nombre"],PDO::PARAM_STR);
-	// 	$statement -> bindParam(":id",$dato["id"],PDO::PARAM_INT);
-
-	// 	if($statement->execute()){
-	// 		return "ok";
-	// 	}else{
-	// 		return "error";
-	// 	}
-	// 	$statement -> close();
-	// 	$statement = null;
-
 
 
 	static public function mdlBorrarSub($tabla,$dato){

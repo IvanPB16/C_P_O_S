@@ -15,6 +15,7 @@
  		if(isset($_POST["nuevaDescripcion"])){
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaDescripcion"]) &&
+			   preg_match('/^[0-9]+$/', $_POST["nuevoClavePro"]) &&
 			   preg_match('/^[0-9]+$/', $_POST["nuevoStock"]) &&	
 			   preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioCompra"]) &&
 			   preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioVenta"])){
@@ -64,7 +65,9 @@
 
 				$tabla = "producto";
 
-				$data = array("id_categoria" => $_POST["nuevaCategoria"],
+				$data = array("nuevaClave"=>$_POST["nuevoClavePro"],
+					"id_categoria" => $_POST["nuevaCategoria"],
+					"id_subcategoria" => $_POST["nuevaSubCategoria"],
 					"codigo"=> $_POST["nuevoCodigo"],
 					"descripcion"=> $_POST["nuevaDescripcion"],
 					"stock"=> $_POST["nuevoStock"],
@@ -114,6 +117,7 @@
  		if(isset($_POST["editarDescripcion"])){
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarDescripcion"]) &&
+			   preg_match('/^[0-9]+$/', $_POST["editarClavePro"]) &&
 			   preg_match('/^[0-9]+$/', $_POST["editarStock"]) &&	
 			   preg_match('/^[0-9.]+$/', $_POST["editarPrecioCompra"]) &&
 			   preg_match('/^[0-9.]+$/', $_POST["editarPrecioVenta"])){
@@ -174,14 +178,16 @@
 
 				$tabla = "producto";
 
-				$data = array("id_categoria" => $_POST["editarCategoria"],
+				$data = array("nuevaClave"=>$_POST["editarClavePro"],
+					"id_categoria" => $_POST["editarCategoria"],
+					"id_subcategoria" => $_POST["editarSubCategoria"],
 					"codigo"=> $_POST["editarCodigo"],
 					"descripcion"=> $_POST["editarDescripcion"],
 					"stock"=> $_POST["editarStock"],
 					"precio_compra"=> $_POST["editarPrecioCompra"],
 					"precio_venta"=> $_POST["editarPrecioVenta"],
 					"imagen" => $ruta); 
-
+				var_dump($data);
  				$respuesta = ModeloProducto::mdlEditarProducto($tabla,$data);
  				
  				if ($respuesta == "ok") {

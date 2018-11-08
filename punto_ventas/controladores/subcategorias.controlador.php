@@ -59,6 +59,21 @@ class ControladorSubCategorias{
 		return $respuesta;
 	}
 
+	static public function ctrMostrarSubCategoriasDos($item,$valor){
+		
+		$tabla = "subcategoria";
+		$respuesta = ModeloSubCategorias::mdlMostrarSubDos($tabla,$item,$valor);
+		
+		return $respuesta;
+	}
+
+	static public function ctrMostrarSub($item,$valor){
+		$tabla = "subcategoria";
+
+		$respuesta = ModeloSubCategorias::mdlMostrarSub($tabla,$item,$valor);
+
+		return $respuesta;
+	}
 
 	static public function ctrEditarSub(){
 		if (isset($_POST["editarids"])) {

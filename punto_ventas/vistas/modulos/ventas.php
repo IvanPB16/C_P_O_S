@@ -32,19 +32,20 @@
             <i class="fa fa-caret-down"></i>
           </button>
 
-          <div class="form-group pull-center">     
+          <!-- <div class="form-group pull-center">     
               <h5>Selecciona al cliente para realizar factura</h5>
                 <select class="form-control input-lg" id="mcliente" name="facCliente" required>
                   <option  value="Seleccione" selected="selected">Seleccione al cliente</option>';
                     <?php  
-                      $item = null;
-                      $valor = null;
-                      $mostrarCliente = ControladorCliente::ctrMostrarCliente($item,$valor);
-                        foreach ($mostrarCliente as $key => $value) {
-                        echo '<option value="'.$value["id"].'" >'.$value["nombre_cliente"].'</option>';
-                    }?>
+                    //   $item = null;
+                    //   $valor = null;
+                    //   $mostrarCliente = ControladorCliente::ctrMostrarCliente($item,$valor);
+                    //     foreach ($mostrarCliente as $key => $value) {
+                    //     echo '<option value="'.$value["id"].'" >'.$value["nombre_cliente"].'</option>';
+                    // }
+                    ?>
                 </select>
-            </div>  
+            </div>  --> 
       </div>
     
 
@@ -55,6 +56,7 @@
             <th style="width: 10px">#</th>
             <th>Código</th>
             <th>Vendedor</th>
+            <th>Cliente</th>
             <th>Forma de pago</th>
             <th>Neto</th>
             <th>Total</th>
@@ -85,8 +87,13 @@
             $respuestaUsuario = ControladorUsuarios::ctrMostrarUsuario($itemUsuario,$valorUsuario);
             echo '<td>'.$respuestaUsuario["nombre"].'</td>';
 
-            echo '<td>'.$value["metodo_pago"].'</td>
-                    <td>$'.number_format($value["subtotal"],2).'</td>
+            $itemCliente = "id";
+            $valorCliente = $value["id_cliente"];
+
+            $respuestaCliente = ControladorCliente::ctrMostrarCliente($itemCliente,$valorCliente);
+             echo '<td>'.$respuestaCliente["nombre_cliente"].'</td>';
+              echo '<td>'.$value["metodo_pago"].'</td>
+                   <td>$'.number_format($value["subtotal"],2).'</td>
                     <td>$'.number_format($value["total"],2).'</td>
                     <td>'.$value["fecha"].'</td>
                     <td>

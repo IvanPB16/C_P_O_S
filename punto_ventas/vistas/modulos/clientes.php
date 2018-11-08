@@ -74,7 +74,7 @@
 
 <!--=====================================
 =            Modal add user            =
-======================================-->
+===================== =================-->
 
 <div id="modalAddCliente" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -88,7 +88,7 @@
           </div>
 
           <div class="modal-body">
-            <div class="box-body">
+            <div class="box-body"> 
 
               <div class="form-group">
                 <div class="input-group">
@@ -100,7 +100,21 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                  <input type="number" min="0" class="form-control input-lg" id="nuevoNumeroCliente" name="nuevoNumeroCliente" required >
+                  <?php 
+                    $item = null;
+                    $valor = null;
+
+                    $num_cliente = ControladorCliente::ctrMostrarCliente($item,$valor);
+
+                    if (!$num_cliente) {
+                      echo ' <input type="number"  class="form-control input-lg" id="nuevoNumeroCliente" name="nuevoNumeroCliente" value="1" required readonly>';
+                    }else{
+                      foreach ($num_cliente as $key => $value) { }
+                        $identificador = $value["numero_cliente"] + 1;
+                      echo ' <input type="number"  class="form-control input-lg" id="nuevoNumeroCliente" name="nuevoNumeroCliente" value="'.$identificador.'" required readonly>';
+                    }
+                   ?>
+          
                 </div>
               </div>
 

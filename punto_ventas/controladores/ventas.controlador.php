@@ -35,7 +35,8 @@ class ControladorVentas{
 	 					    "neto" => $_POST["nuevoPrecioNeto"],
 						    "total" => $_POST["totalVenta"],
 						    "metodo_pago" => $_POST["listaMetodoPago"],
-						    "idVendedor" => $_POST["idVendedor"]
+						    "idVendedor" => $_POST["idVendedor"],
+						    "idCliente" => $_POST["seleccionarCliente"]
 							);
 
 			$enviar = ModeloVentas::mdlAgregarVentas($tabla,$data);
@@ -121,7 +122,8 @@ class ControladorVentas{
 	 					    "neto" => $_POST["nuevoPrecioNeto"],
 						    "total" => $_POST["totalVenta"],
 						    "metodo_pago" => $_POST["listaMetodoPago"],
-						    "idVendedor" => $_POST["idVendedor"]
+						    "idVendedor" => $_POST["idVendedor"],
+						    "idCliente" => $_POST["seleccionarCliente"]
 							);
 
 			$enviar = ModeloVentas::mdlEditarVentas($tabla,$data);

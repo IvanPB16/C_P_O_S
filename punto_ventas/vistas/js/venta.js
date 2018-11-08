@@ -1,5 +1,5 @@
 // cargar tabla ventas
-
+ 
 // $.ajax({
 // 	url:"ajax/dtproductos.ajax.php",
 // 	success:function(respuesta){
@@ -392,14 +392,15 @@ $("#nuevoMetodoPago").change(function(){
 		$(this).parent().parent().addClass("col-xs-4");
 
 		$(this).parent().parent().parent().children(".cajasMetodoPago").html(
-			'<div class="col-xs-4">'+
+
+			'<div class="col-xs-4"><b>Pago Cliente</b>'+
 				'<div class="input-group">'+
 					'<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>'+
 					'<input type="text"  class="form-control nuevoValorEfectivo" placeholder="0.00" required>'+
 				'</div>'+
 			'</div>'+
 
-			'<div class="col-xs-4 capturaCambioEfectivo" style="padding-left:0px">'+
+			'<div class="col-xs-4 capturaCambioEfectivo" style="padding-left:0px"><b>Cambio</b>'+
 				'<div class="input-group">'+
 					'<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>'+
 					'<input type="text"  class="form-control CambioEfectivo" placeholder="0.00" required readonly>'+
@@ -512,20 +513,18 @@ $(".tablas").on("click",".btnEliminarVenta",function(){
 
 // Imprimir Factura
 $(".tablas").on("click",".btnImprimirFactura",function(){
-	if ($("#mcliente").val() !== "Seleccione" ) {
+	// if ($("#mcliente").val() !== "Seleccione" ) {
 	var codigoVenta = $(this).attr("codigoVenta");
-	var idCliente = $("#mcliente").val();
-	console.log(idCliente);
-	window.open("extensiones/tcpdf/pdf/factura.php?codigo="+codigoVenta+"&cliente="+idCliente, "_blank");
-	location.reload();
-	}else{
-		swal({
-			title:"Debe seleccionar a un cliente para imprimir una factura",
-			type:"warning",
-			confirmButtonText:"Continuar"
-		});
-	}
-})
+	window.open("extensiones/tcpdf/pdf/factura.php?codigo="+codigoVenta, "_blank");
+
+	// }else{
+	// 	swal({
+	// 		title:"Debe seleccionar a un cliente para imprimir una factura",
+	// 		type:"warning",
+	// 		confirmButtonText:"Continuar"
+	// 	});
+	// }
+});
 
 /*Rango de fechas*/
 $('#daterange-btn').daterangepicker(
@@ -595,3 +594,4 @@ $(".daterangepicker.opensleft .ranges li").on("click",function(){
 
 	}
 })
+

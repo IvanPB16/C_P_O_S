@@ -78,7 +78,7 @@
 		 		 		</a>
 
 		 		 	</li>
-
+					
 		 		 	<li>
 		 		 		<a href="crear-venta">
 		 		 			<i class="fa fa-circle-o"></i>

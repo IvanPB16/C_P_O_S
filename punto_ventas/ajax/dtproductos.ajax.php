@@ -5,6 +5,9 @@ require_once "../modelos/productos.modelo.php";
 
 require_once "../controladores/categorias.controlador.php";
 require_once "../modelos/categorias.modelo.php";
+
+require_once "../controladores/subcategorias.controlador.php";
+require_once "../modelos/subcategorias.modelo.php";
  
 class TablaProductos{
 
@@ -24,6 +27,13 @@ class TablaProductos{
 	 				$valor = $productos[$i]["id_categoria"];
 
 	 				$categorias = ControladorCategorias::ctrMostrarCategorias($item,$valor);
+
+	 				$item = "id";
+	 				$valor = $productos[$i]["id_subcategoria"];
+
+	 				$subcategorias = ControladorSubCategorias::ctrMostrarSubCategoriasDos($item,$valor);
+
+
 	 				if ($productos[$i]["stock"] <= 10) {
 	 					$stock = "<button class='btn btn-danger'>".$productos[$i]["stock"]."</button>";
 	 				}else if ($productos[$i]["stock"] > 10 && $productos[$i]["stock"] <= 15) {
@@ -36,7 +46,7 @@ class TablaProductos{
 	 					"'.$productos[$i]["imagen"].'",
 	 					"'.$productos[$i]["codigo"].'",
 	 					"'.$productos[$i]["descripcion"].'",
-	 					"'.$categorias["nombre"].'",
+	 					"'.$categorias["nombre"].' => '.$subcategorias["nombre"].'",
 	 					"'.$stock.'",
 	 					"$'.number_format($productos[$i]["precio_compra"],2).'",
 	 					"$'.number_format($productos[$i]["precio_venta"],2).'",
@@ -49,7 +59,14 @@ class TablaProductos{
 	 			$item="id";
 	 			$valor = $productos[count($productos)-1]["id_categoria"];
 
-	 				$categorias = ControladorCategorias::ctrMostrarCategorias($item,$valor);
+	 			$categorias = ControladorCategorias::ctrMostrarCategorias($item,$valor);
+
+	 			$item = "id";
+	 			$valor = $productos[count($productos)-1]["id_subcategoria"];
+
+	 			$subcategorias = ControladorSubCategorias::ctrMostrarSubCategoriasDos($item,$valor);
+
+	 			
 
 	 				if ($productos[count($productos)-1]["stock"] <= 10) {
 	 					$stock = "<button class='btn btn-danger'>".$productos[count($productos)-1]["stock"]."</button>";
@@ -64,7 +81,7 @@ class TablaProductos{
 	 					"'.$productos[count($productos)-1]["imagen"].'",
 	 					"'.$productos[count($productos)-1]["codigo"].'",
 	 					"'.$productos[count($productos)-1]["descripcion"].'",
-	 					"'.$categorias["nombre"].'",
+	 					"'.$categorias["nombre"].' => '.$subcategorias["nombre"].'",
 	 					"'.$stock.'",
 	 					"$'.number_format($productos[count($productos)-1]["precio_compra"],2).'",
 	 					"$'.number_format($productos[count($productos)-1]["precio_venta"],2).'",

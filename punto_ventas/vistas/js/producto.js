@@ -108,7 +108,7 @@ $(".sorting").click(function(){
 
 /* capturar categoria para asiganr codigo */
 $("#nuevaCategoria").change(function(){
-
+ 
 	//se va a enviar a la tabla de productos para buscarlo en id_categoria
 	var idCategoria = $(this).val();
 
@@ -133,8 +133,8 @@ $("#nuevaCategoria").change(function(){
 			
 			var nuevoCodigo = Number(respuesta["codigo"]) + 1;
 			$("#nuevoCodigo").val(nuevoCodigo); 
-		}
-			
+			}
+		
 		}
 
 	})
@@ -247,7 +247,6 @@ $(".tablaProductos tbody").on("click","button.btnEditarProducto",function(){
 		 success:function(respuesta){
 		 	var datosCategoria = new FormData();
 		 	datosCategoria.append("idCategoria",respuesta["id_categoria"]);
-
 		 	$.ajax({
 				url: "ajax/categorias.ajax.php",
 				method: "POST",
@@ -260,8 +259,26 @@ $(".tablaProductos tbody").on("click","button.btnEditarProducto",function(){
 				 	$("#editarCategoria").val(respuesta["id"]);
 				 	$("#editarCategoria").html(respuesta["nombre"]);
 				 }
-			})
+			});
 
+			var datosSub = new FormData();
+		 	datosSub.append("idSubCategoria",respuesta["id_subcategoria"]);
+
+			$.ajax({
+				url: "ajax/subcategoria.ajax.php",
+				method: "POST",
+				data: datosSub,
+				cache: false,
+				contentType: false,
+				processData:false,
+				dataType:"json",
+				success:function(respuesta){
+					var h = '<option value="'+respuesta["id"]+'" selected>'+respuesta["nombre"]+'</option>';
+				 	$("#editarSubCategoria").html(h);
+				}
+			});
+
+		   $("#editarClavePro").val(respuesta["nuevaclave"]);
 		   $("#editarCodigo").val(respuesta["codigo"]);
            $("#editarDescripcion").val(respuesta["descripcion"]);
            $("#editarStock").val(respuesta["stock"]);
@@ -344,6 +361,58 @@ $("#agregarCantidadStock").change(function(){
 	agregarCantidad();
 })
 
-// $("#nuevaCategoria").on("change",function(){
-// 	$("#sub").html('<select class="sub"><option value="">Seleccionar</option></select>');
-// })
+
+/* mostrar subcategoria  */
+$("#nuevaCategoria").change(function(){
+ 
+	//se va a enviar a la tabla de productos para buscarlo en id_categoria
+	var idCategoria = $(this).val();
+
+	var datos = new FormData();
+	datos.append("idCategoria",idCategoria);
+	$.ajax({
+		url: "ajax/subcategoria.ajax.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData:false,
+		dataType:"json",
+		success:function(respuesta){
+
+			var h = '<option value="sinSeleccion" selected>Selecciona...</option>';
+			respuesta.forEach(e => {
+                h = h + '<option  value="'+e.id+'">'+e.nombre+'</option>';
+            });
+
+			 $("#nuevaSubCategoria").html(h);
+		}
+	})
+})
+
+/* mostrar editar subcategoria  */
+$(".editarS").change(function(){
+ 
+	//se va a enviar a la tabla de productos para buscarlo en id_categoria
+	var idCategoria = $(this).val();
+
+	var datos = new FormData();
+	datos.append("idCategoria",idCategoria);
+	$.ajax({
+		url: "ajax/subcategoria.ajax.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData:false,
+		dataType:"json",
+		success:function(respuesta){
+			var valorActual = $("#editarSubCategoria").val();
+			var h = '<option value="Sin seleccionar">Seleccionar...</option>';
+			respuesta.forEach(e => {
+                h = h + '<option  value="'+e.id+'">'+e.nombre+'</option>';
+            });
+			$("#editarSubCategoria").html(h);
+		}
+	})
+})

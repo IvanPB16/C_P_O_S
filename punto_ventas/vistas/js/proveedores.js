@@ -2,6 +2,7 @@
 $(document).on("click",".btnEditarProveedor",function(){
 
   	var idProveedor = $(this).attr("idProveedor");
+  	console.log(idProveedor);
 
   	var dato = new FormData();
 
@@ -47,3 +48,10 @@ $(document).on("click",".btnEliminarProveedor",function(){
 		}
 	})
 })
+
+$(document).on("click",".btnOrden",function(){
+	var idProveedor = $(this).attr("idProveedor");
+	console.log(idProveedor);
+	window.location = "index.php?ruta=orden&idProveedor="+idProveedor;
+})
+

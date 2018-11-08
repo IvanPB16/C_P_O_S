@@ -71,36 +71,50 @@
           <div class="modal-body">
             <div class="box-body">
 
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                  <input type="number" class="form-control input-lg" id="nuevoClavePro" name="nuevoClavePro" placeholder="Ingresa el clave de producto ej.55151618" required>
+                </div>
+              </div>
 
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
                   <select class="form-control input-lg" id="nuevaCategoria" name="nuevaCategoria"  required>
-                    <option value="">Seleccionar categoria</option>
+                    <option value="0">Seleccionar categoria</option>
                     <?php 
 
                     $item = null;
                     $valor = null;
 
                     $mostrarCategorias = ControladorCategorias::ctrMostrarCategorias($item,$valor);
-
+                                      
                     foreach ($mostrarCategorias as $key => $value) {
                       echo '<option value="'.$value["id"].'">'.$value["nombre"].'</option>';
-                       
-                   }
 
+                      }            
                     ?>
                   </select>
-                  <p id="sub"></p>
                 </div>
               </div>
 
 
+              <div class="form-group mostrarSub">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                  
+                  <select class="form-control input-lg" id="nuevaSubCategoria" name="nuevaSubCategoria">
+
+                  </select>
+                </div>
+              </div>
+
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-code"></i></span>
-                  <input type="text" class="form-control input-lg" name="nuevoCodigo" placeholder="Ingresa el código" id="nuevoCodigo"readonly>
+                  <input type="text" class="form-control input-lg" name="nuevoCodigo" placeholder="Código" id="nuevoCodigo"readonly>
                 </div>
               </div>
 
@@ -201,12 +215,40 @@
           <div class="modal-body">
             <div class="box-body">
 
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                  <input type="number" class="form-control input-lg" id="editarClavePro" name="editarClavePro" required >
+                </div>
+              </div>
+
 
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-th"></i></span> 
-                  <select class="form-control input-lg" name="editarCategoria"  readonly  required>
+                  <select class="form-control input-lg editarS" name="editarCategoria" required >
                     <option id="editarCategoria"></option>
+                    <?php 
+
+                    $item = null;
+                    $valor = null;
+
+                    $mostrarCategorias = ControladorCategorias::ctrMostrarCategorias($item,$valor);
+                                      
+                    foreach ($mostrarCategorias as $key => $value) {
+                      echo '<option value="'.$value["id"].'">'.$value["nombre"].'</option>';
+
+                      }            
+                    ?>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group mostrarSub">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-th"></i></span>
+                  <select class="form-control input-lg"  id="editarSubCategoria" name="editarSubCategoria" required>
+                  
                   </select>
                 </div>
               </div>

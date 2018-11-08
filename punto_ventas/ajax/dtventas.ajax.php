@@ -1,7 +1,7 @@
 <?php 
 require_once "../controladores/productos.controlador.php";
 require_once "../modelos/productos.modelo.php";
-
+  
 class TablaMostraProductos{
 
 	public function mostrarTablaProducto(){
@@ -46,6 +46,7 @@ class TablaMostraProductos{
 			}';
 			echo $datosJS;
 	}
+
 }
 
 $mostrarProducto = new TablaMostraProductos();

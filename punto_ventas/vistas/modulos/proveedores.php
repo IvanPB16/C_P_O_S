@@ -43,7 +43,6 @@
 
             $item = null;
             $valor = null;
-
             $verProveedor = ControladorProveedor::ctrMostrarProveedor($item,$valor);
 
             foreach ($verProveedor as $key => $out) {
@@ -57,7 +56,7 @@
                 <td>'.$out["correo"].'</td>
                 <td>
                   <div class="btn-group">
-                   <button class="btn btn-warning btnEditarProveedor" data-toggle="modal" data-target="#modalEditProveedor" idProveedor="'.$out["id"].'"><i class="fa fa-pencil"></i></button>
+                  <button class="btn btn-success btnOrden"  idProveedor="'.$out["id"].'"><i class="fa fa-cube"></i></button><button class="btn btn-warning btnEditarProveedor" data-toggle="modal" data-target="#modalEditProveedor" idProveedor="'.$out["id"].'"><i class="fa fa-pencil"></i></button>
                    <button class="btn btn-danger btnEliminarProveedor" idProveedor="'.$out["id"].'"><i class="fa fa-times"></i></button>
                  </div>
                 </td>

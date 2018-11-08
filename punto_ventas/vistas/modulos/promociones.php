@@ -23,7 +23,7 @@
 
     <div class="box">
       <div class="box-header with-border">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAddProducto">
+        <button class="btn btn-primary promo" onclick="location.href='crear-promocion'">
           Agregar promociones
         </button>
       </div>

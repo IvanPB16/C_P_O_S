@@ -21,7 +21,7 @@ Class ModeloVentas{
 	}
 
 	static public function mdlAgregarVentas($tabla,$data){
-		$statement = Conexion::conectar()->prepare("INSERT INTO $tabla (codigo_venta,producto,impuesto, subtotal,total,metodo_pago,id_vendedor)VALUES(:codigo_venta,:producto, :impuesto,:subtotal,:total,:metodo_pago, :id_vendedor)");
+		$statement = Conexion::conectar()->prepare("INSERT INTO $tabla (codigo_venta,producto,impuesto, subtotal,total,metodo_pago,id_vendedor,id_cliente)VALUES(:codigo_venta,:producto, :impuesto,:subtotal,:total,:metodo_pago, :id_vendedor,:id_cliente)");
 
 		$statement -> bindParam(":codigo_venta",$data["codigo"],PDO::PARAM_INT);
 		$statement -> bindParam(":producto",$data["productos"],PDO::PARAM_STR);
@@ -30,6 +30,7 @@ Class ModeloVentas{
 		$statement -> bindParam(":total",$data["total"],PDO::PARAM_STR);
 		$statement -> bindParam(":metodo_pago",$data["metodo_pago"],PDO::PARAM_STR);
 		$statement -> bindParam(":id_vendedor",$data["idVendedor"],PDO::PARAM_INT);
+		$statement -> bindParam(":id_cliente",$data["idCliente"],PDO::PARAM_INT);
 		if ($statement->execute()) {
 			return "ok";
 		}else{
@@ -40,7 +41,7 @@ Class ModeloVentas{
 	}
 
 	static public function mdlEditarVentas($tabla,$data){
-		$statement = Conexion::conectar()->prepare("UPDATE $tabla SET codigo_venta = :codigo_venta,producto = :producto,impuesto = :impuesto, subtotal = :subtotal,total = :total,metodo_pago = :metodo_pago,id_vendedor = :id_vendedor WHERE codigo_venta = :codigo_venta");
+		$statement = Conexion::conectar()->prepare("UPDATE $tabla SET codigo_venta = :codigo_venta,producto = :producto,impuesto = :impuesto, subtotal = :subtotal,total = :total,metodo_pago = :metodo_pago,id_vendedor = :id_vendedor,id_cliente = :id_cliente WHERE codigo_venta = :codigo_venta");
 
 		$statement -> bindParam(":codigo_venta",$data["codigo"],PDO::PARAM_INT);
 		$statement -> bindParam(":producto",$data["productos"],PDO::PARAM_STR);
@@ -49,6 +50,7 @@ Class ModeloVentas{
 		$statement -> bindParam(":total",$data["total"],PDO::PARAM_STR);
 		$statement -> bindParam(":metodo_pago",$data["metodo_pago"],PDO::PARAM_STR);
 		$statement -> bindParam(":id_vendedor",$data["idVendedor"],PDO::PARAM_INT);
+		$statement -> bindParam(":id_cliente",$data["idCliente"],PDO::PARAM_INT);
 		if ($statement->execute()) {
 			return "ok";
 		}else{

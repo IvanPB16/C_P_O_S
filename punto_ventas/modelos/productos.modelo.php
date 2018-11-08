@@ -21,9 +21,11 @@ class ModeloProducto{
 
 	static public function mdlCrearProducto($tabla,$data){
 
-		$statement = Conexion::conectar()-> prepare("INSERT INTO $tabla(id_categoria,codigo,descripcion,imagen,stock,precio_compra,precio_venta) VALUES (:id_categoria,:codigo,:descripcion,:imagen,:stock,:precio_compra,:precio_venta)");
+		$statement = Conexion::conectar()-> prepare("INSERT INTO $tabla(nuevaclave,id_categoria,id_subcategoria,codigo,descripcion,imagen,stock,precio_compra,precio_venta) VALUES (:nuevaclave,:id_categoria,:id_subcategoria,:codigo,:descripcion,:imagen,:stock,:precio_compra,:precio_venta)");
 
+		$statement -> bindParam(":nuevaclave",$data["nuevaClave"],PDO::PARAM_INT);
 		$statement -> bindParam(":id_categoria",$data["id_categoria"],PDO::PARAM_INT);
+		$statement -> bindParam(":id_subcategoria",$data["id_subcategoria"],PDO::PARAM_INT);
 		$statement -> bindParam(":codigo",$data["codigo"],PDO::PARAM_STR);
 		$statement -> bindParam(":descripcion",$data["descripcion"],PDO::PARAM_STR);
 		$statement -> bindParam(":imagen",$data["imagen"],PDO::PARAM_STR);
@@ -43,9 +45,11 @@ class ModeloProducto{
 
 	static public function mdlEditarProducto($tabla,$data){
 
-		$statement = Conexion::conectar()-> prepare("UPDATE $tabla SET id_categoria = :id_categoria,descripcion = :descripcion,imagen = :imagen,stock = :stock,precio_compra = :precio_compra,precio_venta = :precio_venta WHERE codigo = :codigo");
+		$statement = Conexion::conectar()-> prepare("UPDATE $tabla SET nuevaclave = :nuevaclave,id_categoria = :id_categoria,id_subcategoria = :id_subcategoria,descripcion = :descripcion,imagen = :imagen,stock = :stock,precio_compra = :precio_compra,precio_venta = :precio_venta WHERE codigo = :codigo");
 
-		$statement->bindParam(":id_categoria",$data["id_categoria"],PDO::PARAM_INT);
+		$statement -> bindParam(":nuevaclave",$data["nuevaClave"],PDO::PARAM_INT);
+		$statement -> bindParam(":id_categoria",$data["id_categoria"],PDO::PARAM_INT);
+		$statement -> bindParam(":id_subcategoria",$data["id_subcategoria"],PDO::PARAM_INT);
 		$statement->bindParam(":codigo",$data["codigo"],PDO::PARAM_STR);
 		$statement->bindParam(":descripcion",$data["descripcion"],PDO::PARAM_STR);
 		$statement->bindParam(":imagen",$data["imagen"],PDO::PARAM_STR);

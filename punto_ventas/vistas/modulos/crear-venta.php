@@ -27,8 +27,6 @@
               <form role="form" method="post" class="formularioVenta">
 
                 <div class="box-body">
-
-               
                   <div class="box">
 
                     <div class="form-group">
@@ -65,6 +63,34 @@
                         }
                          ?>
                       </div>
+                    </div>
+
+                    <div class="form-group">
+                  
+                      <div class="input-group">
+                        
+                        <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                        
+                        <select class="form-control" id="seleccionarCliente" name="seleccionarCliente" required>
+
+                        <?php 
+                        $item = null;
+                        $valor = null;
+
+                        $listaClientes = ControladorCliente::ctrMostrarCliente($item,$valor);
+
+                        foreach ($listaClientes as $key => $value) {
+                          echo '<option value="'.$value["id"].'">'.$value["nombre_cliente"].'</option>';
+                        }
+
+                        ?>
+
+                        </select>
+                        
+                        <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAddCliente" data-dismiss="modal">Agregar cliente</button></span>
+                      
+                      </div>
+                    
                     </div>
 
                     <div class="form-group row nuevoProducto">
@@ -142,9 +168,13 @@
                       </div>
                      
                        <div class="cajasMetodoPago">
-                         
+                     
                        </div>
                         <input type="hidden" id="listaMetodoPago" name="listaMetodoPago">
+
+                    </div>
+                    <div style="font-size:20px; text-align:right; line-height:15px;">
+                        <label ><b>Calcular cambio</b></label>
                     </div>
 
                      <br>
@@ -192,4 +222,78 @@
     
   </section>
 
+</div>
+
+<!--=====================================
+=            Modal add user            =
+===================== =================-->
+
+<div id="modalAddCliente" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+        <form role="form" method="post">
+          <div class="modal-header" style="background: #3c8bdc; color:white;">
+            <button type="button" class="close" data-dismiss="modal" >&times;</button>
+            <h4 class="modal-title">Agregar Cliente</h4>
+          </div>
+
+          <div class="modal-body">
+            <div class="box-body">
+
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                  <input type="text" class="form-control input-lg" id="nuevoCliente" name="nuevoCliente" placeholder="Ingresa el nombre del cliente" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                  <input type="number" min="0" class="form-control input-lg" id="nuevoNumeroCliente" name="nuevoNumeroCliente" required >
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                  <input type="text" min="0" class="form-control input-lg" name="nuevoRFC" placeholder="Ingresa el RFC" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                  <input type="email" class="form-control input-lg" name="nuevoEmail" placeholder="Ingresa el Correo electrónico" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
+                <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar teléfono" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
+              </div>
+            </div>
+            
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+            <button type="submit" class="btn btn-primary">Guardar cliente</button>
+          </div>
+
+        </form>
+      
+        <?php 
+          $crearCliente = new ControladorCliente();
+          $crearCliente ->  ctrAltaCliente();
+         ?>
+
+    </div>
+      
+  </div>
 </div>

@@ -38,7 +38,6 @@
         <table class="table table-bordered table-striped dt-responsive tablas" width="100%">
           
           <thead>
-            <th style="width: 10px">#</th>
             <th>Categoria</th>
             <th>Acciones</th>  
           </thead>
@@ -49,7 +48,6 @@
             $categorias = ControladorCategorias::ctrMostrarCategorias($item,$valor);
             foreach ($categorias as $key => $value) {
               echo '<tr>
-                    <td>'.($key+1).'</td>
                     <td class="text-uppercase">'.$value["nombre"].'</td>
                     <td>
                       <div class="btn-group">

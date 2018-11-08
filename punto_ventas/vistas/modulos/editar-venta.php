@@ -35,10 +35,15 @@
                         $valor = $_GET["idVenta"];
 
                         $venta = ControladorVentas::ctrMostrarVentas($item,$valor);
-                       $itemVendedor = "id";
-                       $valorVendedor = $venta["id_vendedor"];
 
-                       $vendedor = ControladorUsuarios::ctrMostrarUsuario($itemVendedor,$valorVendedor);
+                        $itemVendedor = "id";
+                        $valorVendedor = $venta["id_vendedor"];
+                        $vendedor = ControladorUsuarios::ctrMostrarUsuario($itemVendedor,$valorVendedor);
+
+                        $itemCliente = "id";
+                        $valorCliente = $venta["id_cliente"];
+
+                        $cliente = ControladorCliente::ctrMostrarCliente($itemCliente,$valorCliente);
 
                     ?>
 
@@ -57,6 +62,35 @@
                         <input type="text" class="form-control" id="editarVenta" name="editarVenta" value="<?php echo $venta["codigo_venta"]; ?>" readonly>
                       
                       </div>
+                    </div>
+
+                    <div class="form-group">
+                  
+                      <div class="input-group">
+                        
+                        <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                        
+                        <select class="form-control" id="seleccionarCliente" name="seleccionarCliente" required>
+                          <option value="<?php echo $cliente["id"]; ?>"><?php echo $cliente["nombre_cliente"]; ?></option>
+
+                        <?php 
+                        $item = null;
+                        $valor = null;
+
+                        $listaClientes = ControladorCliente::ctrMostrarCliente($item,$valor);
+
+                        foreach ($listaClientes as $key => $value) {
+                          echo '<option value="'.$value["id"].'">'.$value["nombre_cliente"].'</option>';
+                        }
+
+                        ?>
+
+                        </select>
+                        
+                        <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAddCliente" data-dismiss="modal">Agregar cliente</button></span>
+                      
+                      </div>
+                    
                     </div>
 
                     <div class="form-group row nuevoProducto">

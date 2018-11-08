@@ -12,6 +12,7 @@ class AjaxProductos{
 	public $idProducto;
 	public $traerProducto;
 	public $nombreProducto;
+	public $valora;
 
 	
 	/* generar codigo */
@@ -20,6 +21,7 @@ class AjaxProductos{
 	 		$valor = $this->idCategoria;
 	 	
 			$respuesta = ControladorProducto::ctrMostrarProducto($item,$valor);
+			
 	 		echo json_encode($respuesta);
 	 } 
 
@@ -48,7 +50,6 @@ class AjaxProductos{
 		
 	 		echo json_encode($respuesta);
 	 	}
-
 
 	 }
  
@@ -82,3 +83,4 @@ if (isset($_POST["nombreProducto"])) {
 	$nombreProducto -> nombreProducto = $_POST["nombreProducto"];
 	$nombreProducto -> ajaxEditarProducto();
 }
+
