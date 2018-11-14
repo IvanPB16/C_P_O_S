@@ -70,14 +70,14 @@
 
           <div class="modal-body">
             <div class="box-body">
-
+              <label>Clave del producto:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-th"></i></span>
-                  <input type="number" class="form-control input-lg" id="nuevoClavePro" name="nuevoClavePro" placeholder="Ingresa el clave de producto ej.55151618" required>
+                  <input type="number" class="form-control input-lg" id="nuevoClavePro" name="nuevoClavePro" placeholder="Ingresa clave de producto ej.55151618" required>
                 </div>
               </div>
-
+              <label>Categoría:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-th"></i></span>
@@ -100,7 +100,7 @@
                 </div>
               </div>
 
-
+              <label>Subcategoría:</label>
               <div class="form-group mostrarSub">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-th"></i></span>
@@ -111,13 +111,15 @@
                 </div>
               </div>
 
+              <label>Código del producto:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-code"></i></span>
                   <input type="text" class="form-control input-lg" name="nuevoCodigo" placeholder="Código" id="nuevoCodigo"readonly>
                 </div>
               </div>
-
+              
+              <label>Descripción de producto:</label>
                <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
@@ -125,16 +127,18 @@
                 </div>
               </div>
 
-
+               <label>Stock</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-check"></i></span>
                   <input type="number" class="form-control input-lg" id="nuevoStock" name="nuevoStock" min="0" placeholder="Cantidad disponible" required>
                 </div>
               </div>
-
+  
               <div class="form-group row">
+                
                 <div class="col-xs-12 col-sm-6">
+                  <label>Precio de compra:</label>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-arrow-up"></i></span>
                     <input type="number" class="form-control input-lg" id="nuevoPrecioCompra" name="nuevoPrecioCompra" min="0" step="any" placeholder="Precio de compra" required>
@@ -142,6 +146,7 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-6">
+                  <label>Precio de venta:</label>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-arrow-down"></i></span>
                     <input type="number" class="form-control input-lg" id="nuevoPrecioVenta" name="nuevoPrecioVenta" min="0" step="any" placeholder="Precio de venta" required>
@@ -149,6 +154,7 @@
 
                   <br>
 
+                  <label>Porcentaje</label>
                   <div class="col-xs-6">
                     <div class="form-group">
                       <label>
@@ -215,6 +221,7 @@
           <div class="modal-body">
             <div class="box-body">
 
+              <label>Código de producto:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-th"></i></span>
@@ -222,7 +229,7 @@
                 </div>
               </div>
 
-
+              <label>Categoría:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-th"></i></span> 
@@ -243,31 +250,32 @@
                   </select>
                 </div>
               </div>
-
+              <label>Subcategoría</label>
               <div class="form-group mostrarSub">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-th"></i></span>
-                  <select class="form-control input-lg"  id="editarSubCategoria" name="editarSubCategoria" required>
-                  
-                  </select>
+                    <select class="form-control input-lg"  id="editarSubCategoria" name="editarSubCategoria" required>
+                    </select>
                 </div>
               </div>
 
+              <label>Código</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-code"></i></span>
                   <input type="text" class="form-control input-lg" name="editarCodigo" id="editarCodigo"readonly>
                 </div>
               </div>
-
-               <div class="form-group">
+              
+              <label>Descripción del producto</label>
+              <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
                   <input type="text" class="form-control input-lg" id="editarDescripcion" name="editarDescripcion" required>
                 </div>
               </div>
-
-
+                
+              <label>Stock</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-check"></i></span>
@@ -276,22 +284,23 @@
               </div>
 
               <div class="form-group row">
-
-                <div class="col-xs-6">
+                <div class="col-xs-12 col-sm-6">
+                  <label>Precio de compra</label>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-arrow-up"></i></span>
                     <input type="number" class="form-control input-lg" id="editarPrecioCompra" name="editarPrecioCompra" min="0" step="any"  required>
                   </div>
                 </div>
 
-                <div class="col-xs-6">
+                <div class="col-xs-12 col-sm-6">
                   <div class="input-group">
+                    <label>Precio de venta</label>
                     <span class="input-group-addon"><i class="fa fa-arrow-down"></i></span>
                     <input type="number" class="form-control input-lg" id="editarPrecioVenta" name="editarPrecioVenta" min="0" step="any"  required readonly>
                   </div>
 
                   <br>
-
+                  <label>Porcentanje</label>
                   <div class="col-xs-6">
                     <div class="form-group">
                       <label>
@@ -358,8 +367,8 @@
           </div>
 
           <div class="modal-body">
-            <div class="box-body">
-
+            <div class="box-body">  
+              <label>Cantidad a agregar</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-check"></i></span>

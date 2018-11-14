@@ -38,7 +38,7 @@
 
           foreach ($categoria as $key => $value) {
              echo '<ul class="list-group list-group-flush">
-                   <li class="list-group-item">'.($key+1).".-".$value["nombre"].'</li>';
+                   <li class="list-group-item">'.$value["nombre"].'</li>';
 
                 $item = null;
                 $valor = $value["id"];
@@ -89,7 +89,7 @@
 
           <div class="modal-body">
             <div class="box-body">
-
+              <label>Categoría:</label>
               <div class="form-group">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-th"></i></span>
@@ -110,7 +110,7 @@
                     </select>
                   </div>
               </div>
-
+              <label>Nombre de la subcategoría:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-th"></i></span>
@@ -126,7 +126,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-            <button type="submit" class="btn btn-primary">Guardar categorias</button>
+            <button type="submit" class="btn btn-primary">Guardar subcategorias</button>
           </div>
 
           <?php 
@@ -157,10 +157,11 @@
 
           <div class="modal-body">
             <div class="box-body">
+              <label>Nombre de la subcategoría:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-th"></i></span>
-
+              
                   <input type="text" class="form-control input-lg" id="editarSubCategoria" name="editarSubCategoria" required>
                   <input type="hidden" class="form-control input-lg" id="nuevoValor" name="nuevoValor" value="" required>
                   <input type="hidden" class="form-control input-lg" id="idsc" name="editarids" required>

@@ -172,8 +172,8 @@ $cantProducto = $item["cantidad"];
 
 $precioTotal = number_format(($precioSinIva * $cantProducto),2);
 
-$valorImpuesto = number_format((($precioTotal*0.16)),2);
-
+$imp = (float)$precioTotal;
+$valorImpuesto = number_format((($imp*0.16)),2);
 
 $bloque4 = <<<EOF
 

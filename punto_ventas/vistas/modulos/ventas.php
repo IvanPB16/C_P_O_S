@@ -53,7 +53,6 @@
         <table class="table table-bordered table-striped dt-responsive tablas">
           
           <thead>
-            <th style="width: 10px">#</th>
             <th>Código</th>
             <th>Vendedor</th>
             <th>Cliente</th>
@@ -78,7 +77,6 @@
 
             foreach ($obtener as $key => $value) {
             echo '<tr>
-                    <td>'.($key+1).'</td>
                     <td>'.$value["codigo_venta"].'</td>';
 
             $itemUsuario = "id";

@@ -111,28 +111,28 @@
 
           <div class="modal-body">
             <div class="box-body">
-
+              <label>Nombre de la persona:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
                   <input type="text" class="form-control input-lg" name="nuevoNombre" placeholder="Ingresa el nombre" required>
                 </div>
               </div>
-
+                <label>Nombre de usuario:</label>
                <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-key"></i></span>
                   <input type="text" class="form-control input-lg" name="nuevoUsuario" id="nuevoUsuario" placeholder="Ingresa el usuario" required>
                 </div>
               </div>
-
+              <label>Contraseña:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                   <input type="password" class="form-control input-lg" id="nuevoPassword" name="nuevoPassword" placeholder="Ingresa la contraseña" required>
                 </div>
               </div>
-
+              <label>Repitir la contraseña:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-lock"></i></span>
@@ -208,29 +208,31 @@
 
           <div class="modal-body">
             <div class="box-body">
-
+              <label>Nombre de la persona:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
                   <input type="text" class="form-control input-lg" id="editarNombre" name="editarNombre" required>
                 </div>
               </div>
-
+              
+              <label>Nombre de usuario:</label>
                <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                  <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" readonly>
+                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                    <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" readonly>
+                 </div>
                 </div>
-              </div>
 
+               <label>Contraseña:</label>
                <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                  <input type="password" class="form-control input-lg" id="editarPassword" name="editarPassword" placeholder="Escriba una nueva contraseña">
-                  <input type="hidden" id="passwordActual" name="passwordActual" >
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    <input type="password" class="form-control input-lg" id="editarPassword" name="editarPassword" placeholder="Escriba una nueva contraseña">
+                    <input type="hidden" id="passwordActual" name="passwordActual" >
+                  </div>
                 </div>
-              </div>
-
+              <label>Repetir contraseña:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-lock"></i></span>

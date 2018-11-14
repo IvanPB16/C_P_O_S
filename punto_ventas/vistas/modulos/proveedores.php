@@ -96,35 +96,37 @@
           <div class="modal-body">
             <div class="box-body">
 
+              <label>Nombre del proveedor:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
                   <input type="text" class="form-control input-lg" name="nuevoProveedor" placeholder="Ingresa de la empresa o proveedor" required>
                 </div>
               </div>
-
+              <label>Productos que maneja:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa  fa-tag"></i></span>
                   <input type="text" class="form-control input-lg" name="nuevoArticulo" placeholder="Ingresa el nombre de articulos" required>
                 </div>
               </div>
-
+              <label>Descripción del proveedor:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa  fa-comment"></i></span>
                    <textarea class="textarea form-control input-lg" name="nuevaDescripcion" placeholder="Descripción del proveedor" style="width: 100%; height: 80px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                 </div>
               </div>
-
-
+              
+              <label>Teléfono del proveedor:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                   <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar teléfono"  data-inputmask="'mask':'(999) 999-9999'" data-mask required>
                 </div>
               </div>
-
+              
+              <label>Email:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
@@ -171,6 +173,7 @@
           <div class="modal-body">
             <div class="box-body">
 
+              <label>Nombre del proveedor:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -178,7 +181,7 @@
                   <input type="hidden" id="IdProv" name="IdProv">
                 </div>
               </div>
-
+              <label>Productos que maneja:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa  fa-tag"></i></span>
@@ -186,13 +189,14 @@
                 </div>
               </div>
 
+              <label>Descripción del proveedor:</label>
                <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa  fa-comment"></i></span>
                    <textarea class="textarea form-control input-lg" id="editarDescripcion" name="editarDescripcion" style="width: 100%; height: 80px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                 </div>
               </div>
-
+              <label>Teléfono del proveedor:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-phone"></i></span>
@@ -200,6 +204,7 @@
                 </div>
               </div>
 
+              <label>Email:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-envelope"></i></span>

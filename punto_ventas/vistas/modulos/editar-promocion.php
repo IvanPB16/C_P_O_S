@@ -7,7 +7,7 @@
 
       <li><a href="inicio"><i class="fa fa-dashboard"></i>Inicio</a></li>
 
-      <li class="active">Crear promociones</li>
+      <li class="active">Editar promoción</li>
     </ol>
   </section>
  <section class="content">
@@ -18,19 +18,26 @@
           <form role="form" method="post" class="form_promocion" >
             <div class="box-body">
               <div class="box">
+                <?php 
+
+                  $item = "id_promocion";
+                  $valor = $_GET["idPromo"];
+
+                  $Promo = ControladorPromocion::ctrMostrarPromocion($item,$valor);
+                 ?>
 
                 <div class="form-group">
                   <div class="input-group">
 
                     <div class="col-lg-5">
-                      <label>Nombre de promoción:</label>
-                      <input type="text" class="form-control" name="nombre_promo" placeholder="Ej. Lista escolar">   
+                      <label>Nombre de promoción</label>
+                      <input type="text" class="form-control" name="editarNombrePromo" value="<?php echo $Promo["nombre_promocion"]?>" required>   
                     </div>
 
                     <div class="col-lg-5">
                       <label>Fecha:</label>
                       <i class="fa fa-calendar"></i>
-                      <input type="text" class="form-control pull-right" id="reservation" name="daterange"/>
+                      <input type="text" class="form-control pull-right" id="reservation" name="daterange" required />
                       <input id="promof_uno" type="hidden" name="fechaUno">
                       <input id="promof_dos" type="hidden" name="fechaDos">
                     </div>
@@ -42,14 +49,36 @@
                   <div class="col-lg-5 col-xs-12">
                     <div class="form-group">
                       <div class="input-group">
-                        <label>Precio de proción:</label>
-                          <input type="number" class="form-control" name="precio_descuento" min="0" step="any" placeholder="$20.00">
+                        <label>Precio de proción</label>
+                          <input type="number" class="form-control" name="precio_descuento" min="0" step="any" value="<?php echo $Promo["precio_promocion"]?>" required>
                         </div>
                     </div>
                   </div>
                 </div>
 
                 <div class="form-gruop row Productos">
+
+                  <?php 
+
+                    $productoPromo = json_decode($Promo["productos"],true);
+
+                    foreach ($productoPromo as $key => $value) {
+                    $item = "id";
+                    $valor = $value["id"];
+
+                    $respuesta = ControladorProducto::ctrMostrarProducto($item,$valor);
+
+                       echo '<div class="row" style="padding:5px 15px">
+                            <div class="col-xs-6" style="padding-right:0px">
+                               <div class="input-group">
+                                       <span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitar" idProducto="'.$value["id"].'"><i class="fa fa-times"></i></button></span>
+                                        <input type="text" class="form-control PProducto" idProducto="'.$value["id"].'" name="nuevoProductop" value="'.$value["descripcion"].'" readonly required>
+                                      </div>
+                                   </div>
+                                </div>';
+                    }
+
+                  ?>
 
                 </div>
 
@@ -61,15 +90,15 @@
             </div>
 
             <div class="box-footer">
-              <button type="submit" class="btn btn-primary pull-right">Guardar promoción</button>
+              <button type="submit" class="btn btn-primary pull-right">Guardar cambios</button>
             </div>
 
           </form>
           <?php 
-            $crearPromocion = new ControladorPromocion();
-            $crearPromocion -> ctrCrearPromocion();
-            ?>
-          
+          $editar = new ControladorPromocion();
+          $editar -> ctrEditarPromocion();
+
+           ?>
         </div>
       </div>
     </div>

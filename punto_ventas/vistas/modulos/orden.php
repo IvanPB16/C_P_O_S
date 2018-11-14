@@ -41,7 +41,7 @@
 
               $mostrar = ControladorProveedor::ctrMostrarProveedor($item,$valor);
                                                   
-         echo '<div class="col-xs-6">
+         echo '<div class="col-xs-4">
             <label>Nombre del proveedor</label>
               <input type="text" class="form-control" value="'.$mostrar["nombre_proveedor"].'" readonly>   
           </div>
@@ -49,7 +49,7 @@
             <label>Productos</label>
               <input type="text-area" class="form-control" name="precio_descuento" value="'.$mostrar["producto"].'">
           </div>
-          <div class="col-xs-2">
+          <div class="col-xs-4">
             <div class="form-group">
                 <label>Fecha:</label>
                 <div class="input-group">

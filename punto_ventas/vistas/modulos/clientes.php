@@ -90,6 +90,7 @@
           <div class="modal-body">
             <div class="box-body"> 
 
+              <label>Nombre del cliente:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -97,6 +98,7 @@
                 </div>
               </div>
 
+              <label>Número de cliente:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-key"></i></span>
@@ -117,14 +119,16 @@
           
                 </div>
               </div>
-
+              
+              <label>RFC del cliente:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-key"></i></span>
                   <input type="text" min="0" class="form-control input-lg" name="nuevoRFC" placeholder="Ingresa el RFC" required>
                 </div>
               </div>
-
+              
+              <label>Email:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
@@ -132,12 +136,13 @@
                 </div>
               </div>
 
+              <label>Teléfono del cliente:</label>
               <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
-                <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar teléfono" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
-              </div>
-            </div>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
+                  <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar teléfono" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
+                </div>
+               </div>
             
             </div>
           </div>
@@ -177,7 +182,8 @@
 
           <div class="modal-body">
             <div class="box-body">
-
+            
+              <label>Nombre del cliente:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -186,6 +192,7 @@
                 </div>
               </div>
 
+              <label>Número de cliente:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-key"></i></span>
@@ -193,6 +200,7 @@
                 </div>
               </div>
 
+              <label>RFC del cliente:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-key"></i></span>
@@ -200,6 +208,7 @@
                 </div>
               </div>
 
+              <label>Email:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
@@ -207,12 +216,13 @@
                 </div>
               </div>
 
+              <label>Teléfono del cliente:</label>
               <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
-                <input type="text" class="form-control input-lg" id="editarTelefono" name="editarTelefono" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
+                  <input type="text" class="form-control input-lg" id="editarTelefono" name="editarTelefono" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
+                </div>
               </div>
-            </div>
             
             </div>
           </div>

@@ -127,6 +127,7 @@ session_start();
           $_GET["ruta"] == "proveedores" ||
           $_GET["ruta"] == "promociones" ||
           $_GET["ruta"] == "crear-promocion" ||
+          $_GET["ruta"] == "editar-promocion" ||
           $_GET["ruta"] == "orden" ||
           $_GET["ruta"] == "reporte"
           ) {

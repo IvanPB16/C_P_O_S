@@ -11,7 +11,7 @@ class dtPromocion{
 		$datosJSON='{
 					"data":[';
 						for($i = 0; $i<count($mostrar);$i++){
-						$botonAdd = "<div class='btn-group'><button class='btn btn-primary addProducto recuperar' idProducto='".$mostrar[$i]["id"]."'>Agregar</button></div>";
+						$botonAdd = "<div class='btn-group'><button class='btn btn-primary addProducto  recuperar' idProducto='".$mostrar[$i]["id"]."'>Agregar</button></div>";
 							$datosJSON.='[
 										"<td>'.$mostrar[$i]["codigo"].'</td>",
 	 									"<td>'.$mostrar[$i]["descripcion"].'</td>",

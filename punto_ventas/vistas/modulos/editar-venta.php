@@ -50,7 +50,7 @@
                     <div class="form-group">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $vendedor["nombre"]; ?>" readonly>
+                        <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $vendedor["nombre"]; ?>"  readonly>
                         <input type="hidden" name="idVendedor" value="<?php echo $vendedor["id"]; ?>">
                      </div>  
                     </div>

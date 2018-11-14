@@ -38,7 +38,7 @@
         <table class="table table-bordered table-striped dt-responsive tablas" width="100%">
           
           <thead>
-            <th>Categoria</th>
+            <th>Categoría</th>
             <th>Acciones</th>  
           </thead>
           <tbody>
@@ -90,11 +90,12 @@
 
           <div class="modal-body">
             <div class="box-body">
-
+              
+              <label>Nombre de la categoría:</label>
               <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
+                  <span class="input-group-addon"><i class="fa fa-th"></i></span>
                   <input type="text" class="form-control input-lg" id="nuevaCategoria" name="nuevaCategoria" placeholder="Ingresa el Categoria" required>
 
                 </div>
@@ -139,7 +140,7 @@
 
           <div class="modal-body">
             <div class="box-body">
-
+              <label>Nombre de la categoría:</label>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-th"></i></span>

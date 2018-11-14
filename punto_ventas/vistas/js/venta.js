@@ -112,7 +112,7 @@ $(".tablaVentas tbody").on("click",'button.agregarProducto',function(){
 			// poner formato a los precios
 			$(".nuevoPrecioProducto").number(true,2);
 
-			// localStorage.removeItem("quitarProducto");
+			localStorage.removeItem("quitarProducto");
 		}
 
 	})
@@ -120,7 +120,7 @@ $(".tablaVentas tbody").on("click",'button.agregarProducto',function(){
 });
 
 
-/*cuando carge la tabla */
+/*cuando carge la tabla navegando en ella */
 $(".tablaVentas").on("draw.dt",function(){
 	if (localStorage.getItem("quitarProducto") != null) {
 		
@@ -139,7 +139,7 @@ $(".tablaVentas").on("draw.dt",function(){
 var idQuitarProducto = [];
 
 $(".formularioVenta").on('click','button.quitarProducto',function(){
-	//se elimna las etiquetas
+		//se elimna las etiquetas
 	$(this).parent().parent().parent().parent().remove();
 	//capturamos el id del producto
 	var idProducto = $(this).attr("idProducto");
@@ -159,7 +159,6 @@ $(".formularioVenta").on('click','button.quitarProducto',function(){
 	$("button.recuperar[idProducto = '"+idProducto+"']").addClass('btn-primary agregarProducto');
 
 	if ($(".nuevoProducto").children().length == 0) {
-	
 		$("#nuevoTotalVenta").val(0);
 		$("#totalVenta").val(0);
 		$("#nuevoTotalVenta").attr("total",0);
@@ -268,6 +267,9 @@ $(".btnAgregarProducto").click(function(){
 $(".formularioVenta").on("change","select.nuevaDescripcionProducto",function(){
 	
 	var nombreProducto = $(this).val();
+	
+
+	var nuevaDescripcionProducto = $(this).parent().parent().parent().children().children().children(".nuevaDescripcionProducto");
 
 	var nuevoPrecioProducto = $(this).parent().parent().parent().children(".ingresoPrecio").children().children(".nuevoPrecioProducto");
 
@@ -285,6 +287,7 @@ $(".formularioVenta").on("change","select.nuevaDescripcionProducto",function(){
       	processData: false,
       	dataType:"json",
       	success:function(res){
+      		$(nuevaDescripcionProducto).attr("idProducto", res["id"]);
       		$(nuevaCantidadProducto).attr("stock",res["stock"]);
       		$(nuevaCantidadProducto).attr("nuevoStock",Number(res["stock"])-1);
       		$(nuevoPrecioProducto).val(res["precio_venta"]);
@@ -292,6 +295,7 @@ $(".formularioVenta").on("change","select.nuevaDescripcionProducto",function(){
 
       		//agrupar productos json
 			listarProducto()
+			sumarPrecio()
       	}
 
 	})
