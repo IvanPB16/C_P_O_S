@@ -28,7 +28,7 @@
           Agregar categorias
         </button>
 
-           <button class="btn btn-danger pull-right" onclick="location.href='subcategorias'">
+        <button class="btn btn-danger pull-right" onclick="location.href='subcategorias'">
           Ver Subcategorias
         </button>
       </div>

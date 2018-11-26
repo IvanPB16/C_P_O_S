@@ -8,7 +8,7 @@ require_once "../modelos/categorias.modelo.php";
 
 require_once "../controladores/subcategorias.controlador.php";
 require_once "../modelos/subcategorias.modelo.php";
- 
+
 class TablaProductos{
 
 	 public function mostrarTabla(){
@@ -17,6 +17,7 @@ class TablaProductos{
 	 	$valor = null;
 
 	 	$productos = ControladorProducto::ctrMostrarProducto($item,$valor);
+
 
 	 	echo '{
 	 			"data":[';

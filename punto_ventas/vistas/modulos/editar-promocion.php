@@ -20,12 +20,13 @@
               <div class="box">
                 <?php 
 
-                  $item = "id_promocion";
-                  $valor = $_GET["idPromo"];
+                  $item = "codigo";
+                  $valor = $_GET["codigo"];
 
                   $Promo = ControladorPromocion::ctrMostrarPromocion($item,$valor);
-                 ?>
 
+                 ?>
+                  <input type="hidden"  class="form-control input-lg" name="codigoPromocion" value="<?php echo $Promo["codigo"]?>" required readonly>
                 <div class="form-group">
                   <div class="input-group">
 
@@ -56,33 +57,32 @@
                   </div>
                 </div>
 
-                <div class="form-gruop row Productos">
-
+                <div class="form-group row Producto">
                   <?php 
+                    $itemPromocion = "codigo";
+                    $valorPromocion = $Promo["codigo"];
 
-                    $productoPromo = json_decode($Promo["productos"],true);
+                    $promocion = ControladorPromocion::ctrMostrarPromocion2($item,$valor);
 
-                    foreach ($productoPromo as $key => $value) {
-                    $item = "id";
-                    $valor = $value["id"];
+                    foreach ($promocion as $key => $value) {
 
-                    $respuesta = ControladorProducto::ctrMostrarProducto($item,$valor);
-
-                       echo '<div class="row" style="padding:5px 15px">
-                            <div class="col-xs-6" style="padding-right:0px">
-                               <div class="input-group">
-                                       <span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitar" idProducto="'.$value["id"].'"><i class="fa fa-times"></i></button></span>
-                                        <input type="text" class="form-control PProducto" idProducto="'.$value["id"].'" name="nuevoProductop" value="'.$value["descripcion"].'" readonly required>
-                                      </div>
-                                   </div>
-                                </div>';
+                      $itemproducto = "id";
+                      $valorproducto = $value["id_producto"];
+                      $respuesta = ControladorProducto::ctrMostrarProducto($itemproducto,$valorproducto);
+      
+                        echo '<div class="row" style="padding:5px 15px">
+                              <div class="col-xs-6" style="padding-right:0px">
+                                 <div class="input-group">
+                                         <span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitar" idProducto="'.$respuesta["id"].'"><i class="fa fa-times"></i></button></span>
+                                          <input type="text" class="form-control PProducto" idProducto="'.$respuesta["id"].'" name="nuevoProductop[]" value="'.$respuesta["descripcion"].'" readonly required>
+                                          <input type=hidden name="idProducto[]" value="'.$respuesta["id"].'">
+                                        </div>
+                                     </div>
+                                  </div>';
                     }
-
                   ?>
 
                 </div>
-
-                <input type="hidden" id="productos" name="listproductos">
 
                 <button type="button" class="btn btn-default hidden-lg btnAdd">Agregar producto</button>
 

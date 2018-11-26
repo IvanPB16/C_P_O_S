@@ -6,21 +6,24 @@ class ControladorPromocion{
 			if (preg_match('/^[a-z-A-ZñÑáéíóúÁÉÍÓÚ ]+$/',$_POST["nombre_promo"])) {
 				$tabla = "promocion";
 
-				$dato = array("nombre"=>$_POST["nombre_promo"],
+				foreach ($_POST["idProducto"] as $key => $value) {
+					$dato = array("nombre"=>$_POST["nombre_promo"],
+							  "codigo" => $_POST["codigoPromocion"],
 							  "fechaInicio" =>$_POST["fechaUno"],
 							  "fechaFinal" => $_POST["fechaDos"],
 							  "precioPromo" => $_POST["precio_descuento"],
-							  "productos" => $_POST["listproductos"]
+							  "idproducto" => $_POST["idProducto"][$key]
 							);
-				
 				$respuesta = ModeloPromocion::mdlCrearPromocion($tabla,$dato);
+	
+				}
 
 				if ($respuesta == "ok") {
 					echo '<script>
 							localStorage.removeItem("rango");
 							swal({
 								type: "success",
-								title:"venta realziada",
+								title:"Promoción creada",
 								showConfirmButton: true,
 								confirmButtonText: "Cerrar",
 								closeOnConfirm: true
@@ -42,32 +45,30 @@ class ControladorPromocion{
 		return $respuesta;
 	}
 
+	static public function ctrMostrarPromocion2($item,$valor){
+		$tabla = "promocion";
+
+		$respuesta = ModeloPromocion::mdlMostrarPromocion2($tabla,$item,$valor);
+		return $respuesta;
+	}
+
 	static public function ctrEditarPromocion(){
 		if (isset($_POST["editarNombrePromo"])) {
 			if (preg_match('/^[a-z-A-ZñÑáéíóúÁÉÍÓÚ ]+$/',$_POST["editarNombrePromo"])) {
+
 				$tabla = "promocion";
 
-				$item = "nombre_promocion";
-				$valor = $_POST["editarNombrePromo"];
-
-				$traerPromo = ModeloPromocion::mdlMostrarPromocion($tabla,$item,$valor);
-			
-				if ($_POST["listproductos"] == "") {
-					$listproductos = $traerPromo["productos"];
-					$cambioProducto = false; 
-				}else{
-					$listproductos = $_POST["listproductos"];
-					$cambioProducto = true; 
-				}
-
-				$dato = array("nombre"=>$_POST["editarNombrePromo"],
+				foreach ($_POST["idProducto"] as $key) {
+					
+					$dato = array("nombre"=>$_POST["editarNombrePromo"],
+							  "codigo" => $_POST["codigoPromocion"],
 							  "fechaInicio" =>$_POST["fechaUno"],
 							  "fechaFinal" => $_POST["fechaDos"],
 							  "precioPromo" => $_POST["precio_descuento"],
-							  "productos" => $listproductos
+							  "idproducto" => $_POST["idProducto"][$key]
 							);
-				
-				$respuesta = ModeloPromocion::mdlEditarPromocion($tabla,$dato);
+					$respuesta = ModeloPromocion::mdlEditarPromocion($tabla,$dato);
+				}
 
 				if ($respuesta == "ok") {
 					echo '<script>
@@ -92,10 +93,10 @@ class ControladorPromocion{
 
 	
 	static public function ctrEliminarPromo(){
-		if (isset($_GET["idPromo"])) {
+		if (isset($_GET["codigo"])) {
 			$tabla = "promocion";
 
-			$respuesta = ModeloPromocion::mdlEliminarPromo($tabla,$_GET["idPromo"]);
+			$respuesta = ModeloPromocion::mdlEliminarPromo($tabla,$_GET["codigo"]);
 			if ($respuesta == "ok") {
 					echo '<script>
 						

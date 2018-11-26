@@ -6,13 +6,15 @@ class ModeloPromocion{
 
 	static public function mdlCrearPromocion($tabla,$dato){
 
-		$statement = Conexion::conectar()->prepare("INSERT INTO $tabla (nombre_promocion,precio_promocion,productos,fecha_inicio,fecha_fin) VALUES (:nombre_promocion,:precio_promocion,:productos,:fecha_inicio,:fecha_fin)");
+		$statement = Conexion::conectar()->prepare("INSERT INTO $tabla (nombre_promocion,codigo,precio_promocion,fecha_inicio,fecha_fin,id_producto) VALUES (:nombre_promocion,:codigo,:precio_promocion,:fecha_inicio,:fecha_fin,:id_producto)");
 
 		$statement -> bindParam(":nombre_promocion",$dato["nombre"],PDO::PARAM_STR);
+		$statement -> bindParam(":codigo",$dato["codigo"],PDO::PARAM_INT);
 		$statement -> bindParam(":precio_promocion",$dato["precioPromo"],PDO::PARAM_STR);
-		$statement -> bindParam(":productos",$dato["productos"],PDO::PARAM_STR);
 		$statement -> bindParam(":fecha_inicio",$dato["fechaInicio"],PDO::PARAM_STR);
 		$statement -> bindParam(":fecha_fin",$dato["fechaFinal"],PDO::PARAM_STR);
+		$statement -> bindParam(":id_producto",$dato["idproducto"],PDO::PARAM_STR);
+
 		if ($statement ->execute()) {
 			return "ok";
 		}else{
@@ -32,12 +34,23 @@ class ModeloPromocion{
 			$statement -> bindParam(":".$item,$valor,PDO::PARAM_STR);
 			$statement -> execute();
 			return $statement ->fetch();
-		}else{
-		$statement = Conexion::conectar()->prepare("SELECT * FROM $tabla");
-		$statement -> execute();
-		return $statement -> fetchAll();
-		}
+			}else{
+			$statement = Conexion::conectar()->prepare("SELECT * FROM $tabla GROUP BY codigo");
+			$statement -> execute();
+			return $statement -> fetchAll();
+			}
 
+		$statement -> close();
+		$statement = null;
+
+	}
+
+	static public function mdlMostrarPromocion2($tabla,$item,$valor){
+		$statement = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+		$statement -> bindParam(":".$item,$valor,PDO::PARAM_STR);
+		$statement -> execute();
+
+		return $statement ->fetchAll();
 		$statement -> close();
 		$statement = null;
 
@@ -45,29 +58,32 @@ class ModeloPromocion{
 
 	static public function mdlEditarPromocion($tabla,$dato){
 
-		$statement = Conexion::conectar()->prepare("UPDATE $tabla SET nombre_promocion = :nombre_promocion,
-			precio_promocion = :precio_promocion,
-			productos = :productos,
-			fecha_inicio = :fecha_inicio,
-			fecha_fin = :fecha_fin WHERE nombre_promocion = :nombre_promocion");
+		$statement = Conexion::conectar()->prepare("UPDATE $tabla SET codigo = :codigo, nombre_promocion = :nombre_promocion,
+			precio_promocion = :precio_promocion, id_producto = :id_producto,fecha_inicio = :fecha_inicio,fecha_fin = :fecha_fin WHERE nombre_promocion = :nombre_promocion");
+
 		$statement -> bindParam(":nombre_promocion",$dato["nombre"],PDO::PARAM_STR);
+		$statement -> bindParam(":codigo",$dato["codigo"],PDO::PARAM_INT);
 		$statement -> bindParam(":precio_promocion",$dato["precioPromo"],PDO::PARAM_STR);
-		$statement -> bindParam(":productos",$dato["productos"],PDO::PARAM_STR);
 		$statement -> bindParam(":fecha_inicio",$dato["fechaInicio"],PDO::PARAM_STR);
 		$statement -> bindParam(":fecha_fin",$dato["fechaFinal"],PDO::PARAM_STR);
+		$statement -> bindParam(":id_producto",$dato["idproducto"],PDO::PARAM_STR);
 
-		if ($statement -> execute()) {
+		if ($statement ->execute()) {
 			return "ok";
 		}else{
-			return "error";
+			return "false";
 		}
+
+		$statement -> close();
+		$statement=null;
+
 
 	}
 
 	static public function mdlEliminarPromo($tabla,$dato){
-		$statement = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_promocion = :id");
+		$statement = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE codigo = :codigo");
 
-		$statement -> bindParam(":id",$dato,PDO::PARAM_INT);
+		$statement -> bindParam(":codigo",$dato,PDO::PARAM_INT);
 
 		if($statement -> execute()){
 			return "ok";

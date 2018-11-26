@@ -25,6 +25,9 @@
         <button class="btn btn-primary" data-toggle="modal" data-target="#modalAddProveedor">
           Agregar proveedor
         </button>
+        <button class="btn btn-danger pull-right" onclick="location.href='ordenes'">
+          Ver Ordenes de compra
+        </button>
       </div>
       <div class="box-body">
         <table class="table table-bordered table-striped dt-responsive tablas">

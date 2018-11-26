@@ -1,3 +1,4 @@
+
  <div class="content-wrapper">
  
   <section class="content-header"> 
@@ -18,7 +19,24 @@
     </ol>
 
   </section>
+  <?php 
+    date_default_timezone_set('America/Mexico_City');
+    $fechaActual = date('Y-m-d');
+    echo $fechaActual;
 
+    $item = null;
+    $valor = null;
+
+    $respues = ControladorPromocion::ctrMostrarPromocion($item,$valor);
+    
+    if ($respues[0]["fecha_fin"] >= $fechaActual) {
+       echo '<input type="hidden" id="fechaFinalPromocion" value="'.$respues[0]["fecha_fin"].'">';
+       echo '<input type="hidden" id="fechaFinalPromocion" value="'.$respues[0]["codigo"].'">';
+    }
+  ?>
+    <div class="ValoresPromocion">
+      <input type="hidden" id="fechaFinalPromocion" value="<?php echo $respues[0]["fecha_fin"] ?>">     
+    </div>
   <section class="content">
     <div class="row">
         <div class="col-lg-5 col-xs-12">
@@ -28,7 +46,6 @@
 
                 <div class="box-body">
                   <div class="box">
-
                     <div class="form-group">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -157,7 +174,7 @@
                         <div class="input-group">
 
                           <select class="form-control" name="nuevoMetodoPago" id="nuevoMetodoPago" required>
-                            <option value="">Seleccionar forma de pago</option>
+                            <option value="">Seleccionar</option>
                             <option value="Efectivo">Efectivo</option>
                             <option value="TC">Tarjeta Crédito</option>
                             <option value="TD">Tarjeta Débito</option>
@@ -168,7 +185,19 @@
                       </div>
                      
                        <div class="cajasMetodoPago">
-                     
+                   <!--      <div class="col-xs-4"><b>Pago Cliente</b>
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
+                            <input type="text"  class="form-control nuevoValorEfectivo" placeholder="0.00" required>
+                          </div>
+                        </div>
+
+                        <div class="col-xs-4 capturaCambioEfectivo" style="padding-left:0px"><b>Cambio</b>
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
+                            <input type="text"  class="form-control CambioEfectivo" placeholder="0.00" required readonly>
+                          </div>
+                        </div> -->
                        </div>
                         <input type="hidden" id="listaMetodoPago" name="listaMetodoPago">
 

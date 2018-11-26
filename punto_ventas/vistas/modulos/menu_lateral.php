@@ -3,7 +3,7 @@
 		 <ul class="sidebar-menu">
 		 <?php 
 
-		 	if ($_SESSION["perfil"] == "Administrador") {
+		 	// if ($_SESSION["perfil"] == "Administrador") {
 
 		 	echo '<li class="active">
 		 		<a href="inicio">
@@ -18,10 +18,10 @@
 		 			<span>Empleados</span>
 		 		</a>
 		 	</li>';
-		 }
-		if ($_SESSION["perfil"] == "Administrador" ||
-		 	 $_SESSION["perfil"] == "Inventario" ||
-			 $_SESSION["perfil"] == "Contador"){
+		 // }
+		// if ($_SESSION["perfil"] == "Administrador" ||
+		 	 // $_SESSION["perfil"] == "Inventario" ||
+			 // $_SESSION["perfil"] == "Contador"){
 		 	echo '<li>
 		 		<a href="categorias">
 		 			<i class="fa fa-th"></i>
@@ -34,31 +34,31 @@
 		 			<span>Productos</span>
 		 		</a>
 		 	</li>';
-		 }
-		if ($_SESSION["perfil"] == "Administrador" ||
-		 	 $_SESSION["perfil"] == "Vendedor"){ 
+		 // }
+		// if ($_SESSION["perfil"] == "Administrador" ||
+		 	 // $_SESSION["perfil"] == "Vendedor"){ 
 		 echo '<li>
 		 		<a href="clientes">
 		 			<i class="fa fa-users"></i>
 		 			<span>Clientes</span>
 		 		</a>
 		 	</li>';
-		 }
-		 if ($_SESSION["perfil"] == "Administrador" ||
-		 	 $_SESSION["perfil"] == "Inventario" ||
-			 $_SESSION["perfil"] == "Contador"){
+		 // }
+		 // if ($_SESSION["perfil"] == "Administrador" ||
+		 	 // $_SESSION["perfil"] == "Inventario" ||
+			 // $_SESSION["perfil"] == "Contador"){
 		 echo '<li>
 		 		<a href="proveedores">
 		 			<i class="fa fa-handshake-o"></i>
 		 			<span>Proveedores</span>
 		 		</a>
 		 	</li>';
-		 }
+		 // }
 
-		 if ($_SESSION["perfil"] == "Administrador" ||
-		 	 $_SESSION["perfil"] == "Vendedor" ||
-			 $_SESSION["perfil"] == "Contador" ||
-			 $_SESSION["perfil"] == "Agente"){
+		 // if ($_SESSION["perfil"] == "Administrador" ||
+		 	 // $_SESSION["perfil"] == "Vendedor" ||
+			 // $_SESSION["perfil"] == "Contador" ||
+			 // $_SESSION["perfil"] == "Agente"){
 		 echo '<li class="treeview">
 		 		<a href="#">
 		 			<i class="fa fa-list-ul"></i>
@@ -86,10 +86,10 @@
 		 		 		</a>
 
 		 		 	</li>';
-		 		 }
+		 		 // }
 
-			if ($_SESSION["perfil"] == "Administrador" ||
-				$_SESSION["perfil"] == "Contador"){
+			// if ($_SESSION["perfil"] == "Administrador" ||
+				// $_SESSION["perfil"] == "Contador"){
 		 		 	echo'<li>
 		 		 		<a href="reporte">
 		 		 			<i class="fa fa-circle-o"></i>
@@ -97,18 +97,18 @@
 		 		 		</a>
 
 		 		 	</li>';
-		 		 }
+		 		 // }
 		 echo' </ul>
 		 	</li>';
-		 if ($_SESSION["perfil"] == "Administrador" ||
-		 	 $_SESSION["perfil"] == "Agente") {
+		 // if ($_SESSION["perfil"] == "Administrador" ||
+		 	 // $_SESSION["perfil"] == "Agente") {
 		 	echo '<li>
 		 		<a href="promociones">
 		 			<i class="fa fa-star-o"></i>
 		 			<span>Promociones</span>
 		 		</a>
 		 	</li>';
-		 	}
+		 	// }
 		 ?>
 		 </ul>
 	</section>

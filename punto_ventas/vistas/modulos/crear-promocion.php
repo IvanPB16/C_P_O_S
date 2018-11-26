@@ -24,13 +24,13 @@
 
                     <div class="col-lg-5">
                       <label>Nombre de promoción:</label>
-                      <input type="text" class="form-control" name="nombre_promo" placeholder="Ej. Lista escolar">   
+                      <input type="text" class="form-control" name="nombre_promo" placeholder="Ej. Lista escolar" required>   
                     </div>
 
                     <div class="col-lg-5">
                       <label>Fecha:</label>
                       <i class="fa fa-calendar"></i>
-                      <input type="text" class="form-control pull-right" id="reservation" name="daterange"/>
+                      <input type="text" class="form-control pull-right" id="reservation" name="daterange" required />
                       <input id="promof_uno" type="hidden" name="fechaUno">
                       <input id="promof_dos" type="hidden" name="fechaDos">
                     </div>
@@ -43,7 +43,7 @@
                     <div class="form-group">
                       <div class="input-group">
                         <label>Precio de proción:</label>
-                          <input type="number" class="form-control" name="precio_descuento" min="0" step="any" placeholder="$20.00">
+                          <input type="number" class="form-control" name="precio_descuento" min="0" step="any" placeholder="$20.00" required>
                         </div>
                     </div>
                   </div>
@@ -53,8 +53,24 @@
 
                 </div>
 
-                <input type="hidden" id="productos" name="listproductos">
+                <?php 
+                    $item = null;
+                    $valor = null;
 
+                    $num_promocion = ControladorPromocion::ctrMostrarPromocion($item,$valor);
+
+                    if (!$num_promocion) {
+                      echo ' <input type="hidden"  class="form-control input-lg" name="codigoPromocion" value="1" required readonly>';
+                    }else{
+                      foreach ($num_promocion as $key => $value) { }
+                        $identificador = $value["codigo"] + 1;
+                      echo ' <input type="hidden"  class="form-control input-lg" name="codigoPromocion" value="'.$identificador.'" required readonly>';
+                    }
+                   ?>
+
+                <input type="hidden" id="productos" name="listproductos">
+                <input type="hidden" name="ProductoID" id="ppid">
+                
                 <button type="button" class="btn btn-default hidden-lg btnAdd">Agregar producto</button>
 
               </div>

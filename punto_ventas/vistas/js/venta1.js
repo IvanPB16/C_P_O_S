@@ -668,3 +668,37 @@ $(".daterangepicker .opensleft .ranges li").on("click",function(){
 
 	}
 })
+
+					
+			// 	 var identificador = idProducto;
+			// 	 var datoi = new FormData();
+			// 	 datoi.append("idProducto",idProducto);
+
+			// 	$.ajax({
+			// 	url:"ajax/promocion.ajax.php",
+			// 	method:"POST",
+			// 	data:datoi,
+			// 	cache:true,
+			// 	contentType:false,
+			// 	processData:false,
+			// 	dataType: 'json',
+			// 	success:function(res){	
+			// 		if (res[0].id_producto == idProducto) {
+			// 			precio = res[0].precio_promocion;
+			// 		}else{
+			// 			
+			// 		}
+					// var x = new Date();
+					// var y = x.getFullYear().toString();
+					// var m = (x.getMonth() + 1).toString();
+					// var d = x.getDate().toString();
+					// (d.length == 1) && (d = '0' + d);
+					// (m.length == 1) && (m = '0' + m);
+					// var yyyymmdd = y + m + d;
+
+			// 		// var fechaF = $("#fechaFinalPromocion").val();
+			// 		// // var fechaSI = fechaI.replace(/-/gi,"");
+			// 		// var fechaSF = fechaF.replace(/-/gi,"");
+					
+			// 	}
+			// })

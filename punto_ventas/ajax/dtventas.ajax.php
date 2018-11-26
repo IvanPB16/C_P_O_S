@@ -1,7 +1,9 @@
 <?php 
 require_once "../controladores/productos.controlador.php";
 require_once "../modelos/productos.modelo.php";
-  
+require_once "../controladores/promocion.controlador.php";
+require_once "../modelos/promocion.modelo.php";
+
 class TablaMostraProductos{
 
 	public function mostrarTablaProducto(){

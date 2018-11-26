@@ -53,9 +53,9 @@
                     <td>'.$out["fecha_inicio"].' al '.$out["fecha_fin"].' </td>
                     <td>
                     <div class="btn-group">
-                      <button class="btn btn-warning btnEditPromo" idPromo='.$out["id_promocion"].'><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-warning btnEditPromo" codigo='.$out["codigo"].'><i class="fa fa-pencil"></i></button>
                       
-                       <button class="btn btn-danger btnDeletePromo" idPromo='.$out["id_promocion"].'><i class="fa fa-times"></i></button>
+                       <button class="btn btn-danger btnDeletePromo" codigo='.$out["codigo"].'><i class="fa fa-times"></i></button>
                      </div></td>
                   </tr>';
             }

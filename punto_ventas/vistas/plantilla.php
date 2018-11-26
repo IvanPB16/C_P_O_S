@@ -1,4 +1,4 @@
- <?php 
+<?php 
 session_start();
  ?>
 <!DOCTYPE html>
@@ -10,7 +10,7 @@ session_start();
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   
-  <link rel="icon" href="vistas/img/plantilla/logo.jpg"">
+  <link rel="icon" href="vistas/img/plantilla/logo.jpg">
  <!--====================================
  =         plugins de css            =
  =====================================-->
@@ -105,46 +105,9 @@ session_start();
 
   <!-- =============================================== -->
   <?php 
-    if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok" ) {
-    
-    echo '<div class="wrapper">';
-
-    include "modulos/cabezote.php";
-    include "modulos/menu_lateral.php";
-   // include "modulos/inicio.php";
-
-   if (isset($_GET["ruta"])) {
-      if ($_GET["ruta"] == "inicio" ||
-          $_GET["ruta"] == "salir" ||
-          $_GET["ruta"] == "usuarios" ||
-          $_GET["ruta"] == "categorias" ||
-          $_GET["ruta"] == "subcategorias" ||
-          $_GET["ruta"] == "productos" ||
-          $_GET["ruta"] == "ventas" ||
-          $_GET["ruta"] == "crear-venta" ||
-          $_GET["ruta"] == "editar-venta" ||
-          $_GET["ruta"] == "clientes" ||
-          $_GET["ruta"] == "proveedores" ||
-          $_GET["ruta"] == "promociones" ||
-          $_GET["ruta"] == "crear-promocion" ||
-          $_GET["ruta"] == "editar-promocion" ||
-          $_GET["ruta"] == "orden" ||
-          $_GET["ruta"] == "reporte"
-          ) {
-         include "modulos/".$_GET["ruta"].".php";
-      }else{
-        include "modulos/pagina404.php";
-      }
-    }else{
-       include "modulos/inicio.php";
-    }
-    
-
-    include "modulos/footer.php";
-    echo '</div>';  
-    } else{
-          include "modulos/login.php";  
-    }
+  $jeje = new ControladorPlantilla();
+  $jeje->controlRuta();
+  include "vistas/modulos/footer.php";
    ?>
  
   <!-- =============================================== -->

@@ -74,7 +74,8 @@ $(".dtPromocion tbody").on("click",'button.addProducto',function(){
 					'<div class="col-xs-6" style="padding-right:0px">'+
 					   	'<div class="input-group">'+
 			                '<span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitar" idProducto="'+idProducto+'"><i class="fa fa-times"></i></button></span>'+
-			                '<input type="text" class="form-control PProducto" idProducto="'+idProducto+'" name="nuevoProductop" value="'+descripcion+'" readonly required>'+
+			                '<input type="text" class="form-control PProducto" idProducto="'+idProducto+'" name="nuevoProductop[]" value="'+descripcion+'" readonly required>'+
+			                '<input type=hidden name="idProducto[]" value="'+idProducto+'">'+
 		                '</div>'+
 	           		 '</div>'+
 	            '</div>'
@@ -111,8 +112,8 @@ $(".btnAdd").click(function(){
 					'<div class="col-xs-6" style="padding-right:0px">'+
 		             	'<div class="input-group">'+
 			                '<span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitar" idProducto><i class="fa fa-times"></i></button></span>'+
-			               '<select class="form-control PProducto" id="producto'+contProducto+'" idProducto name="nuevoProductop" required>'+
-
+			               '<select class="form-control PProducto" id="producto'+contProducto+'" idProducto name="nuevoProductop[]" required>'+
+			               	'<input type=hidden name="idProducto[]" value="'+idProducto+'">'+
 			                '<option>Selecciona un producto</option>'+
 			                '</select>'+
 
@@ -152,11 +153,7 @@ $(".form_promocion").on('change','select.PProducto',function(){
       	processData: false,
       	dataType:"json",
       	success:function(res){
-      		console.log(res);
       		$(pProducto).attr("idProducto", res["id"]);
-
-
-
       		//agrupar productos json
 			enlistarProducto();
       	}
@@ -174,7 +171,6 @@ function enlistarProducto(){
 			"id":$(descripcionPP[i]).attr("idProducto"),
 			"descripcion":$(descripcionPP[i]).val()
 		});
-		
 	}
 	$("#productos").val(JSON.stringify(listadoPProductos));
 }
@@ -213,7 +209,7 @@ $(".form_promocion").on('click','button.quitar',function(){
 	$("button.recuperar[idProducto = '"+idProducto+"']").removeClass('btn-default');
 	$("button.recuperar[idProducto = '"+idProducto+"']").addClass('btn-primary addProducto');
 	enlistarProducto();
-
+	
 })
 
 function quitaroAgregarProducto(){
@@ -248,16 +244,17 @@ $(".dtPromocion").on('draw.dt',function(){
 })
 
 $(".tablas").on("click",".btnEditPromo",function(){
-	var idPromo = $(this).attr("idPromo");
-	window.location = "index.php?ruta=editar-promocion&idPromo="+idPromo;
+	var codigo = $(this).attr("codigo");
+	window.location = "index.php?ruta=editar-promocion&codigo="+codigo;
+	
 });
 
 $(".tablas").on("click",".btnDeletePromo",function(){
 	
-	var idPromo = $(this).attr("idPromo");
-	console.log(idPromo)
+	var codigo = $(this).attr("codigo");
+
 	swal({
-        title: '¿Está seguro de borrar la venta?',
+        title: '¿Está seguro de borrar la promoción?',
         text: "¡Si no lo está puede cancelar la accíón!",
         type: 'warning',
         showCancelButton: true,
@@ -268,9 +265,10 @@ $(".tablas").on("click",".btnDeletePromo",function(){
       }).then(function(result){
         if (result.value) {
           
-            window.location = "index.php?ruta=promociones&idPromo="+idPromo;
+            window.location = "index.php?ruta=promociones&codigo="+codigo;
         }
 
   })
 	
 });
+

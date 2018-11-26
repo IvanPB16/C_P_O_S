@@ -54,7 +54,7 @@ $pdf->AddPage();
 $bloque1 = <<<EOF
 	<table>
 		<tr>
-			<td style="width:150px"><img src="images/logo.jpeg"></td>
+			<td style="width:150px"><img src="images/logo.jpg"></td>
 			<td style="backgroud-color:white; width:140px">
 
 				<div style="font-size:8.5px; text-align:right; line-height:15px;">

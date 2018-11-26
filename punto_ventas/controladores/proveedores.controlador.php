@@ -147,5 +147,113 @@ class ControladorProveedor{
 		}
 	}
 
+		static public function crearOrden(){
+			if (isset($_POST["idProveedor"])) {
+				$tabla = "orden";
+
+				$datos = array("idProveedor"=>$_POST["idProveedor"],
+								"lista"=>$_POST["listaOrden"],
+								"Total"=>$_POST["TotalOrden"]);
+				$respuesta = ModeloProveedor::mdlCrearOrden($tabla,$datos);
+				var_dump($respuesta);
+				if ($respuesta == "ok") {
+					echo '<script>
+							swal({
+								type:"success",
+								title:"Orden creada correctamente!",
+								showConfirmButton: true,
+								confirmButtonText:"Cerrar",
+								closeOnConfirm: false
+								}).then((res)=>{
+									if(res.value){
+										window.location = "ordenes";
+									}
+								});
+						 	</script>';
+				}
+			}
+		}
+
+		static public function ctrMostrarOrden($item,$valor){
+
+			$tabla = "orden";
+
+			$enviar = ModeloProveedor::mdlMostrarOrden($tabla,$item,$valor);
+
+			return $enviar;
+
+		}
+
+		static public function ctrEditarOrden(){
+			if (isset($_POST["editarid"])) {
+				$tabla = "orden";
+
+				$item = "id";
+				$valor = $_POST["editarid"];
+
+				$traerOrden = ModeloProveedor::mdlMostrarOrden($tabla,$item,$valor);
+
+				if ($_POST["listaOrden"] == "") {
+					$listaOrden = $traerOrden["productos"];
+					$cambio = false;
+				}else{
+					$listaOrden = $_POST["listaOrden"];
+					$cambio = true;
+				}
+
+				$datos = array("idOrden" => $_POST["editarid"],
+							   "idProveedor"=>$_POST["idProveedor"],
+							   "lista"=>$listaOrden,
+							   "Total"=>$_POST["TotalOrden"]
+							);
+				$respuesta = ModeloProveedor::mdlEditarOrden($tabla,$datos);
+
+				if ($respuesta == "ok") {
+					echo '<script>
+							swal({
+								type:"success",
+								title:"Orden actualizada correctamente!",
+								showConfirmButton: true,
+								confirmButtonText:"Cerrar",
+								closeOnConfirm: false
+								}).then((res)=>{
+									if(res.value){
+										window.location = "ordenes";
+									}
+								});
+						 	</script>';
+				}
+			}
+		}
+
+		static public function ctrEliminarOrden(){
+			if (isset($_GET["idOrden"])) {
+				$tabla = "orden";
+
+				$respuesta = ModeloProveedor::mdlEliminarOrde($tabla,$_GET["idOrden"]);
+				if ($respuesta == "ok") {
+					echo '<script>
+						
+							swal({
+								type: "success",
+								title:"Orden eliminada",
+								showConfirmButton: true,
+								confirmButtonText: "Cerrar",
+								closeOnConfirm: true
+								}).then((result)=>{
+									if(result.value){
+									window.location = "ordenes";
+									}
+								})
+						  </script>';
+				}
+
+
+
+			}
+		}
+
+
+
 }
 

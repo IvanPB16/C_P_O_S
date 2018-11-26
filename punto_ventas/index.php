@@ -18,6 +18,7 @@ require_once "modelos/clientes.modelo.php";
 require_once "modelos/ventas.modelo.php";
 require_once "modelos/proveedores.modelo.php";
 require_once "modelos/promocion.modelo.php";
+require_once "modelos/conexion.php";
 
 $plantilla = new ControladorPlantilla();
 $plantilla -> ctrlPlantilla();

@@ -31,21 +31,7 @@
 
             <i class="fa fa-caret-down"></i>
           </button>
-
-          <!-- <div class="form-group pull-center">     
-              <h5>Selecciona al cliente para realizar factura</h5>
-                <select class="form-control input-lg" id="mcliente" name="facCliente" required>
-                  <option  value="Seleccione" selected="selected">Seleccione al cliente</option>';
-                    <?php  
-                    //   $item = null;
-                    //   $valor = null;
-                    //   $mostrarCliente = ControladorCliente::ctrMostrarCliente($item,$valor);
-                    //     foreach ($mostrarCliente as $key => $value) {
-                    //     echo '<option value="'.$value["id"].'" >'.$value["nombre_cliente"].'</option>';
-                    // }
-                    ?>
-                </select>
-            </div>  --> 
+ 
       </div>
     
 
